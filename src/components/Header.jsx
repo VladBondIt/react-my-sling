@@ -65,7 +65,6 @@ function Header() {
                                 <button className="button btn shd">Заказать</button>
                             </div>
                         </div>
-
                     </div>
                 </div >
             </div >
