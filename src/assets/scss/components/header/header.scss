@@ -1,0 +1,215 @@
+.header {
+    color: #ffffff;
+    &__background {
+        background-image: url(../images/header-bg.jpg);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 0 8px;
+    }
+
+    &__nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 40px;
+        margin-bottom: 90px;
+    }
+
+    &__logo {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    &__burger {
+        display: none;
+    }
+
+    &__menu {
+        flex: 0 0 30%;
+    }
+
+    &__list {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        white-space: nowrap;
+    }
+
+    &__contacts {
+        display: flex;
+        flex-direction: column;
+        font-size: 20px;
+        line-height: 23px;
+    }
+
+    &__phone {
+        color: #ffffff;
+        margin-bottom: 10px;
+    }
+
+    &__email {
+        color: #ffffff;
+    }
+
+    &__cart {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ffffff;
+        border-radius: 30px;
+        justify-content: space-between;
+        cursor: pointer;
+        transition: box-shadow 0.5s;
+        &:hover {
+            box-shadow: 0 0 15px rgb(255, 255, 255);
+        }
+    }
+
+    &__content {
+        padding-bottom: 20px;
+    }
+
+    &__row {
+        display: flex;
+        justify-content: space-between;
+        &:first-child {
+            margin-bottom: 70px;
+        }
+        &:nth-child(2) {
+            align-items: center;
+            margin-bottom: 40px;
+        }
+    }
+
+    &__text {
+        font-size: 64px;
+        line-height: 60px;
+        font-family: Lobster;
+        &_left {
+            flex: 0 0 250px;
+        }
+
+        &_right {
+            flex: 0 0 250px;
+            text-align: right;
+        }
+    }
+
+    &__social {
+        border-top: 1px solid rgb(255, 255, 255);
+        flex: 0 1 250px;
+    }
+
+    &__button {
+        flex: 0 1 250px;
+    }
+}
+.logo {
+    font-family: Lobster;
+    &__svg {
+        width: 65px;
+        height: 65px;
+    }
+    &__box {
+        text-align: center;
+    }
+
+    &__title {
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    &__subtitle {
+        font-size: 18px;
+        line-height: 22px;
+    }
+}
+.list {
+    &__item {
+    }
+
+    &__link {
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 23px;
+        line-height: 27px;
+    }
+}
+.cart {
+    &__svg {
+        fill: #b2e5fb;
+        width: 57px;
+        height: 57px;
+        padding: 10px;
+    }
+
+    &__delimetr {
+        width: 1px;
+        background-color: #fff;
+        height: 57px;
+    }
+
+    &__box {
+        padding: 10px;
+        font-size: 16px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__count {
+        margin-bottom: 5px;
+    }
+
+    &__price {
+    }
+}
+.social {
+    &__list {
+        padding-top: 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__item {
+    }
+
+    &__link {
+    }
+
+    &__svg {
+        width: 50px;
+        height: 50px;
+        &:hover {
+            animation-name: header-social;
+            animation-duration: 0.1s;
+            animation-timing-function: linear;
+            animation-iteration-count: 1;
+        }
+        &_vk {
+            fill: #2787f5;
+        }
+
+        &_insta {
+        }
+
+        &_facebook {
+        }
+    }
+}
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-image: linear-gradient(to right, #2be328, #b9c543, #fdb750);
+    padding: 8px 0;
+    border-radius: 33px;
+    font-family: Lobster;
+    font-size: 30px;
+    background-size: 170%;
+    transition: background 1s linear;
+    &:hover {
+        background-position: right;
+    }
+}

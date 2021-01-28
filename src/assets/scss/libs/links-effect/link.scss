@@ -1,0 +1,8 @@
+.link {
+    &:hover {
+        text-decoration: underline 4px #fdb750;
+    }
+    &:active {
+        color: #b2e5fb;
+    }
+}
