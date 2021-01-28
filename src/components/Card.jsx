@@ -1,10 +1,11 @@
-import React from 'react'
+import React from 'react';
+import ForCard from '../assets/images/for_card-cut.png'
 
 function Card() {
     return (
         <div className="shop__card card shd">
             <div className="card__imagebox">
-                <img className="card__image" src="../assets/images/for_card-cut.webp" alt="" />
+                <img className="card__image" src={ForCard} alt="" />
             </div>
             <div className="card__infobox">
                 <div className="card__textbox">
@@ -26,7 +27,7 @@ function Card() {
                     </div>
                     <button className="card__button btn">
                         Добавить
-                            </button>
+                    </button>
                 </div>
             </div>
         </div>

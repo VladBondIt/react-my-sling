@@ -3,6 +3,8 @@ import Card from './Card';
 import CategoryItem from './CategoryItem';
 import SearchForm from './SearchForm';
 
+const arrItems = ['Май Слинг', "Слинг с кольцом", "Слинг Рюкзак", "Подгузники", "Коляски"]
+
 function Shop() {
     return (
         <section className="shop">
@@ -21,7 +23,7 @@ function Shop() {
                         <div className="shop__category category shd">
                             <span className="category__title">Выберите тип товара</span>
                             <ul className="category__list">
-                                <CategoryItem />
+                                {arrItems.map((CategoryType) => <CategoryItem CategoryType={CategoryType} />)}
                             </ul>
                         </div>
                     </div>
