@@ -1,0 +1,103 @@
+{
+    "slings": [
+        {
+            "id": 1,
+            "title": "Май Слинг",
+            "img": 0,
+            "description": "Описание",
+            "material": "хлопок",
+            "size": 140,
+            "price": 1499,
+            "oldprice": 2500,
+            "category": "Май слинг"
+        },
+        {
+            "id": 2,
+            "title": "Май Слинг",
+            "description": "Описание",
+            "img": 0,
+            "material": "полиэстер",
+            "size": 150,
+            "price": 1699,
+            "oldprice": 3500,
+            "category": "Май слинг"
+        },
+        {
+            "id": 3,
+            "title": "Май Слинг",
+            "description": "Описание",
+            "img": 0,
+            "material": "синтетика",
+            "size": 160,
+            "price": 1999,
+            "oldprice": 4500,
+            "category": "Май слинг"
+        },
+        {
+            "id": 4,
+            "title": "Слинг с кольцами",
+            "description": "Описание",
+            "img": 1,
+            "material": "хлопок",
+            "size": 140,
+            "price": 2499,
+            "oldprice": 4500,
+            "category": "Слинг с кольцами"
+        },
+        {
+            "id": 5,
+            "title": "Слинг с кольцами",
+            "description": "Описание",
+            "img": 1,
+            "material": "синтетика",
+            "size": 120,
+            "price": 2999,
+            "oldprice": 4500,
+            "category": "Слинг с кольцами"
+        },
+        {
+            "id": 6,
+            "title": "Слинг с кольцами",
+            "description": "Описание",
+            "img": 1,
+            "material": "полиэстер",
+            "size": 130,
+            "price": 2699,
+            "oldprice": 5500,
+            "category": "Слинг с кольцами"
+        },
+        {
+            "id": 7,
+            "title": "Слинг рюкзак",
+            "description": "Описание",
+            "img": 2,
+            "material": "полиэстер",
+            "size": 180,
+            "price": 3699,
+            "oldprice": 5500,
+            "category": "Слинг рюкзак"
+        },
+        {
+            "id": 8,
+            "title": "Слинг рюкзак",
+            "description": "Описание",
+            "img": 2,
+            "material": "хлопок",
+            "size": 190,
+            "price": 4699,
+            "oldprice": 5500,
+            "category": "Слинг рюкзак"
+        },
+        {
+            "id": 9,
+            "title": "Слинг рюкзак",
+            "description": "Описание",
+            "img": 2,
+            "material": "ситетика",
+            "size": 150,
+            "price": 5699,
+            "oldprice": 6500,
+            "category": "Слинг рюкзак"
+        }
+    ]
+}
