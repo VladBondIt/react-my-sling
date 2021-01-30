@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { setActiveCategory } from '../redux/actions/categoryes';
 import { useDispatch } from 'react-redux';
 import { fetchedCards } from '../redux/actions/cards';
@@ -7,10 +7,9 @@ import { fetchedCards } from '../redux/actions/cards';
 function CategoryItem({ category, activeItem, id }) {
 
     const dispatch = useDispatch();
-    console.log(activeItem);
+
 
     const handleClick = () => {
-        console.log(category);
         dispatch(setActiveCategory(id))
         dispatch(fetchedCards(category))
     }

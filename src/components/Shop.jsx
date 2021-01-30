@@ -4,6 +4,7 @@ import CategoryItem from './CategoryItem';
 import SearchForm from './SearchForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCategoryes } from '../redux/actions/categoryes';
+import { fetchedCards } from '../redux/actions/cards';
 
 
 function Shop() {
@@ -37,6 +38,7 @@ function Shop() {
 
     useEffect(() => {
         onSetCategory()
+        dispatch(fetchedCards())
     }, [])
 
     return (

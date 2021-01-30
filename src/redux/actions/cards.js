@@ -9,7 +9,7 @@ export const setLoading = (boolean) => ({
     payload: boolean
 });
 
-export const fetchedCards = (category, sortBy, orderSort) => async dispatch => {
+export const fetchedCards = (category = "Май слинг", sortBy, orderSort) => async dispatch => {
     const apiUrl = 'http://localhost:3001/slings';
     const categoryUrl = `?category=${category}`;
     // const sortUrl = `&_sort=${sortBy}&_order=${orderSort}`;
