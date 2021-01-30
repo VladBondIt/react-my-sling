@@ -5,19 +5,22 @@ import SearchForm from './SearchForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCategoryes } from '../redux/actions/categoryes';
 import { fetchedCards } from '../redux/actions/cards';
+import Loader from './Loader';
+import { setLoading } from '../redux/actions/loader';
 
 
 function Shop() {
     const dispatch = useDispatch();
 
-    const { items, activeItem, cardItems } = useSelector((state) => ({
+    const { items, activeItem, cardItems, loaderItems, isLoading } = useSelector((state) => ({
         items: state.categoryes.items,
         activeItem: state.categoryes.activeItem,
-        cardItems: state.cards.cardItems
+        cardItems: state.cards.cardItems,
+        loaderItems: state.loader.loaderItems,
+        isLoading: state.loader.isLoading,
     }))
-    console.log(cardItems);
 
-    const onSetCategory = useCallback(async () => {
+    const onSetCategoryes = useCallback(async () => {
         const apiUrl = 'http://localhost:3001/slings';
 
         const res = await fetch(`${apiUrl}`);
@@ -32,12 +35,13 @@ function Shop() {
             [...new Set(data.map((x) => x.category))]
                 .map((z, i) => ({ category: z, id: i + 1 }))
         ));
+        dispatch(setLoading(false))
     }, []);
 
 
 
     useEffect(() => {
-        onSetCategory()
+        onSetCategoryes()
         dispatch(fetchedCards())
     }, [])
 
@@ -69,7 +73,11 @@ function Shop() {
                     </div>
                     <div className="shop__column shop__column_right">
                         <div className="shop__cardbox">
-                            {cardItems && cardItems.map((card) => <Card {...card} key={card.id} />)}
+                            {!isLoading
+                                ? cardItems && cardItems.map((card) => <Card {...card} key={card.id} />)
+                                : loaderItems.map((loader) => <Loader key={loader.id} />)}
+
+
                         </div>
                     </div>
                 </div>

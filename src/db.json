@@ -35,6 +35,39 @@
         },
         {
             "id": 4,
+            "title": "Май Слинг",
+            "img": 0,
+            "description": "Описание",
+            "material": "хлопок",
+            "size": 140,
+            "price": 1499,
+            "oldprice": 2500,
+            "category": "Май слинг"
+        },
+        {
+            "id": 5,
+            "title": "Май Слинг",
+            "description": "Описание",
+            "img": 0,
+            "material": "полиэстер",
+            "size": 150,
+            "price": 1699,
+            "oldprice": 3500,
+            "category": "Май слинг"
+        },
+        {
+            "id": 6,
+            "title": "Май Слинг",
+            "description": "Описание",
+            "img": 0,
+            "material": "синтетика",
+            "size": 160,
+            "price": 1999,
+            "oldprice": 4500,
+            "category": "Май слинг"
+        },
+        {
+            "id": 7,
             "title": "Слинг с кольцами",
             "description": "Описание",
             "img": 1,
@@ -45,7 +78,7 @@
             "category": "Слинг с кольцами"
         },
         {
-            "id": 5,
+            "id": 8,
             "title": "Слинг с кольцами",
             "description": "Описание",
             "img": 1,
@@ -56,7 +89,7 @@
             "category": "Слинг с кольцами"
         },
         {
-            "id": 6,
+            "id": 9,
             "title": "Слинг с кольцами",
             "description": "Описание",
             "img": 1,
@@ -67,7 +100,40 @@
             "category": "Слинг с кольцами"
         },
         {
-            "id": 7,
+            "id": 10,
+            "title": "Слинг с кольцами",
+            "description": "Описание",
+            "img": 1,
+            "material": "хлопок",
+            "size": 140,
+            "price": 2499,
+            "oldprice": 4500,
+            "category": "Слинг с кольцами"
+        },
+        {
+            "id": 11,
+            "title": "Слинг с кольцами",
+            "description": "Описание",
+            "img": 1,
+            "material": "синтетика",
+            "size": 120,
+            "price": 2999,
+            "oldprice": 4500,
+            "category": "Слинг с кольцами"
+        },
+        {
+            "id": 12,
+            "title": "Слинг с кольцами",
+            "description": "Описание",
+            "img": 1,
+            "material": "полиэстер",
+            "size": 130,
+            "price": 2699,
+            "oldprice": 5500,
+            "category": "Слинг с кольцами"
+        },
+        {
+            "id": 13,
             "title": "Слинг рюкзак",
             "description": "Описание",
             "img": 2,
@@ -78,7 +144,7 @@
             "category": "Слинг рюкзак"
         },
         {
-            "id": 8,
+            "id": 14,
             "title": "Слинг рюкзак",
             "description": "Описание",
             "img": 2,
@@ -89,7 +155,40 @@
             "category": "Слинг рюкзак"
         },
         {
-            "id": 9,
+            "id": 15,
+            "title": "Слинг рюкзак",
+            "description": "Описание",
+            "img": 2,
+            "material": "синтетика",
+            "size": 150,
+            "price": 5699,
+            "oldprice": 6500,
+            "category": "Слинг рюкзак"
+        },
+        {
+            "id": 16,
+            "title": "Слинг рюкзак",
+            "description": "Описание",
+            "img": 2,
+            "material": "полиэстер",
+            "size": 180,
+            "price": 3699,
+            "oldprice": 5500,
+            "category": "Слинг рюкзак"
+        },
+        {
+            "id": 17,
+            "title": "Слинг рюкзак",
+            "description": "Описание",
+            "img": 2,
+            "material": "хлопок",
+            "size": 190,
+            "price": 4699,
+            "oldprice": 5500,
+            "category": "Слинг рюкзак"
+        },
+        {
+            "id": 18,
             "title": "Слинг рюкзак",
             "description": "Описание",
             "img": 2,

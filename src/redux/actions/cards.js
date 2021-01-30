@@ -1,12 +1,9 @@
-import { GET_CARDS, SET_LOADING } from "../types";
+import { GET_CARDS } from "../types";
+import { setLoading } from "./loader";
 
 export const getCards = (items) => ({
     type: GET_CARDS,
     payload: items
-});
-export const setLoading = (boolean) => ({
-    type: SET_LOADING,
-    payload: boolean
 });
 
 export const fetchedCards = (category = "Май слинг", sortBy, orderSort) => async dispatch => {
@@ -14,7 +11,7 @@ export const fetchedCards = (category = "Май слинг", sortBy, orderSort) 
     const categoryUrl = `?category=${category}`;
     // const sortUrl = `&_sort=${sortBy}&_order=${orderSort}`;
 
-    dispatch(setLoading(false))
+    dispatch(setLoading(true))
 
 
     const res = await fetch(`${apiUrl}${categoryUrl}`);
@@ -25,7 +22,7 @@ export const fetchedCards = (category = "Май слинг", sortBy, orderSort) 
 
     const data = await res.json();
 
-    console.log(data)
-
     dispatch(getCards(data));
+    dispatch(setLoading(false))
+
 }

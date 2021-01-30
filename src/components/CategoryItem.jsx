@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { setActiveCategory } from '../redux/actions/categoryes';
 import { useDispatch } from 'react-redux';
 import { fetchedCards } from '../redux/actions/cards';
