@@ -7,13 +7,17 @@
         background-repeat: no-repeat;
         padding: 0 8px;
     }
+    &__forcart {
+        background: black;
+        color: white;
+    }
 
     &__nav {
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding-top: 40px;
-        margin-bottom: 90px;
+        padding-bottom: 40px;
     }
 
     &__logo {
@@ -68,6 +72,7 @@
 
     &__content {
         padding-bottom: 20px;
+        margin-top: 50px;
     }
 
     &__row {
@@ -83,7 +88,7 @@
     }
 
     &__text {
-        font-size: 64px;
+        font-size: 60px;
         line-height: 60px;
         font-family: Lobster;
         &_left {
@@ -136,7 +141,7 @@
         line-height: 27px;
     }
 }
-.cart {
+.cart-header {
     &__svg {
         fill: #b2e5fb;
         width: 57px;
@@ -155,6 +160,7 @@
         font-size: 16px;
         display: flex;
         flex-direction: column;
+        color: white;
     }
 
     &__count {

@@ -1,6 +1,8 @@
 import React from 'react';
 import { ReactComponent as Logo } from '../assets/images/svg/logo.svg';
 import { ReactComponent as CartSvg } from '../assets/images/svg/cart.svg';
+import { Link } from 'react-router-dom';
+
 
 
 function HeaderNav() {
@@ -18,7 +20,7 @@ function HeaderNav() {
             </div>
             <div className="header__menu">
                 <ul className="header__list list">
-                    <li className="list__item"><a href="" className="list__link link">Главная</a></li>
+                    <li className="list__item"><Link to="/" className="list__link link">Главная</Link></li>
                     <li className="list__item"><a href="" className="list__link link">О нас</a></li>
                     <li className="list__item"><a href="" className="list__link link">О товаре</a></li>
                 </ul>
@@ -27,14 +29,16 @@ function HeaderNav() {
                 <a href="tel:+78009998877" className="header__phone link">8-800-999-88-77</a>
                 <a href="" className="header__email link">bobaka@cobaka.ru</a>
             </div>
-            <div className="header__cart cart btn shd">
-                <CartSvg />
-                <span className="cart__delimetr"></span>
-                <div className="cart__box">
-                    <span className="cart__count">10 шт</span>
-                    <span className="cart__price">20 руб</span>
+            <Link to="/cart">
+                <div className="header__cart cart-header btn shd">
+                    <CartSvg />
+                    <span className="cart-header__delimetr"></span>
+                    <div className="cart-header__box">
+                        <span className="cart-header__count">10 шт</span>
+                        <span className="cart-header__price">20 руб</span>
+                    </div>
                 </div>
-            </div>
+            </Link>
         </nav>
     )
 }

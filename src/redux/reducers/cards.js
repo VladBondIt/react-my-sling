@@ -5,7 +5,7 @@ const initialState = {
     isLoaded: false
 
 }
-const categoryes = (state = initialState, action) => {
+const cards = (state = initialState, action) => {
     switch (action.type) {
         case GET_CARDS:
             return {
@@ -22,4 +22,4 @@ const categoryes = (state = initialState, action) => {
     }
 }
 
-export default categoryes;
+export default cards;

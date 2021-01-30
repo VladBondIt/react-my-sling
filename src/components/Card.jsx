@@ -2,8 +2,12 @@ import React from 'react';
 import ForCard0 from '../assets/images/for_card-cut.png'
 import ForCard1 from '../assets/images/sling-w-ring.jpg'
 import ForCard2 from '../assets/images/sling-backpack.jpg'
+import { useDispatch } from 'react-redux';
+import { setCartItems } from '../redux/actions/cart';
 
-function Card({ title, description, material, size, price, oldprice, img }) {
+function Card({ title, description, material, size, price, oldprice, img, id }) {
+    const dispatch = useDispatch();
+
     switch (img) {
         case 0:
             img = ForCard0
@@ -17,6 +21,11 @@ function Card({ title, description, material, size, price, oldprice, img }) {
 
         default:
             break;
+    }
+
+    const handleCardItem = (obj) => {
+        console.log(obj);
+        dispatch(setCartItems(obj))
     }
 
 
@@ -43,7 +52,17 @@ function Card({ title, description, material, size, price, oldprice, img }) {
                         <span className="price__old">{oldprice} руб</span>
                         <span className="price__current">{price} руб</span>
                     </div>
-                    <button className="card__button btn">
+                    <button
+                        className="card__button btn"
+                        onClick={() => handleCardItem({
+                            id,
+                            title,
+                            img,
+                            description,
+                            size,
+                            material,
+                            price,
+                        })}>
                         Добавить
                     </button>
                 </div>

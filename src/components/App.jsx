@@ -1,13 +1,15 @@
-import React from 'react'
-import Header from './Header';
-import Shop from './Shop';
+import React from 'react';
 import Footer from './Footer';
+
+import { Route } from 'react-router-dom';
+import Home from '../pages/Home';
+import Cart from '../pages/Cart';
 
 function App() {
     return (
         <div className="wrapper">
-            <Header />
-            <Shop />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/cart" component={Cart} />
             <Footer />
         </div>
     )

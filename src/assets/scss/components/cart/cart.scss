@@ -1,0 +1,74 @@
+@import "./cartItem.scss";
+
+.cart {
+    background-image: url(../../../images/bg/parchment-2123469_640.webp);
+    background-size: 20%;
+    background-repeat: repeat;
+    padding: 50px 8px;
+    &__title {
+        display: flex;
+        font-size: 35px;
+        border-radius: 30px;
+        padding: 15px 20px;
+        justify-content: space-between;
+        align-items: center;
+        white-space: nowrap;
+        &:first-child {
+            margin-bottom: 30px;
+        }
+    }
+    &__button {
+        font-size: 26px;
+        background: transparent;
+        flex: 0 1 250px;
+        border-radius: 30px;
+        padding: 7px 8px;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+        &:active {
+            background: #b2e5fb;
+        }
+        &_green {
+            background: #2be328;
+            margin-right: 20px;
+            &:hover {
+                background: #2be328;
+            }
+            &:active {
+                background: #b2e5fb;
+            }
+        }
+        &_red {
+            &:hover {
+                background: rgba(218, 85, 85, 0.6);
+            }
+            &:active {
+                background: #b2e5fb;
+            }
+        }
+    }
+    &__body {
+    }
+    &__info {
+        background: #2be328;
+        border-radius: 30px;
+        font-size: 26px;
+        padding: 8px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    &__text {
+    }
+    &__itembox {
+        min-height: 100vh;
+    }
+    &__item {
+    }
+    &__totalprice {
+        text-align: right;
+        flex: 1 1 100%;
+    }
+}
