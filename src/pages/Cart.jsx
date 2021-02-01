@@ -3,15 +3,12 @@ import CartItem from '../components/CartItem';
 import HeaderNav from '../components/HeaderNav';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { ReactComponent as CartEmptyBaby } from '../assets/images/cart-empty-baby.svg';
 import { ReactComponent as CartEmpty } from '../assets/images/cart-empty-black.svg';
 
 function Cart() {
     const { cartItems } = useSelector((state) => ({
         cartItems: state.cart.cartItems,
     }))
-
-    console.log(cartItems);
 
 
     return (
@@ -59,7 +56,6 @@ function Cart() {
                             <div className="empty__title">Корзина пуста</div>
                             <div className="empty__imgbox">
                                 <CartEmpty className="empty__svg" />
-                                {/* <CartEmptyBaby className="empty__svg" /> */}
                             </div>
                         </div>}
                 </div>

@@ -24,8 +24,13 @@ function Card({ title, description, material, size, price, oldprice, img, id }) 
     }
 
     const handleCardItem = (obj) => {
-        console.log(obj);
-        dispatch(setCartItems(obj))
+        const newObj = {
+            ...obj,
+            count: 1,
+            dataForKey: Date.now().toString(16)
+        }
+
+        dispatch(setCartItems(newObj))
     }
 
 
