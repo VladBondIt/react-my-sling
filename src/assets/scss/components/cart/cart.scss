@@ -1,11 +1,12 @@
 @import "./cartItem.scss";
+@import "./cartEmpty.scss";
 
 .cart {
     background-image: url(../../../images/bg/parchment-2123469_640.webp);
     background-size: 20%;
     background-repeat: repeat;
     padding: 50px 8px;
-    &__title {
+    &__buttons {
         display: flex;
         font-size: 35px;
         border-radius: 30px;
@@ -23,7 +24,6 @@
         flex: 0 1 250px;
         border-radius: 30px;
         padding: 7px 8px;
-
         &:hover {
             background: rgba(255, 255, 255, 0.6);
         }
@@ -63,12 +63,14 @@
     &__text {
     }
     &__itembox {
-        min-height: 100vh;
+        margin: 50px 30px;
     }
     &__item {
     }
     &__totalprice {
         text-align: right;
         flex: 1 1 100%;
+    }
+    &__empty {
     }
 }

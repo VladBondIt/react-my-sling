@@ -3,6 +3,8 @@ import CartItem from '../components/CartItem';
 import HeaderNav from '../components/HeaderNav';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { ReactComponent as CartEmptyBaby } from '../assets/images/cart-empty-baby.svg';
+import { ReactComponent as CartEmpty } from '../assets/images/cart-empty-black.svg';
 
 function Cart() {
     const { cartItems } = useSelector((state) => ({
@@ -21,35 +23,48 @@ function Cart() {
             </div>
             <div className="cart">
                 <div className="container">
-                    <div className="cart__title shd">
-                        Корзина Заказов
-                    <button className="cart__button shd btn cart__button_red">
-                            X  Очистить
-                    </button>
-                    </div>
-                    <div className="cart__body">
-                        <div className="cart__info">
-                            <span className="cart__text">Товар</span>
-                            <span className="cart__text">Цена</span>
-                        </div>
-                        <div className="cart__itembox">
-                            {cartItems && cartItems.map((cartItem) => <CartItem {...cartItem} key={cartItem.dataForKey} />)}
-                        </div>
-
-                    </div>
-                    <div className="cart__title shd">
-                        <button className="cart__button shd btn cart__button_green">
-                            Оформить заказ
-                        </button>
-                        <Link to="/">
-                            <button className="cart__button shd btn">
-                                Вернуться
+                    {cartItems.length > 0
+                        ?
+                        <>
+                            <div className="cart__buttons shd">
+                                Корзина Заказов
+                            <button className="cart__button shd btn cart__button_red">
+                                    X  Очистить
                             </button>
-                        </Link>
-                        <span className="cart__totalprice">Общая стоимость</span>
-                    </div>
+                            </div>
+                            <div className="cart__body">
+                                <div className="cart__info">
+                                    <span className="cart__text">Товар</span>
+                                    <span className="cart__text">Цена</span>
+                                </div>
+                                <div className="cart__itembox">
+                                    {cartItems.map((cartItem) => <CartItem {...cartItem} key={cartItem.dataForKey} />)}
+                                </div>
+
+                            </div>
+                            <div className="cart__buttons shd">
+                                <button className="cart__button shd btn cart__button_green">
+                                    Оформить заказ
+                            </button>
+                                <Link to="/">
+                                    <button className="cart__button shd btn">
+                                        Вернуться
+                            </button>
+                                </Link>
+                                <span className="cart__totalprice">Общая стоимость</span>
+                            </div>
+                        </>
+                        :
+                        <div className="cart__empty empty shd">
+                            <div className="empty__title">Корзина пуста</div>
+                            <div className="empty__imgbox">
+                                <CartEmpty className="empty__svg" />
+                                {/* <CartEmptyBaby className="empty__svg" /> */}
+                            </div>
+                        </div>}
                 </div>
             </div>
+
         </>
     )
 }

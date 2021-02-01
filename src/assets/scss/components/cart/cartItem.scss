@@ -2,7 +2,9 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    margin: 0 30px 20px;
+    &:not(:last-child) {
+        margin-bottom: 20px;
+    }
     background: rgba(255, 255, 255, 0.6);
     &__column {
         display: flex;
