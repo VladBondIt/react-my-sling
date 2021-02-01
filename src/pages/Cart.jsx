@@ -35,7 +35,11 @@ function Cart() {
                                     <span className="cart__text">Цена</span>
                                 </div>
                                 <div className="cart__itembox">
-                                    {cartItems.map((cartItem) => <CartItem {...cartItem} key={cartItem.dataForKey} />)}
+                                    {[...new Map(cartItems.map(obj => [obj["id"], obj])).values()]
+                                        .map((cartItem) => <CartItem
+                                            {...cartItem}
+                                            key={cartItem.dataForKey}
+                                        />)}
                                 </div>
 
                             </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function CartItem({ title, img, size, material, price, description }) {
+function CartItem({ title, img, size, material, price, description, count }) {
 
     return (
         <div className="cart__item item shd">
@@ -25,6 +25,12 @@ function CartItem({ title, img, size, material, price, description }) {
             </div>
             <div className="item__column">
                 <span className="item__price">{price}</span>
+            </div>
+            <div className="item__column">
+                <span className="item__count">{count}</span>
+            </div>
+            <div className="item__column">
+                <span className="item__totalprice">{price * count}</span>
             </div>
             <button className="item__remove shd btn">X</button>
         </div>

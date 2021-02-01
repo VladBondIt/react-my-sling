@@ -31,9 +31,9 @@ function Shop() {
 
         const data = await res.json();
 
+
         dispatch(setCategoryes(
-            [...new Set(data.map((x) => x.category))]
-                .map((z, i) => ({ category: z, id: i + 1 }))
+            [...new Map(data.map(obj => [obj["category"], obj])).values()]
         ));
         dispatch(setLoading(false))
     }, []);
