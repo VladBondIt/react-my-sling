@@ -2,36 +2,25 @@ import { SET_CART_ITEMS } from "../types";
 
 const initialState = {
     cartItems: [],
-
+    countsIdItems: {},
 }
 const cards = (state = initialState, action) => {
     switch (action.type) {
         case SET_CART_ITEMS:
-            let countedObj = false;
+            const stateCount = !state.countsIdItems[action.payload.id] ? 0 : state.countsIdItems[action.payload.id]
 
-            const newObj = state.cartItems.length > 0
-                ? state.cartItems
-                    .forEach((item) => item.id === action.payload.id
-                        ? countedObj = { ...item, count: item.count + 1 }
-                        : countedObj = action.payload)
-                : action.payload;
-
-            let insertObj = null;
-
-            if (countedObj) {
-                insertObj = countedObj;
-            } else {
-                insertObj = newObj;
-            }
-
-            const newItem = [
-                ...state.cartItems,
-                insertObj
-            ]
+            console.log(state.countsIdItems)
 
             return {
                 ...state,
-                cartItems: newItem,
+                cartItems: [
+                    ...state.cartItems,
+                    action.payload
+                ],
+                countsIdItems: {
+                    ...state.countsIdItems,
+                    [action.payload.id]: stateCount + 1
+                }
             }
         default:
             return state;

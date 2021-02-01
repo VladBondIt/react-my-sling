@@ -13,12 +13,14 @@
         &:nth-child(3) {
             flex: 0 1 250px;
         }
+        &:not(:first-child) {
+            font-size: 20px;
+        }
     }
     &__row {
         width: 100%;
         display: flex;
         justify-content: space-between;
-        font-size: 20px;
         &:first-child {
             margin-bottom: 20px;
         }
