@@ -12,7 +12,7 @@ function Footer() {
                     <div className="footer__row">
                         <div className="footer__column">
                             <div className="footer__logo logo">
-                                <Logo />
+                                <Logo className="logo__svg" />
                                 Helenia
                             </div>
                             <div className="footer__copyright">

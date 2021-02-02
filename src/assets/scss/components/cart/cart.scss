@@ -57,16 +57,33 @@
     &__info {
         background: #2be328;
         border-radius: 30px;
-        font-size: 26px;
+        font-size: 22px;
         padding: 8px;
         display: flex;
         justify-content: space-between;
         margin-bottom: 20px;
     }
     &__text {
+        white-space: nowrap;
+        &:first-child {
+            text-align: center;
+            flex: 0 0 45%;
+        }
+        &:nth-child(2) {
+            text-align: center;
+            flex: 0 0 18%;
+        }
+        &:nth-child(3) {
+            text-align: center;
+            flex: 0 1 5%;
+        }
+        &:nth-child(4) {
+            text-align: center;
+            flex: 0 1 5%;
+        }
     }
     &__itembox {
-        margin: 50px 30px;
+        margin: 50px 5px;
     }
     &__item {
     }

@@ -16,7 +16,7 @@ function HeaderNav() {
     return (
         <nav className="header__nav">
             <div className="header__logo logo">
-                <Logo class="logo__svg" />
+                <Logo className="logo__svg" />
                 <div className="logo__box">
                     <h1 className="logo__title">Товары для Мамочек</h1>
                     <h2 className="logo__subtitle">И их деток</h2>
@@ -38,7 +38,7 @@ function HeaderNav() {
             </div>
             <Link to="/cart">
                 <div className="header__cart cart-header btn shd">
-                    <CartSvg class="cart-header__svg" />
+                    <CartSvg className="cart-header__svg" />
                     <span className="cart-header__delimetr"></span>
                     <div className="cart-header__box">
                         <span className="cart-header__count">{cartItems.length} шт</span>

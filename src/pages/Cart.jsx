@@ -35,7 +35,11 @@ function Cart() {
                             <div className="cart__body">
                                 <div className="cart__info">
                                     <span className="cart__text">Товар</span>
+                                    <span className="cart__text">Характеристики</span>
                                     <span className="cart__text">Цена</span>
+                                    <span className="cart__text">Количество</span>
+                                    <span className="cart__text">Стоимость</span>
+                                    <span className="cart__text">Отмена</span>
                                 </div>
                                 <div className="cart__itembox">
                                     {[...new Map(cartItems.map(obj => [obj["id"], obj])).values()]
@@ -55,7 +59,7 @@ function Cart() {
                                         <CartBack className="cart__backsvg" /> Вернуться
                                     </button>
                                 </Link>
-                                <span className="cart__totalprice">Общая стоимость: {totalPrice}</span>
+                                <span className="cart__totalprice">Общая стоимость: {totalPrice} руб</span>
                             </div>
                         </>
                         :

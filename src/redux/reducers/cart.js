@@ -8,6 +8,7 @@ const initialState = {
 const cards = (state = initialState, action) => {
     switch (action.type) {
         case SET_CART_ITEMS:
+
             const stateCount = !state.countsIdItems[action.payload.id]
                 ? 0
                 : state.countsIdItems[action.payload.id];
@@ -17,7 +18,6 @@ const cards = (state = initialState, action) => {
                 action.payload
             ]
 
-            console.log(state.countsIdItems)
             const totalPrice = newItems.reduce((sum, obj) => sum + obj.price, 0);
 
             return {

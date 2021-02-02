@@ -8,7 +8,6 @@ const initialState = {
 const categoryes = (state = initialState, action) => {
     switch (action.type) {
         case GET_CATEGORYES:
-            console.log(state.items)
             return {
                 ...state,
                 items: action.payload,

@@ -21,13 +21,13 @@ function Header() {
                             <div className="header__social social">
                                 <ul className="social__list">
                                     <li className="social__item"><a href="" className="social__link">
-                                        <VkSvg class="social__svg social__svg_vk btn" />
+                                        <VkSvg className="social__svg social__svg_vk btn" />
                                     </a></li>
                                     <li className="social__item"><a href="" className="social__link">
-                                        <InstaSvg class="social__svg social__svg_insta btn" />
+                                        <InstaSvg className="social__svg social__svg_insta btn" />
                                     </a></li>
                                     <li className="social__item"><a href="" className="social__link">
-                                        <FbSvg class="social__svg social__svg_facebook btn" />
+                                        <FbSvg className="social__svg social__svg_facebook btn" />
                                     </a></li>
                                 </ul>
                             </div>

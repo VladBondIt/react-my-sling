@@ -1,8 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { ReactComponent as DeleteItem } from '../assets/images/svg/clear-single.svg';
+import { ReactComponent as Plus } from '../assets/images/svg/plus.svg';
+import { ReactComponent as Minus } from '../assets/images/svg/minus.svg';
 
-function CartItem({ id, title, img, size, material, price, description, count }) {
+function CartItem({ id, title, img, size, material, price, description }) {
 
 
     const { countsIdItems } = useSelector((state) => ({
@@ -31,15 +33,22 @@ function CartItem({ id, title, img, size, material, price, description, count })
                 </div>
             </div>
             <div className="item__column">
-                <span className="item__price">{price}</span>
+                <span className="item__price">{price} руб</span>
             </div>
             <div className="item__column">
-                <span className="item__count">{countsIdItems[id]}</span>
+                <div className="item__count">
+                    <button className="item__button shd btn"><Minus className="item__minus" /></button>
+                    <span className="item__count-value">{countsIdItems[id]} шт</span>
+                    <button className="item__button item__button_green shd btn"><Plus className="item__plus" /> </button>
+                </div>
             </div>
             <div className="item__column">
-                <span className="item__totalprice">{price * countsIdItems[id]}</span>
+                <span className="item__totalprice">{price * countsIdItems[id]} руб</span>
             </div>
-            <button className="item__remove shd btn"><DeleteItem className="item__svg" /> </button>
+            <div className="item__column">
+                <button className="item__button shd btn"><DeleteItem className="item__svg" /></button>
+            </div>
+
         </div>
     )
 }
