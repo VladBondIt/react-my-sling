@@ -3,7 +3,7 @@ import CartItem from '../components/CartItem';
 import HeaderNav from '../components/HeaderNav';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { ReactComponent as CartEmpty } from '../assets/images/cart-empty-black.svg';
+import { ReactComponent as CartEmpty } from '../assets/images/svg/cart-empty-black.svg';
 
 function Cart() {
     const { cartItems } = useSelector((state) => ({
@@ -50,7 +50,7 @@ function Cart() {
                                 <Link to="/">
                                     <button className="cart__button shd btn">
                                         Вернуться
-                            </button>
+                                    </button>
                                 </Link>
                                 <span className="cart__totalprice">Общая стоимость</span>
                             </div>
@@ -61,6 +61,11 @@ function Cart() {
                             <div className="empty__imgbox">
                                 <CartEmpty className="empty__svg" />
                             </div>
+                            <Link to="/">
+                                <button className="cart__button shd btn">
+                                    Вернуться
+                                </button>
+                            </Link>
                         </div>}
                 </div>
             </div>
