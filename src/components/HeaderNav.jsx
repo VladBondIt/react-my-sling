@@ -2,20 +2,21 @@ import React from 'react';
 import { ReactComponent as Logo } from '../assets/images/svg/logo.svg';
 import { ReactComponent as CartSvg } from '../assets/images/svg/cart.svg';
 import { Link } from 'react-router-dom';
-
 import { useSelector } from 'react-redux';
 
 
 
 function HeaderNav() {
 
-    const { cartItems, } = useSelector((state) => ({
+    const { cartItems, totalPrice } = useSelector((state) => ({
         cartItems: state.cart.cartItems,
+        totalPrice: state.cart.totalPrice,
     }))
+
     return (
         <nav className="header__nav">
             <div className="header__logo logo">
-                <Logo />
+                <Logo class="logo__svg" />
                 <div className="logo__box">
                     <h1 className="logo__title">Товары для Мамочек</h1>
                     <h2 className="logo__subtitle">И их деток</h2>
@@ -37,11 +38,11 @@ function HeaderNav() {
             </div>
             <Link to="/cart">
                 <div className="header__cart cart-header btn shd">
-                    <CartSvg />
+                    <CartSvg class="cart-header__svg" />
                     <span className="cart-header__delimetr"></span>
                     <div className="cart-header__box">
                         <span className="cart-header__count">{cartItems.length} шт</span>
-                        <span className="cart-header__price">20 руб</span>
+                        <span className="cart-header__price">{totalPrice} руб</span>
                     </div>
                 </div>
             </Link>

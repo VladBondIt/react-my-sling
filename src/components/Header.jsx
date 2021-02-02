@@ -2,7 +2,6 @@ import React from 'react';
 import { ReactComponent as VkSvg } from '../assets/images/svg/header-vk.svg';
 import { ReactComponent as InstaSvg } from '../assets/images/svg/header-instagram.svg';
 import { ReactComponent as FbSvg } from '../assets/images/svg/header-facebook.svg';
-import { Link } from 'react-router-dom';
 import HeaderNav from './HeaderNav';
 
 
@@ -22,13 +21,13 @@ function Header() {
                             <div className="header__social social">
                                 <ul className="social__list">
                                     <li className="social__item"><a href="" className="social__link">
-                                        <VkSvg />
+                                        <VkSvg class="social__svg social__svg_vk btn" />
                                     </a></li>
                                     <li className="social__item"><a href="" className="social__link">
-                                        <InstaSvg />
+                                        <InstaSvg class="social__svg social__svg_insta btn" />
                                     </a></li>
                                     <li className="social__item"><a href="" className="social__link">
-                                        <FbSvg />
+                                        <FbSvg class="social__svg social__svg_facebook btn" />
                                     </a></li>
                                 </ul>
                             </div>

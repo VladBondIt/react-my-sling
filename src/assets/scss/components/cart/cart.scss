@@ -21,9 +21,12 @@
     &__button {
         font-size: 26px;
         background: transparent;
-        flex: 0 1 250px;
+        flex: 0 1 200px;
         border-radius: 30px;
-        padding: 7px 8px;
+        padding: 7px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         &:hover {
             background: rgba(255, 255, 255, 0.6);
         }
@@ -42,7 +45,7 @@
         }
         &_red {
             &:hover {
-                background: rgba(218, 85, 85, 0.6);
+                background: rgba(243, 44, 44, 0.6);
             }
             &:active {
                 background: #b2e5fb;
@@ -68,9 +71,17 @@
     &__item {
     }
     &__totalprice {
-        text-align: right;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
         flex: 1 1 100%;
     }
     &__empty {
+    }
+    &__clearsvg {
+        margin-right: 10px;
+    }
+    &__backsvg {
+        margin-right: 10px;
     }
 }

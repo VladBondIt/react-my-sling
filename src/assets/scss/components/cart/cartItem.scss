@@ -1,7 +1,9 @@
 .item {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    position: relative;
+    padding: 0 30px;
     &:not(:last-child) {
         margin-bottom: 20px;
     }
@@ -10,8 +12,17 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
+        min-height: 130px;
+        &:first-child {
+            flex: 0 0 250px;
+            text-align: center;
+        }
+        &:nth-child(2) {
+            flex: 0 1 25%;
+        }
         &:nth-child(3) {
-            flex: 0 1 250px;
+            flex: 0 1 18%;
         }
         &:not(:first-child) {
             font-size: 20px;
@@ -51,13 +62,16 @@
         font-size: 20px;
     }
     &__remove {
-        font-size: 18px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
         background: transparent;
         border: 1px solid #000;
-        padding: 10px 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         &:hover {
-            background: rgba(218, 85, 85, 0.6);
+            background: rgba(243, 44, 44, 0.6);
         }
         &:active {
             background: #b2e5fb;
@@ -66,5 +80,7 @@
     &__count {
     }
     &__totalprice {
+    }
+    &__svg {
     }
 }

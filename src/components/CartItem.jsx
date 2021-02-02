@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { ReactComponent as DeleteItem } from '../assets/images/svg/clear-single.svg';
 
 function CartItem({ id, title, img, size, material, price, description, count }) {
 
@@ -38,7 +39,7 @@ function CartItem({ id, title, img, size, material, price, description, count })
             <div className="item__column">
                 <span className="item__totalprice">{price * countsIdItems[id]}</span>
             </div>
-            <button className="item__remove shd btn">X</button>
+            <button className="item__remove shd btn"><DeleteItem className="item__svg" /> </button>
         </div>
     )
 }
