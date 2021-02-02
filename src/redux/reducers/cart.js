@@ -1,4 +1,4 @@
-import { SET_CART_ITEMS } from "../types";
+import { SET_CART_ITEMS, CLEAR_CART, MINUS_CART_ITEM } from "../types";
 
 const initialState = {
     cartItems: [],
@@ -29,6 +29,46 @@ const cards = (state = initialState, action) => {
                 },
                 totalPrice: totalPrice
             }
+        case CLEAR_CART:
+            return {
+                cartItems: [],
+                countsIdItems: {},
+                totalPrice: 0
+            }
+        case MINUS_CART_ITEM:
+
+            let deletedItemIndex = null;
+
+            for (let i = 0; i < state.cartItems.length; i++) {
+                const element = state.cartItems[i];
+                if (element.id === action.payload) {
+                    deletedItemIndex = i;
+                    break;
+                }
+            }
+
+            const newSlicedItems = [
+                ...state.cartItems.reduce((previousValue, currentValue, i) => {
+                    if (deletedItemIndex !== i) {
+                        previousValue.push(currentValue)
+                    }
+                    return previousValue;
+                }, [])
+            ]
+
+
+            const totalPriceSliced = newSlicedItems.reduce((sum, obj) => sum + obj.price, 0);
+
+
+            return {
+                cartItems: newSlicedItems,
+                countsIdItems: {
+                    ...state.countsIdItems,
+                    [action.payload]: state.countsIdItems[action.payload] - 1
+                },
+                totalPrice: totalPriceSliced
+            }
+
         default:
             return state;
     }

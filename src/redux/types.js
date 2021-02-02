@@ -3,3 +3,5 @@ export const GET_CARDS = "GET_CARDS";
 export const SET_ACTIVE_CATEGORY = "SET_ACTIVE_CATEGORY";
 export const SET_LOADING = "SET_LOADING";
 export const SET_CART_ITEMS = "SET_CART_ITEMS";
+export const CLEAR_CART = "CLEAR_CART";
+export const MINUS_CART_ITEM = "MINUS_CART_ITEM";

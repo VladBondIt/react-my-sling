@@ -21,3 +21,14 @@ body {
     max-width: 1400px;
     margin: 0 auto;
 }
+
+.disabled {
+    opacity: 0.2;
+    &:hover {
+        background: transparent;
+    }
+    &:active {
+        background: transparent;
+        transform: translate(0px, 0px);
+    }
+}

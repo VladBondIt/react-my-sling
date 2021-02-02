@@ -1,7 +1,7 @@
 import React from 'react';
-import ForCard0 from '../assets/images/card/for_card-cut.png'
-import ForCard1 from '../assets/images/card/sling-w-ring.jpg'
-import ForCard2 from '../assets/images/card/sling-backpack.jpg'
+import ForCard0 from '../assets/images/card/for_card-cut.png';
+import ForCard1 from '../assets/images/card/sling-w-ring.jpg';
+import ForCard2 from '../assets/images/card/sling-backpack.jpg';
 import { useDispatch } from 'react-redux';
 import { setCartItems } from '../redux/actions/cart';
 
@@ -26,7 +26,6 @@ function Card({ title, description, material, size, price, oldprice, img, id }) 
     const handleCardItem = (obj) => {
         const newObj = {
             ...obj,
-            count: 1,
             dataForKey: Date.now().toString(16)
         }
 

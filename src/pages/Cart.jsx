@@ -1,17 +1,24 @@
 import React from 'react';
 import CartItem from '../components/CartItem';
 import HeaderNav from '../components/HeaderNav';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ReactComponent as CartEmpty } from '../assets/images/svg/cart-empty-black.svg';
 import { ReactComponent as CartBack } from '../assets/images/svg/back-button.svg';
 import { ReactComponent as CartClear } from '../assets/images/svg/clear-all.svg';
+import { clearCart } from '../redux/actions/cart'
 
 function Cart() {
+    const dispatch = useDispatch();
+
     const { cartItems, totalPrice } = useSelector((state) => ({
         cartItems: state.cart.cartItems,
         totalPrice: state.cart.totalPrice,
     }))
+
+    const handleClear = () => {
+        dispatch(clearCart())
+    }
 
 
     return (
@@ -28,7 +35,7 @@ function Cart() {
                         <>
                             <div className="cart__buttons shd">
                                 Корзина Заказов
-                            <button className="cart__button shd btn cart__button_red">
+                            <button onClick={handleClear} className="cart__button shd btn cart__button_red">
                                     <CartClear className="cart__clearsvg" /> Очистить
                             </button>
                             </div>
