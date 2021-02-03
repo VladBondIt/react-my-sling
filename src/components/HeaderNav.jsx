@@ -8,9 +8,10 @@ import { useSelector } from 'react-redux';
 
 function HeaderNav() {
 
-    const { cartItems, totalPrice } = useSelector((state) => ({
+    const { totalCount, totalPrice } = useSelector((state) => ({
         cartItems: state.cart.cartItems,
         totalPrice: state.cart.totalPrice,
+        totalCount: state.cart.totalCount,
     }))
 
     return (
@@ -41,7 +42,7 @@ function HeaderNav() {
                     <CartSvg className="cart-header__svg" />
                     <span className="cart-header__delimetr"></span>
                     <div className="cart-header__box">
-                        <span className="cart-header__count">{cartItems.length} шт</span>
+                        <span className="cart-header__count">{totalCount} шт</span>
                         <span className="cart-header__price">{totalPrice} руб</span>
                     </div>
                 </div>

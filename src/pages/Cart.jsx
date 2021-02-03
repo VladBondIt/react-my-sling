@@ -49,11 +49,10 @@ function Cart() {
                                     <span className="cart__text">Отмена</span>
                                 </div>
                                 <div className="cart__itembox">
-                                    {[...new Map(cartItems.map(obj => [obj["id"], obj])).values()]
-                                        .map((cartItem) => <CartItem
-                                            {...cartItem}
-                                            key={cartItem.dataForKey}
-                                        />)}
+                                    {cartItems.map((cartItem) => <CartItem
+                                        {...cartItem}
+                                        key={cartItem.dataForKey}
+                                    />)}
                                 </div>
 
                             </div>

@@ -3,8 +3,27 @@ import { SET_CART_ITEMS, CLEAR_CART, MINUS_CART_ITEM } from "../types";
 const initialState = {
     cartItems: [],
     countsIdItems: {},
-    totalPrice: 0
+    totalPrice: 0,
+    totalCount: 0
 }
+
+const calcTotalCount = (obj) => {
+    return Object.values(obj).reduce((previousValue, currentValue) => {
+        previousValue += currentValue;
+
+        return previousValue;
+    }, 0)
+}
+
+const calcTotalPrice = (arr, obj) => {
+    return arr.reduce((previousValue, currentValue) => {
+        previousValue += (currentValue.price * obj[currentValue.id])
+        return previousValue;
+    }, 0)
+}
+
+
+
 const cards = (state = initialState, action) => {
     switch (action.type) {
         case SET_CART_ITEMS:
@@ -13,23 +32,31 @@ const cards = (state = initialState, action) => {
                 ? 0
                 : state.countsIdItems[action.payload.id];
 
-            const newItems = [
-                ...state.cartItems,
-                action.payload
-            ]
+            let newItems = null;
+
+            state.cartItems.length > 0
+                ? state.cartItems.some((obj) => obj.id === action.payload.id)
+                    ? newItems = [
+                        ...state.cartItems
+                    ]
+                    : newItems = [
+                        ...state.cartItems,
+                        action.payload
+                    ]
+                : newItems = [
+                    ...state.cartItems,
+                    action.payload
+                ]
 
             const newCountsIdItems = {
                 ...state.countsIdItems,
                 [action.payload.id]: stateCount + 1
-            }
+            };
 
-            const uniqueArrPriceId = [...new Map(newItems.map(obj => [obj["id"], obj["price"]]))]
+            const totalCount = calcTotalCount(newCountsIdItems);
 
 
-            const totalPrice = uniqueArrPriceId.reduce((previousValue, currentValue) => {
-                previousValue += (currentValue[1] * newCountsIdItems[currentValue[0]])
-                return previousValue;
-            }, 0)
+            const totalPrice = calcTotalPrice(newItems, newCountsIdItems);
 
 
 
@@ -37,7 +64,8 @@ const cards = (state = initialState, action) => {
                 ...state,
                 cartItems: newItems,
                 countsIdItems: newCountsIdItems,
-                totalPrice: totalPrice
+                totalPrice: totalPrice,
+                totalCount: totalCount
             }
         case CLEAR_CART:
             return {
@@ -50,21 +78,19 @@ const cards = (state = initialState, action) => {
             const countsIdItemsMinused = {
                 ...state.countsIdItems,
                 [action.payload]: state.countsIdItems[action.payload] - 1
-            }
+            };
 
+            const totalCountMinused = calcTotalCount(countsIdItemsMinused);
 
-            const totalPriceMinused = [...new Map(state.cartItems.map(obj => [obj["id"], obj["price"]]))]
-                .reduce((previousValue, currentValue) => {
-                    previousValue += (currentValue[1] * countsIdItemsMinused[currentValue[0]])
-                    return previousValue;
-                }, 0)
+            const totalPriceMinused = calcTotalPrice(state.cartItems, countsIdItemsMinused);
 
 
 
             return {
                 ...state,
                 countsIdItems: countsIdItemsMinused,
-                totalPrice: totalPriceMinused
+                totalPrice: totalPriceMinused,
+                totalCount: totalCountMinused
             }
 
         default:
