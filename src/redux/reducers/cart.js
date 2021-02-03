@@ -18,15 +18,25 @@ const cards = (state = initialState, action) => {
                 action.payload
             ]
 
-            const totalPrice = newItems.reduce((sum, obj) => sum + obj.price, 0);
+            const newCountsIdItems = {
+                ...state.countsIdItems,
+                [action.payload.id]: stateCount + 1
+            }
+
+            const uniqueArrPriceId = [...new Map(newItems.map(obj => [obj["id"], obj["price"]]))]
+
+
+            const totalPrice = uniqueArrPriceId.reduce((previousValue, currentValue) => {
+                previousValue += (currentValue[1] * newCountsIdItems[currentValue[0]])
+                return previousValue;
+            }, 0)
+
+
 
             return {
                 ...state,
                 cartItems: newItems,
-                countsIdItems: {
-                    ...state.countsIdItems,
-                    [action.payload.id]: stateCount + 1
-                },
+                countsIdItems: newCountsIdItems,
                 totalPrice: totalPrice
             }
         case CLEAR_CART:
@@ -37,36 +47,24 @@ const cards = (state = initialState, action) => {
             }
         case MINUS_CART_ITEM:
 
-            let deletedItemIndex = null;
-
-            for (let i = 0; i < state.cartItems.length; i++) {
-                const element = state.cartItems[i];
-                if (element.id === action.payload) {
-                    deletedItemIndex = i;
-                    break;
-                }
+            const countsIdItemsMinused = {
+                ...state.countsIdItems,
+                [action.payload]: state.countsIdItems[action.payload] - 1
             }
 
-            const newSlicedItems = [
-                ...state.cartItems.reduce((previousValue, currentValue, i) => {
-                    if (deletedItemIndex !== i) {
-                        previousValue.push(currentValue)
-                    }
+
+            const totalPriceMinused = [...new Map(state.cartItems.map(obj => [obj["id"], obj["price"]]))]
+                .reduce((previousValue, currentValue) => {
+                    previousValue += (currentValue[1] * countsIdItemsMinused[currentValue[0]])
                     return previousValue;
-                }, [])
-            ]
+                }, 0)
 
-
-            const totalPriceSliced = newSlicedItems.reduce((sum, obj) => sum + obj.price, 0);
 
 
             return {
-                cartItems: newSlicedItems,
-                countsIdItems: {
-                    ...state.countsIdItems,
-                    [action.payload]: state.countsIdItems[action.payload] - 1
-                },
-                totalPrice: totalPriceSliced
+                ...state,
+                countsIdItems: countsIdItemsMinused,
+                totalPrice: totalPriceMinused
             }
 
         default:
