@@ -7,3 +7,5 @@ export const CLEAR_CART = "CLEAR_CART";
 export const MINUS_CART_ITEM = "MINUS_CART_ITEM";
 export const SET_MODAL = "SET_MODAL";
 export const SET_MODAL_TYPE = "SET_MODAL_TYPE";
+export const SET_CANCEL_ID = "SET_CANCEL_ID";
+export const CANCEL_POSITION = "CANCEL_POSITION";

@@ -6,18 +6,19 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as CartEmpty } from '../assets/images/svg/cart-empty-black.svg';
 import { ReactComponent as CartBack } from '../assets/images/svg/back-button.svg';
 import { ReactComponent as CartClear } from '../assets/images/svg/clear-all.svg';
-import { clearCart } from '../redux/actions/cart'
+import { cancelPosition, clearCart } from '../redux/actions/cart'
 import CartModal from '../components/CartModal';
 import { setModalShow, setModalType } from '../redux/actions/modal';
 
 function Cart() {
     const dispatch = useDispatch();
 
-    const { cartItems, totalPrice, cartModalShow, typeModal } = useSelector((state) => ({
+    const { cartItems, totalPrice, cartModalShow, typeModal, cancelId } = useSelector((state) => ({
         cartItems: state.cart.cartItems,
         totalPrice: state.cart.totalPrice,
         cartModalShow: state.modal.cartModalShow,
         typeModal: state.modal.typeModal,
+        cancelId: state.modal.cancelId,
     }))
 
 
@@ -29,9 +30,13 @@ function Cart() {
         dispatch(setModalShow(!cartModalShow))
     }
 
-    const handleModal = (num) => {
+    const handleModalShow = (num) => {
         handleSetModalShow()
         dispatch(setModalType(num))
+    }
+
+    const handleCancel = () => {
+        dispatch(cancelPosition(cancelId))
     }
 
 
@@ -49,7 +54,7 @@ function Cart() {
                         <>
                             <div className="cart__buttons shd">
                                 Корзина Заказов
-                            <button onClick={() => handleModal(0)} className="cart__button shd btn cart__button_red">
+                            <button onClick={() => handleModalShow(0)} className="cart__button shd btn cart__button_red">
                                     <CartClear className="cart__clearsvg" /> Очистить
                             </button>
                             </div>
@@ -65,6 +70,7 @@ function Cart() {
                                 <div className="cart__itembox">
                                     {cartItems.map((cartItem) => <CartItem
                                         {...cartItem}
+                                        handleModalShow={handleModalShow}
                                         key={cartItem.dataForKey}
                                     />)}
                                 </div>
@@ -86,6 +92,7 @@ function Cart() {
                                     handleSetModalShow={handleSetModalShow}
                                     typeModal={typeModal}
                                     handleClear={handleClear}
+                                    handleCancel={handleCancel}
                                 />}
                         </>
                         :

@@ -1,4 +1,4 @@
-import { SET_CART_ITEMS, CLEAR_CART, MINUS_CART_ITEM } from "../types";
+import { SET_CART_ITEMS, CLEAR_CART, MINUS_CART_ITEM, CANCEL_POSITION } from "../types";
 
 const initialState = {
     cartItems: [],
@@ -95,6 +95,23 @@ const cards = (state = initialState, action) => {
                 countsIdItems: countsIdItemsMinused,
                 totalPrice: totalPriceMinused,
                 totalCount: totalCountMinused
+            }
+        case CANCEL_POSITION:
+
+            const canceledItems = state.cartItems.filter((obj) => obj.id !== action.payload)
+
+            const canceledCountsItems = Object.fromEntries(Object.entries(state.countsIdItems).filter((x) => x[0] !== (action.payload + '')))
+
+            const totaleCountCanceled = calcTotalCount(canceledCountsItems);
+            const totalePriceCanceled = calcTotalPrice(canceledItems, canceledCountsItems);
+
+
+            return {
+                ...state,
+                cartItems: canceledItems,
+                countsIdItems: canceledCountsItems,
+                totalPrice: totalePriceCanceled,
+                totalCount: totaleCountCanceled
             }
 
         default:

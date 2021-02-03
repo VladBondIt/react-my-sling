@@ -1,6 +1,6 @@
 import React from 'react'
 
-function CartModal({ typeModal, handleSetModalShow, handleClear }) {
+function CartModal({ typeModal, handleSetModalShow, handleClear, handleCancel }) {
 
     const modalText = ["Вы хотите очистить корзину?", "Вы хотите отменить позицию?"]
 
@@ -8,8 +8,20 @@ function CartModal({ typeModal, handleSetModalShow, handleClear }) {
         handleSetModalShow()
     }
     const handleYes = () => {
-        handleSetModalShow()
-        handleClear()
+        switch (typeModal) {
+            case 0:
+                handleSetModalShow()
+                handleClear()
+                break;
+            case 1:
+                handleSetModalShow()
+                handleCancel()
+                break;
+
+            default:
+                break;
+        }
+
     }
 
     return (

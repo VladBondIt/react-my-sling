@@ -1,8 +1,9 @@
-import { SET_MODAL, SET_MODAL_TYPE } from "../types";
+import { SET_MODAL, SET_MODAL_TYPE, SET_CANCEL_ID } from "../types";
 
 const initialState = {
     cartModalShow: false,
-    typeModal: null
+    typeModal: null,
+    cancelId: null
 
 }
 const modal = (state = initialState, action) => {
@@ -16,6 +17,11 @@ const modal = (state = initialState, action) => {
             return {
                 ...state,
                 typeModal: action.payload,
+            }
+        case SET_CANCEL_ID:
+            return {
+                ...state,
+                cancelId: action.payload,
             }
         default:
             return state;

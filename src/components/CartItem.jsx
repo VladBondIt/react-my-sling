@@ -5,8 +5,9 @@ import { ReactComponent as Plus } from '../assets/images/svg/plus.svg';
 import { ReactComponent as Minus } from '../assets/images/svg/minus.svg';
 import { useDispatch } from 'react-redux';
 import { minusCartItem, setCartItems } from '../redux/actions/cart';
+import { setCancelId } from '../redux/actions/modal';
 
-function CartItem({ id, title, img, size, material, price, description, dataForKey }) {
+function CartItem({ id, title, img, size, material, price, description, dataForKey, handleModalShow }) {
 
     const dispatch = useDispatch();
 
@@ -33,6 +34,11 @@ function CartItem({ id, title, img, size, material, price, description, dataForK
             dispatch(minusCartItem(id))
         }
         onSetDisableMinus()
+    }
+
+    const handleCancel = () => {
+        handleModalShow(1)
+        dispatch(setCancelId(id))
     }
 
     useEffect(() => {
@@ -95,7 +101,9 @@ function CartItem({ id, title, img, size, material, price, description, dataForK
                 <span className="item__totalprice">{price * countsIdItems[id]} руб</span>
             </div>
             <div className="item__column">
-                <button className="item__button shd btn"><DeleteItem className="item__svg" /></button>
+                <button onClick={handleCancel} className="item__button shd btn">
+                    <DeleteItem className="item__svg" />
+                </button>
             </div>
 
         </div >
