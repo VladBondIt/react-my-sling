@@ -6,6 +6,8 @@ import HeaderNav from './HeaderNav';
 
 
 function Header() {
+
+
     return (
         <header className="header">
             <div className="header__background">

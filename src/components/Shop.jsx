@@ -45,6 +45,7 @@ function Shop() {
         dispatch(fetchedCards())
     }, [])
 
+
     return (
         <section className="shop">
             <div className="container">

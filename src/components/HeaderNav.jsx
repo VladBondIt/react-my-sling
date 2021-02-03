@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ReactComponent as Logo } from '../assets/images/svg/logo.svg';
 import { ReactComponent as CartSvg } from '../assets/images/svg/cart.svg';
 import { Link } from 'react-router-dom';
@@ -8,11 +8,24 @@ import { useSelector } from 'react-redux';
 
 function HeaderNav() {
 
+
     const { totalCount, totalPrice } = useSelector((state) => ({
         cartItems: state.cart.cartItems,
         totalPrice: state.cart.totalPrice,
         totalCount: state.cart.totalCount,
     }))
+
+    const [offset, setOffset] = useState(0);
+
+    useEffect(() => {
+        window.onscroll = () => {
+            setOffset(window.pageYOffset)
+        }
+    }, []);
+
+
+    let cartClassName = "header__cart cart-header btn shd";
+    cartClassName += offset > 130 ? " fixed" : "";
 
     return (
         <nav className="header__nav">
@@ -38,7 +51,7 @@ function HeaderNav() {
                 <a href="" className="header__email link">bobaka@cobaka.ru</a>
             </div>
             <Link to="/react-my-sling/cart">
-                <div className="header__cart cart-header btn shd">
+                <div className={cartClassName}>
                     <CartSvg className="cart-header__svg" />
                     <span className="cart-header__delimetr"></span>
                     <div className="cart-header__box">
