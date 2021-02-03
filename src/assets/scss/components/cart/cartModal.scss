@@ -1,0 +1,49 @@
+.modal {
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &__body {
+        background-image: url(../../../images/bg/parchment-2123469_640.webp);
+        background-size: 20%;
+        background-repeat: repeat;
+        border-radius: 15px;
+        max-width: 900px;
+        width: 100%;
+        padding: 30px 10px;
+        font-family: Lobster;
+    }
+    &__text {
+        font-size: 38px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    &__buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &__button {
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 1 150px;
+        font-size: 30px;
+        border-radius: 30px;
+        &:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+        &:active {
+            background: #b2e5fb;
+        }
+        &:first-child {
+            margin-right: 30px;
+        }
+    }
+}

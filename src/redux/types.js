@@ -5,3 +5,5 @@ export const SET_LOADING = "SET_LOADING";
 export const SET_CART_ITEMS = "SET_CART_ITEMS";
 export const CLEAR_CART = "CLEAR_CART";
 export const MINUS_CART_ITEM = "MINUS_CART_ITEM";
+export const SET_MODAL = "SET_MODAL";
+export const SET_MODAL_TYPE = "SET_MODAL_TYPE";

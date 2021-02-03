@@ -9,6 +9,7 @@ const initialState = {
 
 const calcTotalCount = (obj) => {
     return Object.values(obj).reduce((previousValue, currentValue) => {
+
         previousValue += currentValue;
 
         return previousValue;
@@ -17,7 +18,9 @@ const calcTotalCount = (obj) => {
 
 const calcTotalPrice = (arr, obj) => {
     return arr.reduce((previousValue, currentValue) => {
+
         previousValue += (currentValue.price * obj[currentValue.id])
+
         return previousValue;
     }, 0)
 }
@@ -71,7 +74,8 @@ const cards = (state = initialState, action) => {
             return {
                 cartItems: [],
                 countsIdItems: {},
-                totalPrice: 0
+                totalPrice: 0,
+                totalCount: 0
             }
         case MINUS_CART_ITEM:
 

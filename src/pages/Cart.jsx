@@ -7,17 +7,31 @@ import { ReactComponent as CartEmpty } from '../assets/images/svg/cart-empty-bla
 import { ReactComponent as CartBack } from '../assets/images/svg/back-button.svg';
 import { ReactComponent as CartClear } from '../assets/images/svg/clear-all.svg';
 import { clearCart } from '../redux/actions/cart'
+import CartModal from '../components/CartModal';
+import { setModalShow, setModalType } from '../redux/actions/modal';
 
 function Cart() {
     const dispatch = useDispatch();
 
-    const { cartItems, totalPrice } = useSelector((state) => ({
+    const { cartItems, totalPrice, cartModalShow, typeModal } = useSelector((state) => ({
         cartItems: state.cart.cartItems,
         totalPrice: state.cart.totalPrice,
+        cartModalShow: state.modal.cartModalShow,
+        typeModal: state.modal.typeModal,
     }))
+
 
     const handleClear = () => {
         dispatch(clearCart())
+    }
+
+    const handleSetModalShow = () => {
+        dispatch(setModalShow(!cartModalShow))
+    }
+
+    const handleModal = (num) => {
+        handleSetModalShow()
+        dispatch(setModalType(num))
     }
 
 
@@ -35,7 +49,7 @@ function Cart() {
                         <>
                             <div className="cart__buttons shd">
                                 Корзина Заказов
-                            <button onClick={handleClear} className="cart__button shd btn cart__button_red">
+                            <button onClick={() => handleModal(0)} className="cart__button shd btn cart__button_red">
                                     <CartClear className="cart__clearsvg" /> Очистить
                             </button>
                             </div>
@@ -67,6 +81,12 @@ function Cart() {
                                 </Link>
                                 <span className="cart__totalprice">Общая стоимость: {totalPrice} руб</span>
                             </div>
+                            {cartModalShow
+                                && <CartModal
+                                    handleSetModalShow={handleSetModalShow}
+                                    typeModal={typeModal}
+                                    handleClear={handleClear}
+                                />}
                         </>
                         :
                         <div className="cart__empty empty shd">
