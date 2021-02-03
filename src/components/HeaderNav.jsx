@@ -27,7 +27,7 @@ function HeaderNav() {
             </div>
             <div className="header__menu">
                 <ul className="header__list list">
-                    <li className="list__item"><Link to="/" className="list__link link">Главная</Link></li>
+                    <li className="list__item"><Link to="/react-my-sling/" className="list__link link">Главная</Link></li>
                     <li className="list__item"><a href="" className="list__link link">О нас</a></li>
                     <li className="list__item"><a href="" className="list__link link">О товаре</a></li>
                 </ul>
@@ -36,7 +36,7 @@ function HeaderNav() {
                 <a href="tel:+78009998877" className="header__phone link">8-800-999-88-77</a>
                 <a href="" className="header__email link">bobaka@cobaka.ru</a>
             </div>
-            <Link to="/cart">
+            <Link to="/react-my-sling/cart">
                 <div className="header__cart cart-header btn shd">
                     <CartSvg className="cart-header__svg" />
                     <span className="cart-header__delimetr"></span>

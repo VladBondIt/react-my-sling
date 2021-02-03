@@ -7,7 +7,7 @@ export const getCards = (items) => ({
 });
 
 export const fetchedCards = (category = "Май слинг", sortBy, orderSort) => async dispatch => {
-    const apiUrl = 'http://localhost:3001/slings';
+    const apiUrl = 'https://my-json-server.typicode.com/VladBondIt/FakeDBjson/slings';
     const categoryUrl = `?category=${category}`;
     // const sortUrl = `&_sort=${sortBy}&_order=${orderSort}`;
 

@@ -8,8 +8,8 @@ import Cart from '../pages/Cart';
 function App() {
     return (
         <div className="wrapper">
-            <Route exact path="/" component={Home} />
-            <Route exact path="/cart" component={Cart} />
+            <Route exact path="/react-my-sling/" component={Home} />
+            <Route exact path="/react-my-sling/cart" component={Cart} />
             <Footer />
         </div>
     )

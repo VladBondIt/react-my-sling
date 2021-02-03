@@ -61,7 +61,7 @@ function Cart() {
                                 <button className="cart__button shd btn cart__button_green">
                                     Оформить заказ
                             </button>
-                                <Link to="/">
+                                <Link to="/react-my-sling/">
                                     <button className="cart__button shd btn">
                                         <CartBack className="cart__backsvg" /> Вернуться
                                     </button>
@@ -75,7 +75,7 @@ function Cart() {
                             <div className="empty__imgbox">
                                 <CartEmpty className="empty__svg" />
                             </div>
-                            <Link to="/">
+                            <Link to="/react-my-sling/">
                                 <button className="cart__button shd btn">
                                     <CartBack className="cart__backsvg" /> Вернуться
                                 </button>

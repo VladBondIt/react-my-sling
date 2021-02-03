@@ -21,7 +21,7 @@ function Shop() {
     }))
 
     const onSetCategoryes = useCallback(async () => {
-        const apiUrl = 'http://localhost:3001/slings';
+        const apiUrl = 'https://my-json-server.typicode.com/VladBondIt/FakeDBjson/slings';
 
         const res = await fetch(`${apiUrl}`);
         if (!res.ok) {
