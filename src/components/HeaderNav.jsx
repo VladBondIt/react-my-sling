@@ -9,10 +9,11 @@ import { useSelector } from 'react-redux';
 function HeaderNav() {
 
 
-    const { totalCount, totalPrice } = useSelector((state) => ({
+    const { totalCount, totalPrice, cartModalShow } = useSelector((state) => ({
         cartItems: state.cart.cartItems,
         totalPrice: state.cart.totalPrice,
         totalCount: state.cart.totalCount,
+        cartModalShow: state.modal.cartModalShow,
     }))
 
     const [offset, setOffset] = useState(0);
@@ -26,6 +27,7 @@ function HeaderNav() {
 
     let cartClassName = "header__cart cart-header btn shd";
     cartClassName += offset > 130 ? " fixed" : "";
+    cartClassName += cartModalShow ? "" : " fixed";
 
     return (
         <nav className="header__nav">
