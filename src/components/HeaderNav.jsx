@@ -27,7 +27,7 @@ function HeaderNav() {
 
     let cartClassName = "header__cart cart-header btn shd";
     cartClassName += offset > 130 ? " fixed" : "";
-    cartClassName += cartModalShow ? "" : " fixed";
+    cartClassName += cartModalShow ? "header__cart cart-header btn shd" : "";
 
     return (
         <nav className="header__nav">
