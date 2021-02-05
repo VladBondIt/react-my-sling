@@ -1,7 +1,7 @@
 {
   "name": "react-my-sling",
   "version": "0.1.0",
-  "private": false,
+  "private": true,
   "homepage": "https://vladbondit.github.io/react-my-sling/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
