@@ -7,7 +7,7 @@ import { ReactComponent as CartEmpty } from '../assets/images/svg/cart-empty-bla
 import { ReactComponent as CartBack } from '../assets/images/svg/back-button.svg';
 import { ReactComponent as CartClear } from '../assets/images/svg/clear-all.svg';
 import { cancelPosition, clearCart } from '../redux/actions/cart'
-import CartModal from '../components/CartModal';
+import CartModal from '../components/Modal';
 import { setModalShow, setModalType } from '../redux/actions/modal';
 
 function Cart() {
@@ -42,7 +42,7 @@ function Cart() {
 
     return (
         <>
-            <div className="header__forcart">
+            <div className="header__notmain">
                 <div className="container">
                     <HeaderNav />
                 </div>

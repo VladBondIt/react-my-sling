@@ -7,17 +7,19 @@ import { setCategoryes } from '../redux/actions/categoryes';
 import { fetchedCards } from '../redux/actions/cards';
 import Loader from './Loader';
 import { setLoading } from '../redux/actions/loader';
+import { setSearchChar } from '../redux/actions/search';
 
 
 function Shop() {
     const dispatch = useDispatch();
 
-    const { items, activeItem, cardItems, loaderItems, isLoading } = useSelector((state) => ({
+    const { items, activeItem, cardItems, loaderItems, isLoading, searchChar } = useSelector((state) => ({
         items: state.categoryes.items,
         activeItem: state.categoryes.activeItem,
         cardItems: state.cards.cardItems,
         loaderItems: state.loader.loaderItems,
         isLoading: state.loader.isLoading,
+        searchChar: state.search.searchChar,
     }))
 
     const onSetCategoryes = useCallback(async () => {
@@ -45,15 +47,20 @@ function Shop() {
         dispatch(fetchedCards())
     }, [])
 
+    const onChange = (e) => {
+        dispatch(setSearchChar(e.target.value))
+    }
+
 
     return (
         <section className="shop">
             <div className="container">
                 <div className="shop__search search shd">
                     <span className="search__count">
-                        Товара найдено: 50
+                        Товара найдено: {cardItems.length}
                     </span>
-                    <SearchForm />
+                    <SearchForm
+                        onChange={onChange} />
                     <div className="search__sort">
                         Сортировать по: <span className="search__type">Цене</span>
                     </div>
@@ -75,7 +82,11 @@ function Shop() {
                     <div className="shop__column shop__column_right">
                         <div className="shop__cardbox">
                             {!isLoading
-                                ? cardItems && cardItems.map((card) => <Card {...card} key={card.id} />)
+                                ? cardItems && cardItems.map((card) =>
+                                    <Card
+                                        {...card}
+                                        searchChar={searchChar}
+                                        key={card.id} />)
                                 : loaderItems.map((loader) => <Loader key={loader.id} />)}
 
 

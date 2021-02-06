@@ -9,3 +9,4 @@ export const SET_MODAL = "SET_MODAL";
 export const SET_MODAL_TYPE = "SET_MODAL_TYPE";
 export const SET_CANCEL_ID = "SET_CANCEL_ID";
 export const CANCEL_POSITION = "CANCEL_POSITION";
+export const SET_SEARCH_CHAR = "SET_SEARCH_CHAR";

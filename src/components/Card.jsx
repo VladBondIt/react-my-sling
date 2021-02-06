@@ -5,8 +5,10 @@ import ForCard2 from '../assets/images/card/sling-backpack.jpg';
 import { useDispatch } from 'react-redux';
 import { setCartItems } from '../redux/actions/cart';
 
-function Card({ title, description, material, size, price, oldprice, img, id }) {
+function Card({ title, description, material, size, price, oldprice, img, id, searchChar }) {
     const dispatch = useDispatch();
+
+    const searchFields = [title, description, material, size];
 
     switch (img) {
         case 0:
@@ -32,46 +34,48 @@ function Card({ title, description, material, size, price, oldprice, img, id }) 
         dispatch(setCartItems(newObj))
     }
 
+    const checked = searchChar !== null ? searchFields.filter((item) => (item + "").includes(searchChar)) : false;
 
     return (
-        <div className="shop__card card shd">
-            <div className="card__imagebox">
-                <img className="card__image" src={img} alt={title} />
-            </div>
-            <div className="card__infobox">
-                <div className="card__textbox">
-                    <h2 className="card__title">{title}</h2>
-                    <span className="card__subtitle">{description}</span>
+        checked.length > 0 || !checked ?
+            <div className="shop__card card shd" >
+                <div className="card__imagebox">
+                    <img className="card__image" src={img} alt={title} />
                 </div>
-                <div className="card__row">
-                    <span className="card__size">Размер:</span>
-                    <span className="card__size-count">{size} см</span>
-                </div>
-                <div className="card__row">
-                    <span className="card__material">Материал:</span>
-                    <span className="card__material-value">{material}</span>
-                </div>
-                <div className="card__row">
-                    <div className="card__price price">
-                        <span className="price__old">{oldprice} руб</span>
-                        <span className="price__current">{price} руб</span>
+                <div className="card__infobox">
+                    <div className="card__textbox">
+                        <h2 className="card__title">{title}</h2>
+                        <span className="card__subtitle">{description}</span>
                     </div>
-                    <button
-                        className="card__button btn"
-                        onClick={() => handleCardItem({
-                            id,
-                            title,
-                            img,
-                            description,
-                            size,
-                            material,
-                            price,
-                        })}>
-                        Добавить
+                    <div className="card__row">
+                        <span className="card__size">Размер:</span>
+                        <span className="card__size-count">{size} см</span>
+                    </div>
+                    <div className="card__row">
+                        <span className="card__material">Материал:</span>
+                        <span className="card__material-value">{material}</span>
+                    </div>
+                    <div className="card__row">
+                        <div className="card__price price">
+                            <span className="price__old">{oldprice} руб</span>
+                            <span className="price__current">{price} руб</span>
+                        </div>
+                        <button
+                            className="card__button btn"
+                            onClick={() => handleCardItem({
+                                id,
+                                title,
+                                img,
+                                description,
+                                size,
+                                material,
+                                price,
+                            })}>
+                            Добавить
                     </button>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </div> : null
 
     )
 }
