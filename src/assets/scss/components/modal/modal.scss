@@ -8,15 +8,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+    z-index: 1000;
     &__body {
         background-image: url(../../../images/bg/parchment-2123469_640.webp);
         background-size: 20%;
         background-repeat: repeat;
         border-radius: 15px;
-        max-width: 900px;
-        width: 100%;
         padding: 30px 10px;
+        width: 100%;
+        position: relative;
+        &_cart {
+            max-width: 900px;
+        }
+        &_header {
+            max-width: 600px;
+        }
+    }
+    &__cart {
         font-family: Lobster;
     }
     &__text {
@@ -45,6 +53,97 @@
         }
         &:first-child {
             margin-right: 30px;
+        }
+    }
+
+    &__form {
+    }
+}
+
+.call-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &__phone {
+        margin-bottom: 20px;
+        padding-left: 20px;
+        font-size: 30px;
+        border-radius: 30px;
+        background: transparent;
+        &:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+    }
+    &__email {
+        margin-bottom: 20px;
+        padding-left: 20px;
+        font-size: 30px;
+        border-radius: 30px;
+        background: transparent;
+        &:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+    }
+    &__label {
+        cursor: pointer;
+    }
+    &__checkbox {
+        margin-bottom: 20px;
+        font-size: 20px;
+        position: relative;
+    }
+    &__check-input {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border: none;
+        &:checked + .call-form__subcheck {
+            background: url(../../../images/svg/check.svg) center / 15px 15px no-repeat, #e8f0fe;
+        }
+    }
+
+    &__subcheck {
+        position: absolute;
+        height: 18px;
+        width: 18px;
+        margin-left: -28px;
+        margin-top: 3px;
+        background: #e8f0fe;
+        border-radius: 3px;
+    }
+    &__button {
+        font-size: 26px;
+        background: transparent;
+        border-radius: 30px;
+        padding: 7px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+        &:active {
+            background: #b2e5fb;
+        }
+    }
+    &__close {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: transparent;
+        border: 1px solid #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        &:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+        &:active {
+            background: #b2e5fb;
         }
     }
 }

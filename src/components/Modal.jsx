@@ -1,21 +1,50 @@
-import React from 'react'
-import CartModal from './CartModal'
+import React from 'react';
+import CartModal from './CartModal';
+import OfferCallModal from './OfferCallModal';
+import { useSelector, useDispatch } from 'react-redux';
+import { cancelPosition, clearCart } from '../redux/actions/cart';
+import { setModalShow } from '../redux/actions/modal';
 
-function Modal({ typeModal, handleSetModalShow, handleClear, handleCancel }) {
+function Modal() {
 
+    const dispatch = useDispatch();
+
+
+    const { modalShow, typeModal, cancelId } = useSelector((state) => ({
+        modalShow: state.modal.modalShow,
+        typeModal: state.modal.typeModal,
+        cancelId: state.modal.cancelId,
+    }))
+
+    const handlerClear = () => {
+        dispatch(clearCart())
+    }
+    const handlerCancel = () => {
+        dispatch(cancelPosition(cancelId))
+    }
+
+    const handlerModalShow = () => {
+        dispatch(setModalShow(!modalShow))
+    }
+
+    const delegateShowModal = e => {
+        if (e.target.matches('.modal')) {
+            handlerModalShow()
+        }
+    }
 
     const handlerNot = () => {
-        handleSetModalShow()
+        handlerModalShow()
     }
     const handlerYes = () => {
         switch (typeModal) {
             case 0:
-                handleSetModalShow()
-                handleClear()
+                handlerModalShow()
+                handlerClear()
                 break;
             case 1:
-                handleSetModalShow()
-                handleCancel()
+                handlerModalShow()
+                handlerCancel()
                 break;
 
             default:
@@ -24,13 +53,22 @@ function Modal({ typeModal, handleSetModalShow, handleClear, handleCancel }) {
 
     }
 
+    let bodyClassName = "modal__body";
+    bodyClassName += typeModal === 2 ? " modal__body_header" : " modal__body_cart";
+
     return (
-        <div className="modal">
-            <div className="modal__body">
-                <CartModal
-                    typeModal={typeModal}
-                    handlerNot={handlerNot}
-                    handlerYes={handlerYes} />
+        <div
+            onClick={delegateShowModal}
+            className="modal">
+            <div className={bodyClassName}>
+                {typeModal === 2
+                    ?
+                    <OfferCallModal handlerModalShow={handlerModalShow} />
+                    :
+                    <CartModal
+                        typeModal={typeModal}
+                        handlerNot={handlerNot}
+                        handlerYes={handlerYes} />}
             </div>
         </div>
     )

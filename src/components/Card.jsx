@@ -25,13 +25,19 @@ function Card({ title, description, material, size, price, oldprice, img, id, se
             break;
     }
 
-    const handleCardItem = (obj) => {
-        const newObj = {
-            ...obj,
+    const handlerCardItem = () => {
+        const obj = {
+            id,
+            title,
+            img,
+            description,
+            size,
+            material,
+            price,
             dataForKey: Date.now().toString(16)
         }
 
-        dispatch(setCartItems(newObj))
+        dispatch(setCartItems(obj))
     }
 
     const checked = searchChar !== null ? searchFields.filter((item) => (item + "").includes(searchChar)) : false;
@@ -62,15 +68,7 @@ function Card({ title, description, material, size, price, oldprice, img, id, se
                         </div>
                         <button
                             className="card__button btn"
-                            onClick={() => handleCardItem({
-                                id,
-                                title,
-                                img,
-                                description,
-                                size,
-                                material,
-                                price,
-                            })}>
+                            onClick={handlerCardItem}>
                             Добавить
                     </button>
                     </div>

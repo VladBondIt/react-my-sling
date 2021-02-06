@@ -1,7 +1,7 @@
 import { SET_MODAL, SET_MODAL_TYPE, SET_CANCEL_ID } from "../types";
 
 const initialState = {
-    cartModalShow: false,
+    modalShow: false,
     typeModal: null,
     cancelId: null
 
@@ -11,7 +11,7 @@ const modal = (state = initialState, action) => {
         case SET_MODAL:
             return {
                 ...state,
-                cartModalShow: action.payload,
+                modalShow: action.payload,
             }
         case SET_MODAL_TYPE:
             return {

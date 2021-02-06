@@ -6,37 +6,26 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as CartEmpty } from '../assets/images/svg/cart-empty-black.svg';
 import { ReactComponent as CartBack } from '../assets/images/svg/back-button.svg';
 import { ReactComponent as CartClear } from '../assets/images/svg/clear-all.svg';
-import { cancelPosition, clearCart } from '../redux/actions/cart'
-import CartModal from '../components/Modal';
+import Modal from '../components/Modal';
 import { setModalShow, setModalType } from '../redux/actions/modal';
 
 function Cart() {
     const dispatch = useDispatch();
 
-    const { cartItems, totalPrice, cartModalShow, typeModal, cancelId } = useSelector((state) => ({
+    const { cartItems, totalPrice, modalShow } = useSelector((state) => ({
         cartItems: state.cart.cartItems,
         totalPrice: state.cart.totalPrice,
-        cartModalShow: state.modal.cartModalShow,
-        typeModal: state.modal.typeModal,
-        cancelId: state.modal.cancelId,
+        modalShow: state.modal.modalShow,
     }))
 
 
-    const handleClear = () => {
-        dispatch(clearCart())
+    const handlerClearModalShow = () => {
+        dispatch(setModalShow(!modalShow))
+        dispatch(setModalType(0))
     }
-
-    const handleSetModalShow = () => {
-        dispatch(setModalShow(!cartModalShow))
-    }
-
-    const handleModalShow = (num) => {
-        handleSetModalShow()
-        dispatch(setModalType(num))
-    }
-
-    const handleCancel = () => {
-        dispatch(cancelPosition(cancelId))
+    const handlerCancelModalShow = () => {
+        dispatch(setModalShow(!modalShow))
+        dispatch(setModalType(1))
     }
 
 
@@ -54,7 +43,7 @@ function Cart() {
                         <>
                             <div className="cart__buttons shd">
                                 Корзина Заказов
-                            <button onClick={() => handleModalShow(0)} className="cart__button shd btn cart__button_red">
+                            <button onClick={handlerClearModalShow} className="cart__button shd btn cart__button_red">
                                     <CartClear className="cart__clearsvg" /> Очистить
                             </button>
                             </div>
@@ -70,7 +59,7 @@ function Cart() {
                                 <div className="cart__itembox">
                                     {cartItems.map((cartItem) => <CartItem
                                         {...cartItem}
-                                        handleModalShow={handleModalShow}
+                                        handlerCancelModalShow={handlerCancelModalShow}
                                         key={cartItem.dataForKey}
                                     />)}
                                 </div>
@@ -87,13 +76,8 @@ function Cart() {
                                 </Link>
                                 <span className="cart__totalprice">Общая стоимость: {totalPrice} руб</span>
                             </div>
-                            {cartModalShow
-                                && <CartModal
-                                    handleSetModalShow={handleSetModalShow}
-                                    typeModal={typeModal}
-                                    handleClear={handleClear}
-                                    handleCancel={handleCancel}
-                                />}
+                            {modalShow
+                                && <Modal />}
                         </>
                         :
                         <div className="cart__empty empty shd">
