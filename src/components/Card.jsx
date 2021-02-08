@@ -4,6 +4,7 @@ import ForCard1 from '../assets/images/card/sling-w-ring.jpg';
 import ForCard2 from '../assets/images/card/sling-backpack.jpg';
 import { useDispatch } from 'react-redux';
 import { setCartItems } from '../redux/actions/cart';
+import { setModalShow, setModalType, setPreviewObj } from '../redux/actions/modal';
 
 function Card({ title, description, material, size, price, oldprice, img, id, searchChar }) {
     const dispatch = useDispatch();
@@ -24,29 +25,43 @@ function Card({ title, description, material, size, price, oldprice, img, id, se
         default:
             break;
     }
+    const obj = {
+        id,
+        title,
+        img,
+        description,
+        size,
+        material,
+        price,
+        oldprice,
+        dataForKey: Date.now().toString(16)
+    }
 
     const handlerCardItem = () => {
-        const obj = {
-            id,
-            title,
-            img,
-            description,
-            size,
-            material,
-            price,
-            dataForKey: Date.now().toString(16)
-        }
-
         dispatch(setCartItems(obj))
     }
 
-    const checked = searchChar !== null ? searchFields.filter((item) => (item + "").includes(searchChar)) : false;
+    const handlerPreview = () => {
+        dispatch(setModalType(3))
+        dispatch(setPreviewObj(obj))
+        dispatch(setModalShow(true))
+    }
+
+
+    const checked = searchChar !== null
+        ? searchFields.filter((item) => (item + "").includes(searchChar))
+        : false;
 
     return (
         checked.length > 0 || !checked ?
             <div className="shop__card card shd" >
                 <div className="card__imagebox">
                     <img className="card__image" src={img} alt={title} />
+                    <div className="card__overlay overlay">
+                        <button
+                            onClick={handlerPreview}
+                            className="overlay__button btn">Предпросмотр</button>
+                    </div>
                 </div>
                 <div className="card__infobox">
                     <div className="card__textbox">
@@ -67,10 +82,10 @@ function Card({ title, description, material, size, price, oldprice, img, id, se
                             <span className="price__current">{price} руб</span>
                         </div>
                         <button
-                            className="card__button btn"
+                            className="card__button add-button btn"
                             onClick={handlerCardItem}>
                             Добавить
-                    </button>
+                        </button>
                     </div>
                 </div>
             </div> : null

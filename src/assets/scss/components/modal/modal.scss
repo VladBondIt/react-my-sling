@@ -1,3 +1,6 @@
+@import "./preview.scss";
+@import "./callModal.scss";
+
 .modal {
     background: rgba(0, 0, 0, 0.7);
     position: fixed;
@@ -9,6 +12,7 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
+    overflow: auto;
     &__body {
         background-image: url(../../../images/bg/parchment-2123469_640.webp);
         background-size: 20%;
@@ -22,6 +26,9 @@
         }
         &_header {
             max-width: 600px;
+        }
+        &_preview {
+            max-width: 900px;
         }
     }
     &__cart {
@@ -57,93 +64,5 @@
     }
 
     &__form {
-    }
-}
-
-.call-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    &__phone {
-        margin-bottom: 20px;
-        padding-left: 20px;
-        font-size: 30px;
-        border-radius: 30px;
-        background: transparent;
-        &:hover {
-            background: rgba(255, 255, 255, 0.6);
-        }
-    }
-    &__email {
-        margin-bottom: 20px;
-        padding-left: 20px;
-        font-size: 30px;
-        border-radius: 30px;
-        background: transparent;
-        &:hover {
-            background: rgba(255, 255, 255, 0.6);
-        }
-    }
-    &__label {
-        cursor: pointer;
-    }
-    &__checkbox {
-        margin-bottom: 20px;
-        font-size: 20px;
-        position: relative;
-    }
-    &__check-input {
-        appearance: none;
-        width: 20px;
-        height: 20px;
-        border: none;
-        &:checked + .call-form__subcheck {
-            background: url(../../../images/svg/check.svg) center / 15px 15px no-repeat, #e8f0fe;
-        }
-    }
-
-    &__subcheck {
-        position: absolute;
-        height: 18px;
-        width: 18px;
-        margin-left: -28px;
-        margin-top: 3px;
-        background: #e8f0fe;
-        border-radius: 3px;
-    }
-    &__button {
-        font-size: 26px;
-        background: transparent;
-        border-radius: 30px;
-        padding: 7px 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        &:hover {
-            background: rgba(255, 255, 255, 0.6);
-        }
-        &:active {
-            background: #b2e5fb;
-        }
-    }
-    &__close {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: transparent;
-        border: 1px solid #000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        &:hover {
-            background: rgba(255, 255, 255, 0.6);
-        }
-        &:active {
-            background: #b2e5fb;
-        }
     }
 }

@@ -1,4 +1,4 @@
-import { SET_MODAL, SET_MODAL_TYPE, SET_CANCEL_ID } from "../types";
+import { SET_MODAL, SET_MODAL_TYPE, SET_CANCEL_ID, SET_PREVIEW_OBJECT } from "../types";
 
 export const setModalShow = (boolean) => ({
     type: SET_MODAL,
@@ -11,4 +11,8 @@ export const setModalType = (num) => ({
 export const setCancelId = (cancelId) => ({
     type: SET_CANCEL_ID,
     payload: cancelId
+});
+export const setPreviewObj = (previewObj) => ({
+    type: SET_PREVIEW_OBJECT,
+    payload: previewObj
 });

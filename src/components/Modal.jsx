@@ -4,16 +4,18 @@ import OfferCallModal from './OfferCallModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { cancelPosition, clearCart } from '../redux/actions/cart';
 import { setModalShow } from '../redux/actions/modal';
+import PreviewCardModal from './PreviewCardModal';
 
 function Modal() {
 
     const dispatch = useDispatch();
 
 
-    const { modalShow, typeModal, cancelId } = useSelector((state) => ({
+    const { modalShow, typeModal, cancelId, previewObj } = useSelector((state) => ({
         modalShow: state.modal.modalShow,
         typeModal: state.modal.typeModal,
         cancelId: state.modal.cancelId,
+        previewObj: state.modal.previewObj,
     }))
 
     const handlerClear = () => {
@@ -54,21 +56,43 @@ function Modal() {
     }
 
     let bodyClassName = "modal__body";
-    bodyClassName += typeModal === 2 ? " modal__body_header" : " modal__body_cart";
+    let visibleModalBody = null;
+
+    switch (typeModal) {
+        case 0:
+            bodyClassName += " modal__body_cart";
+            visibleModalBody = <CartModal
+                typeModal={typeModal}
+                handlerNot={handlerNot}
+                handlerYes={handlerYes} />
+            break;
+        case 1:
+            bodyClassName += " modal__body_cart";
+            visibleModalBody = <CartModal
+                typeModal={typeModal}
+                handlerNot={handlerNot}
+                handlerYes={handlerYes} />
+            break;
+        case 2:
+            bodyClassName += " modal__body_header";
+            visibleModalBody = <OfferCallModal handlerModalShow={handlerModalShow} />
+            break;
+        case 3:
+            bodyClassName += " modal__body_preview";
+            visibleModalBody = <PreviewCardModal previewObj={previewObj} handlerModalShow={handlerModalShow} />
+            break;
+
+        default:
+            break;
+    }
+
 
     return (
         <div
             onClick={delegateShowModal}
             className="modal">
             <div className={bodyClassName}>
-                {typeModal === 2
-                    ?
-                    <OfferCallModal handlerModalShow={handlerModalShow} />
-                    :
-                    <CartModal
-                        typeModal={typeModal}
-                        handlerNot={handlerNot}
-                        handlerYes={handlerYes} />}
+                {visibleModalBody}
             </div>
         </div>
     )

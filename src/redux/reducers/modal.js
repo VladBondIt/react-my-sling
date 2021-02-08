@@ -1,9 +1,10 @@
-import { SET_MODAL, SET_MODAL_TYPE, SET_CANCEL_ID } from "../types";
+import { SET_MODAL, SET_MODAL_TYPE, SET_CANCEL_ID, SET_PREVIEW_OBJECT } from "../types";
 
 const initialState = {
     modalShow: false,
     typeModal: null,
-    cancelId: null
+    cancelId: null,
+    previewObj: null
 
 }
 const modal = (state = initialState, action) => {
@@ -22,6 +23,11 @@ const modal = (state = initialState, action) => {
             return {
                 ...state,
                 cancelId: action.payload,
+            }
+        case SET_PREVIEW_OBJECT:
+            return {
+                ...state,
+                previewObj: action.payload,
             }
         default:
             return state;
