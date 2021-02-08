@@ -33,6 +33,7 @@ function PreviewCardModal({ previewObj, handlerModalShow }) {
             <div className="preview__imagebox imagebox">
                 <div className="imagebox__column">
                     {testArr.map((x) => <PreviewItem
+                        key={x.id}
                         setActiveImg={setActiveImg}
                         {...x}
                         activeId={activeId}
