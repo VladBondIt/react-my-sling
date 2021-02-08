@@ -5,6 +5,7 @@ import ForCard2 from '../assets/images/card/sling-backpack.jpg';
 import { useDispatch } from 'react-redux';
 import { setCartItems } from '../redux/actions/cart';
 import { setModalShow, setModalType, setPreviewObj } from '../redux/actions/modal';
+import { setFoundCard } from '../redux/actions/cards'
 
 function Card({ title, description, material, size, price, oldprice, img, id, searchChar }) {
     const dispatch = useDispatch();
@@ -46,6 +47,11 @@ function Card({ title, description, material, size, price, oldprice, img, id, se
         dispatch(setPreviewObj(obj))
         dispatch(setModalShow(true))
     }
+
+    React.useEffect(() => {
+        dispatch(setFoundCard())
+
+    }, [])
 
 
     const checked = searchChar !== null

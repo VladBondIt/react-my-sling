@@ -13,10 +13,11 @@ import { setSearchChar } from '../redux/actions/search';
 function Shop() {
     const dispatch = useDispatch();
 
-    const { items, activeItem, cardItems, loaderItems, isLoading, searchChar } = useSelector((state) => ({
+    const { items, activeItem, cardItems, loaderItems, isLoading, searchChar, foundCards } = useSelector((state) => ({
         items: state.categoryes.items,
         activeItem: state.categoryes.activeItem,
         cardItems: state.cards.cardItems,
+        foundCards: state.cards.foundCards,
         loaderItems: state.loader.loaderItems,
         isLoading: state.loader.isLoading,
         searchChar: state.search.searchChar,
@@ -57,7 +58,7 @@ function Shop() {
             <div className="container">
                 <div className="shop__search search shd">
                     <span className="search__count">
-                        Товара найдено: {cardItems.length}
+                        Товара найдено: {foundCards}
                     </span>
                     <SearchForm
                         onChange={onChange} />

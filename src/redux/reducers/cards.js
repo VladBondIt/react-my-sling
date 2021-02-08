@@ -1,8 +1,9 @@
-import { GET_CARDS, SET_LOADING } from "../types";
+import { GET_CARDS, SET_FOUND_CARDS, SET_LOADING } from "../types";
 
 const initialState = {
     cardItems: [],
-    isLoaded: false
+    isLoaded: false,
+    foundCards: 0
 
 }
 const cards = (state = initialState, action) => {
@@ -16,6 +17,11 @@ const cards = (state = initialState, action) => {
             return {
                 ...state,
                 isLoaded: action.payload,
+            }
+        case SET_FOUND_CARDS:
+            return {
+                ...state,
+                foundCards: state.foundCards + 1,
             }
         default:
             return state;
