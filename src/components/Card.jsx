@@ -5,12 +5,10 @@ import ForCard2 from '../assets/images/card/sling-backpack.jpg';
 import { useDispatch } from 'react-redux';
 import { setCartItems } from '../redux/actions/cart';
 import { setModalShow, setModalType, setPreviewObj } from '../redux/actions/modal';
-import { setFoundCard } from '../redux/actions/cards'
 
 function Card({ title, description, material, size, price, oldprice, img, id, searchChar }) {
     const dispatch = useDispatch();
 
-    const searchFields = [title, description, material, size];
 
     switch (img) {
         case 0:
@@ -48,53 +46,43 @@ function Card({ title, description, material, size, price, oldprice, img, id, se
         dispatch(setModalShow(true))
     }
 
-    React.useEffect(() => {
-        dispatch(setFoundCard())
-
-    }, [])
-
-
-    const checked = searchChar !== null
-        ? searchFields.filter((item) => (item + "").includes(searchChar))
-        : false;
 
     return (
-        checked.length > 0 || !checked ?
-            <div className="shop__card card shd" >
-                <div className="card__imagebox">
-                    <img className="card__image" src={img} alt={title} />
-                    <div className="card__overlay overlay">
-                        <button
-                            onClick={handlerPreview}
-                            className="overlay__button btn">Предпросмотр</button>
-                    </div>
+        <div className="shop__card card shd" >
+            <div className="card__imagebox">
+                <img className="card__image" src={img} alt={title} />
+                <div className="card__overlay overlay">
+                    <button
+                        onClick={handlerPreview}
+                        className="overlay__button btn">Предпросмотр</button>
                 </div>
-                <div className="card__infobox">
-                    <div className="card__textbox">
-                        <h2 className="card__title">{title}</h2>
-                        <span className="card__subtitle">{description}</span>
+            </div>
+            <div className="card__infobox">
+                <div className="card__textbox">
+                    <h2 className="card__title">{title}</h2>
+                    <span className="card__subtitle">{description}</span>
+                </div>
+                <div className="card__row">
+                    <span className="card__size">Размер:</span>
+                    <span className="card__size-count">{size} см</span>
+                </div>
+                <div className="card__row">
+                    <span className="card__material">Материал:</span>
+                    <span className="card__material-value">{material}</span>
+                </div>
+                <div className="card__row">
+                    <div className="card__price price">
+                        <span className="price__old">{oldprice} руб</span>
+                        <span className="price__current">{price} руб</span>
                     </div>
-                    <div className="card__row">
-                        <span className="card__size">Размер:</span>
-                        <span className="card__size-count">{size} см</span>
-                    </div>
-                    <div className="card__row">
-                        <span className="card__material">Материал:</span>
-                        <span className="card__material-value">{material}</span>
-                    </div>
-                    <div className="card__row">
-                        <div className="card__price price">
-                            <span className="price__old">{oldprice} руб</span>
-                            <span className="price__current">{price} руб</span>
-                        </div>
-                        <button
-                            className="card__button add-button btn"
-                            onClick={handlerCardItem}>
-                            Добавить
+                    <button
+                        className="card__button add-button btn"
+                        onClick={handlerCardItem}>
+                        Добавить
                         </button>
-                    </div>
                 </div>
-            </div> : null
+            </div>
+        </div>
 
     )
 }

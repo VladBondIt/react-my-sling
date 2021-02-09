@@ -8,6 +8,7 @@ import { fetchedCards } from '../redux/actions/cards';
 import Loader from './Loader';
 import { setLoading } from '../redux/actions/loader';
 import { setSearchChar } from '../redux/actions/search';
+import { clearFoundCards, setFoundCard } from '../redux/actions/cards'
 
 
 function Shop() {
@@ -86,7 +87,6 @@ function Shop() {
                                 ? cardItems && cardItems.map((card) =>
                                     <Card
                                         {...card}
-                                        searchChar={searchChar}
                                         key={card.id} />)
                                 : loaderItems.map((loader) => <Loader key={loader.id} />)}
 
