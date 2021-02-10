@@ -1,7 +1,7 @@
 import React from 'react'
 import { setActiveCategory } from '../redux/actions/categoryes';
 import { useDispatch } from 'react-redux';
-import { fetchedCards, clearFoundCards } from '../redux/actions/cards';
+import { fetchedCards } from '../redux/actions/cards';
 
 
 function CategoryItem({ category, activeItem, id }) {
@@ -12,7 +12,6 @@ function CategoryItem({ category, activeItem, id }) {
     const handlerClick = () => {
         dispatch(setActiveCategory(id))
         dispatch(fetchedCards(category))
-        dispatch(clearFoundCards())
     }
 
     const className = activeItem !== id ? 'category__item btn' : 'category__item btn active';

@@ -8,7 +8,6 @@ import { fetchedCards } from '../redux/actions/cards';
 import Loader from './Loader';
 import { setLoading } from '../redux/actions/loader';
 import { setSearchChar } from '../redux/actions/search';
-import { clearFoundCards, setFoundCard } from '../redux/actions/cards'
 
 
 function Shop() {
@@ -54,12 +53,22 @@ function Shop() {
     }
 
 
+    const visibleCards = searchChar !== null
+        ? cardItems
+            .filter((x) => Object
+                .values(x)
+                .some((value) => (value + '').toLowerCase().includes(searchChar)))
+        : cardItems;
+
+
+    console.log(visibleCards);
+
     return (
         <section className="shop">
             <div className="container">
                 <div className="shop__search search shd">
                     <span className="search__count">
-                        Товара найдено: {foundCards}
+                        Товара найдено: {visibleCards.length > 0 ? visibleCards.length : cardItems.length}
                     </span>
                     <SearchForm
                         onChange={onChange} />
@@ -84,7 +93,7 @@ function Shop() {
                     <div className="shop__column shop__column_right">
                         <div className="shop__cardbox">
                             {!isLoading
-                                ? cardItems && cardItems.map((card) =>
+                                ? visibleCards.map((card) =>
                                     <Card
                                         {...card}
                                         key={card.id} />)

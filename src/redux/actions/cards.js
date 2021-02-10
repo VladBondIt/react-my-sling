@@ -1,4 +1,4 @@
-import { GET_CARDS, SET_FOUND_CARDS, CLEAR_FOUND_CARDS } from "../types";
+import { GET_CARDS } from "../types";
 import { setLoading } from "./loader";
 
 export const getCards = (items) => ({
@@ -27,10 +27,10 @@ export const fetchedCards = (category = "Май слинг", sortBy, orderSort) 
 
 }
 
-export const setFoundCard = () => ({
-    type: SET_FOUND_CARDS,
-});
+// export const setFoundCard = () => ({
+//     type: SET_FOUND_CARDS,
+// });
 
-export const clearFoundCards = () => ({
-    type: CLEAR_FOUND_CARDS,
-});
+// export const clearFoundCards = () => ({
+//     type: CLEAR_FOUND_CARDS,
+// });
