@@ -5,18 +5,25 @@ import { useSelector, useDispatch } from 'react-redux';
 import { cancelPosition, clearCart } from '../redux/actions/cart';
 import { setModalShow } from '../redux/actions/modal';
 import PreviewCardModal from './PreviewCardModal';
+import OrderModal from './OrderModal';
 
 function Modal() {
 
     const dispatch = useDispatch();
 
 
-    const { modalShow, typeModal, cancelId, previewObj } = useSelector((state) => ({
+    const { modalShow, typeModal, cancelId, previewObj, totalPrice, totalCount } = useSelector((state) => ({
         modalShow: state.modal.modalShow,
         typeModal: state.modal.typeModal,
         cancelId: state.modal.cancelId,
         previewObj: state.modal.previewObj,
+        totalPrice: state.cart.totalPrice,
+        totalCount: state.cart.totalCount,
     }))
+
+    const handlerSuccess = (e) => {
+        e.preventDefault();
+    }
 
     const handlerClear = () => {
         dispatch(clearCart())
@@ -75,11 +82,21 @@ function Modal() {
             break;
         case 2:
             bodyClassName += " modal__body_header";
-            visibleModalBody = <OfferCallModal handlerModalShow={handlerModalShow} />
+            visibleModalBody = <OfferCallModal
+                handlerSuccess={handlerSuccess}
+                handlerModalShow={handlerModalShow} />
             break;
         case 3:
             bodyClassName += " modal__body_preview";
             visibleModalBody = <PreviewCardModal previewObj={previewObj} handlerModalShow={handlerModalShow} />
+            break;
+        case 4:
+            bodyClassName += " modal__body_cart-order";
+            visibleModalBody = <OrderModal
+                handlerSuccess={handlerSuccess}
+                totalPrice={totalPrice}
+                totalCount={totalCount}
+                handlerModalShow={handlerModalShow} />
             break;
 
         default:

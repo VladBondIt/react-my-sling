@@ -13,11 +13,10 @@ import { setSearchChar } from '../redux/actions/search';
 function Shop() {
     const dispatch = useDispatch();
 
-    const { items, activeItem, cardItems, loaderItems, isLoading, searchChar, foundCards } = useSelector((state) => ({
+    const { items, activeItem, cardItems, loaderItems, isLoading, searchChar, } = useSelector((state) => ({
         items: state.categoryes.items,
         activeItem: state.categoryes.activeItem,
         cardItems: state.cards.cardItems,
-        foundCards: state.cards.foundCards,
         loaderItems: state.loader.loaderItems,
         isLoading: state.loader.isLoading,
         searchChar: state.search.searchChar,
@@ -61,7 +60,6 @@ function Shop() {
         : cardItems;
 
 
-    console.log(visibleCards);
 
     return (
         <section className="shop">

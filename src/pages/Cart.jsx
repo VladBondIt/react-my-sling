@@ -28,6 +28,11 @@ function Cart() {
         dispatch(setModalType(1))
     }
 
+    const handlerOrderModalShow = () => {
+        dispatch(setModalShow(!modalShow))
+        dispatch(setModalType(4))
+    }
+
 
     return (
         <>
@@ -66,9 +71,11 @@ function Cart() {
 
                             </div>
                             <div className="cart__buttons shd">
-                                <button className="cart__button shd btn cart__button_green">
+                                <button
+                                    onClick={handlerOrderModalShow}
+                                    className="cart__button shd btn cart__button_green">
                                     Оформить заказ
-                            </button>
+                                </button>
                                 <Link to="/react-my-sling/">
                                     <button className="cart__button shd btn">
                                         <CartBack className="cart__backsvg" /> Вернуться
