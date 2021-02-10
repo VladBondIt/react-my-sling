@@ -1,18 +1,21 @@
 import React from 'react';
 import { ReactComponent as DeleteItem } from '../assets/images/svg/clear-single.svg';
 
-function OfferCallModal({ handlerModalShow, handlerSuccess }) {
+function OfferCallModal({ handlerModalShow, handlerSuccess, handlerEmail, handlerPhone }) {
+
+    const form = React.useRef(null);
 
 
     const handlerSubmit = (e) => {
         handlerSuccess(e);
+        form.current.reset();
     }
 
     return (
-        <form onSubmit={handlerSubmit} className="modal__form form">
+        <form ref={form} onSubmit={handlerSubmit} className="modal__form form">
 
-            <input type="tel" name="phone" placeholder="Введите ваш Телефон" className="form__phone shd" />
-            <input type="email" name="email" placeholder="Введите ваш Email" className="form__email shd" />
+            <input onChange={handlerEmail} type="tel" name="phone" placeholder="Введите ваш Телефон" className="form__phone shd" />
+            <input onChange={handlerPhone} type="email" name="email" placeholder="Введите ваш Email" className="form__email shd" />
 
             <div className="form__checkbox">
                 <label className="form__label link"><input className="form__check-input" type="checkbox" name="license" />
