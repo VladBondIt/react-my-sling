@@ -14,6 +14,7 @@ function Modal() {
 
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
+    const [name, setName] = useState('')
 
 
     const { modalShow, typeModal, cancelId, previewObj, totalPrice, totalCount } = useSelector((state) => ({
@@ -39,6 +40,9 @@ function Modal() {
     }
     const handlerEmail = (e) => {
         setEmail(e.target.value);
+    }
+    const handlerName = (e) => {
+        setName(e.target.value);
     }
 
     const handlerClear = () => {
@@ -99,6 +103,7 @@ function Modal() {
         case 2:
             bodyClassName += " modal__body_header";
             visibleModalBody = <OfferCallModal
+                handlerName={handlerName}
                 handlerEmail={handlerEmail}
                 handlerPhone={handlerPhone}
                 handlerSuccess={handlerSuccess}
@@ -111,7 +116,11 @@ function Modal() {
         case 4:
             bodyClassName += " modal__body_cart-order";
             visibleModalBody = <OrderModal
+                handlerClear={handlerClear}
+                handlerName={handlerName}
                 handlerSuccess={handlerSuccess}
+                handlerEmail={handlerEmail}
+                handlerPhone={handlerPhone}
                 totalPrice={totalPrice}
                 totalCount={totalCount}
                 handlerModalShow={handlerModalShow} />

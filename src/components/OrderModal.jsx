@@ -1,12 +1,19 @@
 import React from 'react';
 import { ReactComponent as DeleteItem } from '../assets/images/svg/clear-single.svg';
 
-function OrderModal({ handlerModalShow, totalPrice, totalCount, handlerSuccess }) {
-    return (
-        <form onSubmit={handlerSuccess} className="modal__form form">
+function OrderModal({ handlerModalShow, totalPrice, totalCount, handlerSuccess, handlerEmail, handlerPhone, handlerName, handlerClear }) {
 
-            <input type="tel" name="phone" placeholder="Введите ваш Телефон" className="form__phone shd" />
-            <input type="email" name="email" placeholder="Введите ваш Email" className="form__email shd" />
+    const handlerOrderSubmit = (e) => {
+        handlerSuccess(e);
+        handlerClear();
+    }
+
+    return (
+        <form onSubmit={handlerOrderSubmit} className="modal__form form">
+
+            <input onChange={handlerName} type="text" name="name" placeholder="Введите ваше Имя" className="form__phone shd" />
+            <input onChange={handlerEmail} type="tel" name="phone" placeholder="Введите ваш Телефон" className="form__phone shd" />
+            <input onChange={handlerPhone} type="email" name="email" placeholder="Введите ваш Email" className="form__email shd" />
 
 
             <div className="form__row">

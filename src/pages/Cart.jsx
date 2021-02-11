@@ -83,8 +83,6 @@ function Cart() {
                                 </Link>
                                 <span className="cart__totalprice">Общая стоимость: {totalPrice} руб</span>
                             </div>
-                            {modalShow
-                                && <Modal />}
                         </>
                         :
                         <div className="cart__empty empty shd">
@@ -98,6 +96,8 @@ function Cart() {
                                 </button>
                             </Link>
                         </div>}
+                    {modalShow
+                        && <Modal />}
                 </div>
             </div>
 
