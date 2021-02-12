@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import Card from './Card';
 import CategoryItem from './CategoryItem';
 import SearchForm from './SearchForm';
@@ -8,6 +8,7 @@ import { fetchedCards } from '../redux/actions/cards';
 import Loader from './Loader';
 import { setLoading } from '../redux/actions/loader';
 import { setSearchChar } from '../redux/actions/search';
+import FetchService from '../services/fetchService';
 
 
 function Shop() {
@@ -22,28 +23,12 @@ function Shop() {
         searchChar: state.search.searchChar,
     }))
 
-    const onSetCategoryes = useCallback(async () => {
-        const apiUrl = 'https://my-json-server.typicode.com/VladBondIt/FakeDBjson/slings';
-
-        const res = await fetch(`${apiUrl}`);
-        if (!res.ok) {
-            throw new Error(`Could not fetch ${apiUrl}` +
-                `, received ${res.status}`);
-        }
-
-        const data = await res.json();
-
-
-        dispatch(setCategoryes(
-            [...new Map(data.map(obj => [obj["category"], obj])).values()]
-        ));
-        dispatch(setLoading(false))
-    }, []);
-
-
-
     useEffect(() => {
-        onSetCategoryes()
+
+        FetchService.getCategoryes('slings').then((res) => {
+            dispatch(setCategoryes(res));
+        })
+        dispatch(setLoading(false))
         dispatch(fetchedCards())
     }, [])
 
