@@ -33,6 +33,7 @@ function Modal() {
         dispatch(setModalType(5))
         console.log(phone);
         console.log(email);
+        console.log(name);
     }
 
     const handlerPhone = (e) => {

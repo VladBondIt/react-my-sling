@@ -22,22 +22,22 @@ function Footer() {
                         </div>
                         <div className="footer__column">
                             <ul className="footer__list">
-                                <li className="footer__item"><a href="" className="footer__link link">Продукты</a></li>
-                                <li className="footer__item"><a href="" className="footer__link link">Май Слинг</a></li>
-                                <li className="footer__item"><a href="" className="footer__link link">Слинг с кольцом</a></li>
-                                <li className="footer__item"><a href="" className="footer__link link">Слинг рюкзак</a></li>
+                                <li className="footer__item"><button className="footer__link link">Продукты</button></li>
+                                <li className="footer__item"><button className="footer__link link">Май Слинг</button></li>
+                                <li className="footer__item"><button className="footer__link link">Слинг с кольцом</button></li>
+                                <li className="footer__item"><button className="footer__link link">Слинг рюкзак</button></li>
                             </ul>
                             <ul className="footer__list">
-                                <li className="footer__item"><a href="" className="footer__link link">О нас</a></li>
-                                <li className="footer__item"><a href="" className="footer__link link">Компания</a></li>
-                                <li className="footer__item"><a href="" className="footer__link link">Акции</a></li>
-                                <li className="footer__item"><a href="" className="footer__link link">Отзывы клиентов</a></li>
+                                <li className="footer__item"><button className="footer__link link">О нас</button></li>
+                                <li className="footer__item"><button className="footer__link link">Компания</button></li>
+                                <li className="footer__item"><button className="footer__link link">Акции</button></li>
+                                <li className="footer__item"><button className="footer__link link">Отзывы клиентов</button></li>
                             </ul>
                             <ul className="footer__list">
-                                <li className="footer__item"><a href="" className="footer__link link">Помощь</a></li>
-                                <li className="footer__item"><a href="" className="footer__link link">FAQ</a></li>
-                                <li className="footer__item"><a href="" className="footer__link link">Полезные статьи</a></li>
-                                <li className="footer__item"><a href="" className="footer__link link">Поддержка в Telegram</a>
+                                <li className="footer__item"><button className="footer__link link">Помощь</button></li>
+                                <li className="footer__item"><button className="footer__link link">FAQ</button></li>
+                                <li className="footer__item"><button className="footer__link link">Полезные статьи</button></li>
+                                <li className="footer__item"><button className="footer__link link">Поддержка в Telegram</button>
                                 </li>
                             </ul>
                         </div>
@@ -49,20 +49,20 @@ function Footer() {
                             </a>
                                 </li>
                                 <li className="footer__item">
-                                    <a href="" className="footer__link link">bobaka@cobaka.ru
-                            </a>
+                                    <button className="footer__link link">bobaka@cobaka.ru
+                            </button>
                                 </li>
                                 <div className="footer__social footer-social">
                                     <div className="footer-social__box">
-                                        <a className="footer-social__link" href="">
+                                        <button className="footer-social__link" >
                                             <VkSvg />
-                                        </a>
-                                        <a className="footer-social__link" href="">
+                                        </button>
+                                        <button className="footer-social__link" >
                                             <FbSvg />
-                                        </a>
-                                        <a className="footer-social__link" href="">
+                                        </button>
+                                        <button className="footer-social__link" >
                                             <InstaSvg />
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </ul>
