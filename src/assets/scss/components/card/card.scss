@@ -8,17 +8,37 @@
     @media (max-width: 922px) {
         flex: 0 0 250px;
     }
+    @media (max-width: 790px) {
+        flex: 0 1 90%;
+    }
+    @media (max-width: 540px) {
+        flex: 0 0 47%;
+    }
+    @media (max-width: 500px) {
+        flex: 0 0 100%;
+        margin: 0 0 20px 0;
+    }
     &:hover {
         transform: scale(1.02);
+        @media (max-width: 922px) {
+            transform: scale(1);
+        }
     }
     &__imagebox {
         border-radius: 15px 15px 0 0;
         overflow: hidden;
         cursor: pointer;
         position: relative;
+        min-height: 250px;
+        @media (max-width: 922px) {
+            min-height: auto;
+        }
         &:hover {
             .overlay {
                 background: rgba(0, 0, 0, 0.6);
+                @media (max-width: 922px) {
+                    background: transparent;
+                }
                 &__button {
                     visibility: visible;
                 }
@@ -29,7 +49,11 @@
     }
 
     &__image {
+        max-width: 320px;
         width: 100%;
+        @media (max-width: 790px) {
+            max-width: 100%;
+        }
     }
 
     &__infobox {
@@ -41,23 +65,24 @@
         align-items: center;
         flex-direction: column;
         white-space: nowrap;
-        line-height: 41px;
         margin-bottom: 15px;
+        @include adaptiv-lheight(41, 20);
     }
 
     &__title {
-        font-size: 32px;
+        @include adaptiv-font(30, 22);
         font-weight: bold;
     }
 
     &__subtitle {
-        font-size: 20px;
+        @include adaptiv-font(20, 18);
     }
 
     &__row {
         display: flex;
         justify-content: space-between;
-        font-size: 20px;
+        @include adaptiv-font(20, 18);
+        white-space: nowrap;
         &:not(:last-child) {
             margin-bottom: 15px;
             border-bottom: 1px solid #000;
@@ -80,11 +105,15 @@
         display: flex;
         flex-direction: column;
         font-size: 16px;
+        margin-right: 10px;
     }
 
     &__button {
+        @media (max-width: 922px) {
+            flex: 0 0 100px;
+        }
         flex: 0 1 150px;
-        font-size: 16px;
+        @include adaptiv-font(16, 15);
         box-shadow: 0.7px 1px 2px #000;
     }
 }
@@ -128,6 +157,12 @@
         font-size: 22px;
         color: white;
         box-shadow: 0 0 15px white;
+        @media (max-width: 922px) {
+            visibility: visible;
+            border: 1px solid black;
+            color: black;
+            box-shadow: 0 0 15px black;
+        }
     }
 }
 

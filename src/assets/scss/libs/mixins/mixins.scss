@@ -11,7 +11,7 @@
     }
 }
 
-// !! АДАПТИВНЫЙ ШРИФТ
+// !! АДАПТИВ
 // Миксин для шрифтов
 $maxWidth: 1400;
 @mixin adaptiv-font($pcSize, $mobSize) {
@@ -25,6 +25,13 @@ $maxWidth: 1400;
     $maxWidth: $maxWidth - 320;
     line-height: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}));
 }
+
+@mixin adaptiv-width($pcSize, $mobSize) {
+    $addSize: $pcSize - $mobSize;
+    $maxWidth: $maxWidth - 320;
+    width: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}));
+}
+
 @mixin adaptiv-flex-width($grow, $shrink, $pcSize, $mobSize) {
     $addSize: $pcSize - $mobSize;
     $maxWidth: $maxWidth - 320;

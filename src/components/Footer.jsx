@@ -3,8 +3,23 @@ import { ReactComponent as Logo } from '../assets/images/svg/logo.svg';
 import { ReactComponent as VkSvg } from '../assets/images/svg/footer-vk.svg';
 import { ReactComponent as FbSvg } from '../assets/images/svg/facebook-foot.svg';
 import { ReactComponent as InstaSvg } from '../assets/images/svg/instagram-footer.svg';
+import FooterMenu from './FooterMenu';
+import { setInnerWidth } from '../redux/actions/width';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Footer() {
+    const dispatch = useDispatch();
+    const { innerWidth } = useSelector(state => state.width)
+
+    console.log(innerWidth);
+
+    React.useEffect(() => {
+        dispatch(setInnerWidth(window.innerWidth))
+        window.onresize = () => {
+            dispatch(setInnerWidth(window.innerWidth))
+        }
+    }, []);
+
     return (
         <footer className="footer">
             <div className="container">
@@ -20,27 +35,7 @@ function Footer() {
                                 Helenia Company
                             </div>
                         </div>
-                        <div className="footer__column">
-                            <ul className="footer__list">
-                                <li className="footer__item"><button className="footer__link link">Продукты</button></li>
-                                <li className="footer__item"><button className="footer__link link">Май Слинг</button></li>
-                                <li className="footer__item"><button className="footer__link link">Слинг с кольцом</button></li>
-                                <li className="footer__item"><button className="footer__link link">Слинг рюкзак</button></li>
-                            </ul>
-                            <ul className="footer__list">
-                                <li className="footer__item"><button className="footer__link link">О нас</button></li>
-                                <li className="footer__item"><button className="footer__link link">Компания</button></li>
-                                <li className="footer__item"><button className="footer__link link">Акции</button></li>
-                                <li className="footer__item"><button className="footer__link link">Отзывы клиентов</button></li>
-                            </ul>
-                            <ul className="footer__list">
-                                <li className="footer__item"><button className="footer__link link">Помощь</button></li>
-                                <li className="footer__item"><button className="footer__link link">FAQ</button></li>
-                                <li className="footer__item"><button className="footer__link link">Полезные статьи</button></li>
-                                <li className="footer__item"><button className="footer__link link">Поддержка в Telegram</button>
-                                </li>
-                            </ul>
-                        </div>
+                        {innerWidth >= 540 ? <FooterMenu /> : null}
                         <div className="footer__column">
                             <ul className="footer__contacts">
                                 <li className="footer__item">Наши Контакты</li>
@@ -49,20 +44,21 @@ function Footer() {
                             </a>
                                 </li>
                                 <li className="footer__item">
-                                    <button className="footer__link link">bobaka@cobaka.ru
-                            </button>
+                                    <a href="a" className="footer__link link">
+                                        bobaka@cobaka.ru
+                                    </a>
                                 </li>
                                 <div className="footer__social footer-social">
                                     <div className="footer-social__box">
-                                        <button className="footer-social__link" >
+                                        <a href="a" className="footer-social__link" >
                                             <VkSvg />
-                                        </button>
-                                        <button className="footer-social__link" >
+                                        </a>
+                                        <a href="a" className="footer-social__link" >
                                             <FbSvg />
-                                        </button>
-                                        <button className="footer-social__link" >
+                                        </a>
+                                        <a href="a" className="footer-social__link" >
                                             <InstaSvg />
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </ul>

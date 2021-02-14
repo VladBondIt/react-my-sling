@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { setCartItems } from '../redux/actions/cart';
 import { setModalShow, setModalType, setPreviewObj } from '../redux/actions/modal';
 
-function Card({ title, description, material, size, price, oldprice, img, id, searchChar }) {
+function Card({ title, description, material, size, price, oldprice, img, id }) {
     const dispatch = useDispatch();
 
 

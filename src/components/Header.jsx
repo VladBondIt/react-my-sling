@@ -25,9 +25,6 @@ function Header() {
     }
 
 
-
-
-
     return (
         <header className="header">
             <div className="header__background">
@@ -35,9 +32,9 @@ function Header() {
                     <HeaderNav />
                     <div className="header__content">
                         <div className="header__row">
-                            <h3 className="header__text header__text_left">Мы с радостью ответим на любые ваши вопросы</h3>
-                            <h3 className="header__text header__text_right">Только лучшие и проверенные товары для вас
-                        и ваших деточек!</h3>
+                            <h2 className="header__text header__text_left">Мы с радостью ответим на любые ваши вопросы</h2>
+                            <h2 className="header__text header__text_right">Только лучшие и проверенные товары для вас
+                        и ваших деточек!</h2>
                         </div>
                         <div className="header__row">
                             <div className="header__social social">

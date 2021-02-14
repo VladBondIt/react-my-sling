@@ -17,6 +17,7 @@ function HeaderNav() {
     }))
 
     const [offset, setOffset] = useState(0);
+    const [showBurgerMenu, setShowBurgerMenu] = useState(false);
 
     useEffect(() => {
         window.onscroll = () => {
@@ -27,7 +28,17 @@ function HeaderNav() {
 
     let cartClassName = "header__cart cart-header btn shd";
     let burgerClassName = "header__burger";
+    let menuClassName = "header__menu";
+    menuClassName += showBurgerMenu ? " active" : "";
     cartClassName += cartModalShow ? "header__cart cart-header btn shd" : "";
+    if (showBurgerMenu) {
+        burgerClassName += " active fixed";
+        menuClassName += " active";
+    } else {
+        burgerClassName += "";
+        menuClassName += "";
+    }
+
     if (offset > 130) {
         cartClassName += " fixed";
         burgerClassName += " fixed";
@@ -36,9 +47,15 @@ function HeaderNav() {
         burgerClassName += "";
     }
 
+    const handlerBurger = () => {
+        setShowBurgerMenu(!showBurgerMenu)
+    }
+
     return (
         <nav className="header__nav">
-            <div className={burgerClassName}>
+            <div
+                onClick={handlerBurger}
+                className={burgerClassName}>
                 <span></span>
             </div>
             <Link to="/react-my-sling/" className="header__logo logo">
@@ -48,9 +65,9 @@ function HeaderNav() {
                     <h2 className="logo__subtitle">И их деток</h2>
                 </div>
             </Link>
-            <div className="header__menu">
+            <div className={menuClassName}>
                 <ul className="header__list list">
-                    <li className="list__item"><Link to="/react-my-sling/" className="list__link link">Главная</Link></li>
+                    <li className="list__item"><Link to="/react-my-sling/"><div className="list__link link">Главная</div></Link></li>
                     <li className="list__item"><a href="a" className="list__link link">О нас</a></li>
                     <li className="list__item"><a href="a" className="list__link link">О товаре</a></li>
                 </ul>

@@ -16,8 +16,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding-top: 40px;
-        padding-bottom: 40px;
+        padding: 40px 5px;
     }
 
     &__logo {
@@ -34,6 +33,7 @@
             position: relative;
             width: 30px;
             height: 20px;
+            z-index: 1003;
         }
         &::before {
             content: "";
@@ -66,23 +66,21 @@
         }
         &.active::before {
             transform: rotate(45deg);
-            background-color: #2b69dd;
+            background-color: white;
             top: 9px;
         }
         &.active:after {
             transform: rotate(-45deg);
-            background-color: #2b69dd;
+            background-color: white;
             bottom: 9px;
         }
         &.active span {
             transform: scale(0);
         }
         &.fixed {
-            visibility: visible;
             position: fixed;
-            top: 40px;
+            top: 30px;
             left: 10px;
-            z-index: 1003;
         }
     }
 
@@ -90,7 +88,7 @@
         flex: 0 0 30%;
         @media (max-width: 922px) {
             position: fixed;
-            background-color: #e5e5e5;
+            background-color: black;
             top: -100%;
             left: 0;
             width: 100%;
@@ -111,6 +109,9 @@
         align-items: center;
         justify-content: space-between;
         white-space: nowrap;
+        @media (max-width: 922px) {
+            flex-direction: column;
+        }
     }
 
     &__contacts {
@@ -213,6 +214,9 @@
 }
 .list {
     &__item {
+        @media (max-width: 922px) {
+            margin-bottom: 40px;
+        }
     }
 
     &__link {
@@ -220,6 +224,9 @@
         font-weight: bold;
         font-size: 23px;
         line-height: 27px;
+        @media (max-width: 922px) {
+            font-size: 40px;
+        }
     }
 }
 .cart-header {

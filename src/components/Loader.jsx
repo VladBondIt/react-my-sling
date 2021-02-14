@@ -3,10 +3,8 @@ import ContentLoader from "react-content-loader"
 
 const Loader = (props) => (
     <ContentLoader
-        className="shop__card"
+        className="shop__card card"
         speed={2}
-        width={320}
-        height={532}
         viewBox="0 0 320 532"
         backgroundColor="#f3f3f3"
         foregroundColor="#ecebeb"
