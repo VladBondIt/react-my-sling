@@ -53,6 +53,7 @@
 
     &__link {
         color: white;
+        background: transparent;
     }
 
     &__contacts {
@@ -70,23 +71,33 @@
     }
 
     &__link {
+        background: transparent;
     }
 
     &__svg {
         fill: white;
         &_vk {
+            @media (max-width: 922px) {
+                fill: #2787f5;
+            }
             &:hover {
                 fill: #2787f5;
             }
         }
 
         &_fb {
+            @media (max-width: 922px) {
+                fill: #475993;
+            }
             &:hover {
                 fill: #475993;
             }
         }
 
         &_insta {
+            @media (max-width: 922px) {
+                fill: #e1306c;
+            }
             &:hover {
                 fill: #e1306c;
             }

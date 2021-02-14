@@ -4,7 +4,6 @@ class FetchService {
     async getResource(url) {
         const res = await fetch(`${this._apiBase}${url}`);
 
-        console.log(res)
         if (!res.ok) {
             throw new Error(`Could not fetch ${url}` +
                 `, received ${res.status}`);

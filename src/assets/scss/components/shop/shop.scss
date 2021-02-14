@@ -8,13 +8,6 @@
     padding: 50px 8px 0px;
     min-height: 100vh;
     &__search {
-        border-radius: 50px;
-        font-size: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 15px 15px;
-        margin-bottom: 40px;
     }
 
     &__content {
@@ -32,12 +25,6 @@
     }
 
     &__category {
-        border-radius: 10px;
-        padding: 20px 14px;
-        font-size: 20px;
-        position: sticky;
-        top: 5%;
-        margin-bottom: 20px;
     }
 
     &__cardbox {
@@ -47,13 +34,17 @@
     }
 
     &__card {
-        flex: 0 0 320px;
-        margin-bottom: 20px;
-        border-radius: 15px;
     }
 }
 
 .category {
+    border-radius: 10px;
+    padding: 20px 14px;
+    font-size: 20px;
+    position: sticky;
+    top: 5%;
+    margin-bottom: 20px;
+    white-space: nowrap;
     &__title {
         display: block;
         color: black;

@@ -2,6 +2,12 @@
     border: 1px solid #000000;
     background: rgba(255, 255, 255, 0.6);
     transition: all 0.3s;
+    margin: 0 5px 20px;
+    flex: 0 0 310px;
+    border-radius: 15px;
+    @media (max-width: 922px) {
+        flex: 0 0 250px;
+    }
     &:hover {
         transform: scale(1.02);
     }
@@ -9,7 +15,6 @@
         border-radius: 15px 15px 0 0;
         overflow: hidden;
         cursor: pointer;
-        min-height: 300px;
         position: relative;
         &:hover {
             .overlay {

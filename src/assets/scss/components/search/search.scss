@@ -1,4 +1,15 @@
 .search {
+    white-space: nowrap;
+    border-radius: 50px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 15px;
+    margin-bottom: 40px;
+    @media (max-width: 1025px) {
+        flex-wrap: wrap;
+    }
     &__count {
         background-color: black;
         color: white;
@@ -14,6 +25,12 @@
         background: #e5e5e5;
         border: 1px solid rgba(0, 0, 0, 0.5);
         border-radius: 50px;
+        margin: 0 5px;
+        @media (max-width: 1025px) {
+            flex: 0 1 100%;
+            order: -1;
+            margin-bottom: 20px;
+        }
         &:hover {
             background: white;
             .search__input {
