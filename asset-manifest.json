@@ -1,16 +1,17 @@
 {
   "files": {
-    "main.css": "/react-my-sling/static/css/main.40285246.chunk.css",
-    "main.js": "/react-my-sling/static/js/main.9c62c964.chunk.js",
-    "main.js.map": "/react-my-sling/static/js/main.9c62c964.chunk.js.map",
+    "main.css": "/react-my-sling/static/css/main.a8241efd.chunk.css",
+    "main.js": "/react-my-sling/static/js/main.4459ebb1.chunk.js",
+    "main.js.map": "/react-my-sling/static/js/main.4459ebb1.chunk.js.map",
     "runtime-main.js": "/react-my-sling/static/js/runtime-main.b2033046.js",
     "runtime-main.js.map": "/react-my-sling/static/js/runtime-main.b2033046.js.map",
     "static/js/2.79623308.chunk.js": "/react-my-sling/static/js/2.79623308.chunk.js",
     "static/js/2.79623308.chunk.js.map": "/react-my-sling/static/js/2.79623308.chunk.js.map",
     "index.html": "/react-my-sling/index.html",
-    "static/css/main.40285246.chunk.css.map": "/react-my-sling/static/css/main.40285246.chunk.css.map",
+    "static/css/main.a8241efd.chunk.css.map": "/react-my-sling/static/css/main.a8241efd.chunk.css.map",
     "static/js/2.79623308.chunk.js.LICENSE.txt": "/react-my-sling/static/js/2.79623308.chunk.js.LICENSE.txt",
     "static/media/back-button.7bd68ada.svg": "/react-my-sling/static/media/back-button.7bd68ada.svg",
+    "static/media/call-black.83871645.svg": "/react-my-sling/static/media/call-black.83871645.svg",
     "static/media/cart-empty-black.1c0eaa8b.svg": "/react-my-sling/static/media/cart-empty-black.1c0eaa8b.svg",
     "static/media/cart.d466cdb4.svg": "/react-my-sling/static/media/cart.d466cdb4.svg",
     "static/media/style.scss": "/react-my-sling/static/media/parchment-2123469_640.7dba83bc.webp",
@@ -19,7 +20,7 @@
     "static/media/facebook-foot.11180bcf.svg": "/react-my-sling/static/media/facebook-foot.11180bcf.svg",
     "static/media/footer-vk.4b896cbb.svg": "/react-my-sling/static/media/footer-vk.4b896cbb.svg",
     "static/media/for_card-cut.cbbd4dff.png": "/react-my-sling/static/media/for_card-cut.cbbd4dff.png",
-    "static/media/header-facebook.e360e513.svg": "/react-my-sling/static/media/header-facebook.e360e513.svg",
+    "static/media/header-facebook.0ada6948.svg": "/react-my-sling/static/media/header-facebook.0ada6948.svg",
     "static/media/header-instagram.5018f8a7.svg": "/react-my-sling/static/media/header-instagram.5018f8a7.svg",
     "static/media/header-vk.3cd5a68e.svg": "/react-my-sling/static/media/header-vk.3cd5a68e.svg",
     "static/media/instagram-footer.e64e3dea.svg": "/react-my-sling/static/media/instagram-footer.e64e3dea.svg",
@@ -34,7 +35,7 @@
   "entrypoints": [
     "static/js/runtime-main.b2033046.js",
     "static/js/2.79623308.chunk.js",
-    "static/css/main.40285246.chunk.css",
-    "static/js/main.9c62c964.chunk.js"
+    "static/css/main.a8241efd.chunk.css",
+    "static/js/main.4459ebb1.chunk.js"
   ]
 }
