@@ -24,7 +24,6 @@ function Shop() {
     }))
 
     useEffect(() => {
-
         FetchService.getCategoryes('slings').then((res) => {
             dispatch(setCategoryes(res));
         })
@@ -36,22 +35,24 @@ function Shop() {
         dispatch(setSearchChar(e.target.value))
     }
 
-
     const visibleCards = searchChar !== null
         ? cardItems
             .filter((x) => Object
                 .values(x)
-                .some((value) => (value + '').toLowerCase().includes(searchChar)))
+                .some((value) => (value + '').toLowerCase().includes(searchChar.toLowerCase())))
         : cardItems;
 
-
-
     return (
-        <section className="shop">
+        <section className="shop mainbg">
             <div className="container">
                 <div className="shop__search search shd">
                     <span className="search__count">
-                        Товара найдено: {visibleCards.length > 0 ? visibleCards.length : cardItems.length}
+                        Товара найдено:
+                        <span className="search__number">
+                            {visibleCards.length >= 0 && searchChar !== null
+                                ? visibleCards.length
+                                : cardItems.length}
+                        </span>
                     </span>
                     <SearchForm
                         onChange={onChange} />
@@ -81,8 +82,6 @@ function Shop() {
                                         {...card}
                                         key={card.id} />)
                                 : loaderItems.map((loader) => <Loader key={loader.id} />)}
-
-
                         </div>
                     </div>
                 </div>

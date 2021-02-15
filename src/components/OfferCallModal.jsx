@@ -14,9 +14,9 @@ function OfferCallModal({ handlerModalShow, handlerSuccess, handlerEmail, handle
     return (
         <form ref={form} onSubmit={handlerSubmit} className="modal__form form">
 
-            <input onChange={handlerName} type="text" name="name" placeholder="Введите ваше Имя" className="form__phone shd" />
-            <input onChange={handlerEmail} type="tel" name="phone" placeholder="Введите ваш Телефон" className="form__phone shd" />
-            <input onChange={handlerPhone} type="email" name="email" placeholder="Введите ваш Email" className="form__email shd" />
+            <input onChange={handlerName} type="text" name="name" placeholder="Введите ваше Имя" className="form__input shd" />
+            <input onChange={handlerEmail} type="tel" name="phone" placeholder="Введите ваш Телефон" className="form__input shd" />
+            <input onChange={handlerPhone} type="email" name="email" placeholder="Введите ваш Email" className="form__input shd" />
 
             <div className="form__checkbox">
                 <label className="form__label link"><input className="form__check-input" type="checkbox" name="license" />
@@ -24,8 +24,8 @@ function OfferCallModal({ handlerModalShow, handlerSuccess, handlerEmail, handle
                                 Подписаться на новости</label>
             </div>
 
-            <button className="form__button btn shd">Отправить</button>
-            <div onClick={handlerModalShow} className="form__close btn"><DeleteItem className="form__svg" /></div>
+            <button className="form__button btn shd eff">Отправить</button>
+            <div onClick={handlerModalShow} className="form__close btn eff"><DeleteItem className="form__svg" /></div>
         </form>
     )
 }

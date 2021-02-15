@@ -41,26 +41,28 @@ function Cart() {
                     <HeaderNav />
                 </div>
             </div>
-            <div className="cart">
+            <div className="cart mainbg">
                 <div className="container">
                     {cartItems.length > 0
                         ?
                         <>
                             <div className="cart__buttons shd">
                                 Корзина Заказов
-                            <button onClick={handlerClearModalShow} className="cart__button shd btn cart__button_red">
+                            <button
+                                    onClick={handlerClearModalShow}
+                                    className="cart__button shd btn reff cart__button_red">
                                     <CartClear className="cart__clearsvg" /> Очистить
                             </button>
                             </div>
                             <div className="cart__body">
-                                <div className="cart__info">
+                                {/* <div className="cart__info">
                                     <span className="cart__text">Товар</span>
                                     <span className="cart__text">Характеристики</span>
                                     <span className="cart__text">Цена</span>
                                     <span className="cart__text">Количество</span>
                                     <span className="cart__text">Стоимость</span>
                                     <span className="cart__text">Отмена</span>
-                                </div>
+                                </div> */}
                                 <div className="cart__itembox">
                                     {cartItems.map((cartItem) => <CartItem
                                         {...cartItem}
@@ -71,16 +73,18 @@ function Cart() {
 
                             </div>
                             <div className="cart__buttons shd">
-                                <button
-                                    onClick={handlerOrderModalShow}
-                                    className="cart__button shd btn cart__button_green">
-                                    Оформить заказ
+                                <div className="cart__box">
+                                    <button
+                                        onClick={handlerOrderModalShow}
+                                        className="cart__button shd btn cart__button_green geff">
+                                        Оформить заказ
                                 </button>
-                                <Link to="/react-my-sling/">
-                                    <button className="cart__button shd btn">
-                                        <CartBack className="cart__backsvg" /> Вернуться
+                                    <Link to="/react-my-sling/">
+                                        <button className="cart__button shd btn eff">
+                                            <CartBack className="cart__backsvg" /> Вернуться
                                     </button>
-                                </Link>
+                                    </Link>
+                                </div>
                                 <span className="cart__totalprice">Общая стоимость: {totalPrice} руб</span>
                             </div>
                         </>
@@ -91,7 +95,7 @@ function Cart() {
                                 <CartEmpty className="empty__svg" />
                             </div>
                             <Link to="/react-my-sling/">
-                                <button className="cart__button shd btn">
+                                <button className="cart__button shd btn eff">
                                     <CartBack className="cart__backsvg" /> Вернуться
                                 </button>
                             </Link>

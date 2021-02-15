@@ -3,3 +3,37 @@
         transform: translate(1px, 1px);
     }
 }
+
+.eff {
+    &:hover {
+        background: rgba(255, 255, 255, 0.6);
+    }
+    @media (max-width: 922px) {
+        background: rgba(255, 255, 255, 0.6);
+    }
+    &:active {
+        background: #b2e5fb;
+    }
+}
+.reff {
+    &:hover {
+        background: rgba(243, 44, 44, 0.6);
+    }
+    @media (max-width: 922px) {
+        background: rgba(243, 44, 44, 0.6);
+    }
+    &:active {
+        background: #b2e5fb;
+    }
+}
+.geff {
+    &:hover {
+        background: #2be328;
+    }
+    @media (max-width: 922px) {
+        background: #2be328;
+    }
+    &:active {
+        background: #b2e5fb;
+    }
+}

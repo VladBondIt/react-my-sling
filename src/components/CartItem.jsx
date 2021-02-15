@@ -55,7 +55,7 @@ function CartItem({ id, title, img, size, material, price, description, dataForK
         onSetDisableMinus()
     }, [countsIdItems[id]])
 
-    const MinusButton = disableMinus ? "item__button shd btn disabled" : "item__button shd btn";
+    const MinusButton = disableMinus ? "item__button shd btn disabled reff" : "item__button shd btn reff";
 
     return (
         <div className="cart__item item shd">
@@ -90,7 +90,7 @@ function CartItem({ id, title, img, size, material, price, description, dataForK
                             className="item__minus" />
                     </button>
                     <span className="item__count-value">{countsIdItems[id]} шт</span>
-                    <button className="item__button item__button_green shd btn">
+                    <button className="item__button item__button_green shd btn geff">
                         <Plus
                             onClick={handlerCartItem}
                             className="item__plus"
@@ -102,7 +102,7 @@ function CartItem({ id, title, img, size, material, price, description, dataForK
                 <span className="item__totalprice">{price * countsIdItems[id]} руб</span>
             </div>
             <div className="item__column">
-                <button onClick={handlerCancel} className="item__button shd btn">
+                <button onClick={handlerCancel} className="item__button shd btn reff">
                     <DeleteItem className="item__svg" />
                 </button>
             </div>

@@ -44,9 +44,9 @@ function Footer() {
                             </a>
                                 </li>
                                 <li className="footer__item">
-                                    <a href="a" className="footer__link link">
+                                    <div className="footer__link link">
                                         bobaka@cobaka.ru
-                                    </a>
+                                    </div>
                                 </li>
                                 <div className="footer__social footer-social">
                                     <div className="footer-social__box">

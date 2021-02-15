@@ -54,7 +54,7 @@ function Card({ title, description, material, size, price, oldprice, img, id }) 
                 <div className="card__overlay overlay">
                     <button
                         onClick={handlerPreview}
-                        className="overlay__button btn">Предпросмотр</button>
+                        className="overlay__button btn eff">Предпросмотр</button>
                 </div>
             </div>
             <div className="card__infobox">

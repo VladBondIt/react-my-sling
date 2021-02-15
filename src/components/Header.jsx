@@ -39,15 +39,15 @@ function Header() {
                         <div className="header__row">
                             <div className="header__social social">
                                 <ul className="social__list">
-                                    <li className="social__item"><a href="a" className="social__link">
+                                    <li className="social__item"><div className="social__link">
                                         <VkSvg className="social__svg social__svg_vk btn" />
-                                    </a></li>
-                                    <li className="social__item"><a href="a" className="social__link">
+                                    </div></li>
+                                    <li className="social__item"><div className="social__link">
                                         <InstaSvg className="social__svg social__svg_insta btn" />
-                                    </a></li>
-                                    <li className="social__item"><a href="a" className="social__link">
+                                    </div></li>
+                                    <li className="social__item"><div className="social__link">
                                         <FbSvg className="social__svg social__svg_facebook btn" />
-                                    </a></li>
+                                    </div></li>
                                 </ul>
                             </div>
                             <div className="header__button">

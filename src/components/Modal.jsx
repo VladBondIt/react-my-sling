@@ -83,7 +83,7 @@ function Modal() {
 
     }
 
-    let bodyClassName = "modal__body";
+    let bodyClassName = "modal__body mainbg";
     let visibleModalBody = null;
 
     switch (typeModal) {

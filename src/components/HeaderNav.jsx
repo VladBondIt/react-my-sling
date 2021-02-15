@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { ReactComponent as Logo } from '../assets/images/svg/logo.svg';
 import { ReactComponent as CartSvg } from '../assets/images/svg/cart.svg';
+import { ReactComponent as Phone } from '../assets/images/svg/call-black.svg';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import FooterMenu from './FooterMenu';
 
 
 
 function HeaderNav() {
 
 
-    const { totalCount, totalPrice, cartModalShow } = useSelector((state) => ({
+    const { totalCount, totalPrice, cartModalShow, innerWidth } = useSelector((state) => ({
         cartItems: state.cart.cartItems,
         totalPrice: state.cart.totalPrice,
         totalCount: state.cart.totalCount,
         cartModalShow: state.modal.cartModalShow,
+        innerWidth: state.width.innerWidth,
     }))
 
     const [offset, setOffset] = useState(0);
@@ -68,13 +71,21 @@ function HeaderNav() {
             <div className={menuClassName}>
                 <ul className="header__list list">
                     <li className="list__item"><Link to="/react-my-sling/"><div className="list__link link">Главная</div></Link></li>
-                    <li className="list__item"><a href="a" className="list__link link">О нас</a></li>
-                    <li className="list__item"><a href="a" className="list__link link">О товаре</a></li>
+                    <li className="list__item"><div className="list__link link">О нас</div></li>
+                    <li className="list__item"><div className="list__link link">О товаре</div></li>
                 </ul>
+                {innerWidth >= 540 ? null : <FooterMenu />}
             </div>
             <div className="header__contacts">
-                <a href="tel:+78009998877" className="header__phone link">8-800-999-88-77</a>
-                <a href="email" className="header__email link">bobaka@cobaka.ru</a>
+                {innerWidth >= 540
+                    ?
+                    <>
+                        <a href="tel:+78009998877" className="header__phone link">8-800-999-88-77</a>
+                        <div className="header__email link">bobaka@cobaka.ru</div>
+                    </>
+                    : <a href="tel:+78009998877"><Phone className="header__phone-svg" /></a>}
+
+
             </div>
             <Link to="/react-my-sling/cart">
                 <div className={cartClassName}>
@@ -84,6 +95,7 @@ function HeaderNav() {
                         <span className="cart-header__count">{totalCount} шт</span>
                         <span className="cart-header__price">{totalPrice} руб</span>
                     </div>
+                    <div className="cart-header__adaptive-count">{totalCount}</div>
                 </div>
             </Link>
         </nav>

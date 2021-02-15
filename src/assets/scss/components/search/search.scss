@@ -10,11 +10,20 @@
     @media (max-width: 1025px) {
         flex-wrap: wrap;
     }
+    @media (max-width: 475px) {
+        border-radius: 20px;
+    }
     &__count {
         background-color: black;
         color: white;
         padding: 10px 20px;
         border-radius: 20px;
+        @media (max-width: 475px) {
+            flex: 0 1 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
     }
 
     &__form {
@@ -68,6 +77,11 @@
         padding: 10px 20px;
         border-radius: 20px;
         cursor: pointer;
+        @media (max-width: 475px) {
+            flex: 0 1 100%;
+            display: flex;
+            justify-content: space-between;
+        }
     }
 
     &__type {

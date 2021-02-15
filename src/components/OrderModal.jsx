@@ -11,9 +11,9 @@ function OrderModal({ handlerModalShow, totalPrice, totalCount, handlerSuccess, 
     return (
         <form onSubmit={handlerOrderSubmit} className="modal__form form">
 
-            <input onChange={handlerName} type="text" name="name" placeholder="Введите ваше Имя" className="form__phone shd" />
-            <input onChange={handlerEmail} type="tel" name="phone" placeholder="Введите ваш Телефон" className="form__phone shd" />
-            <input onChange={handlerPhone} type="email" name="email" placeholder="Введите ваш Email" className="form__email shd" />
+            <input onChange={handlerName} type="text" name="name" placeholder="Введите ваше Имя" className="form__input shd" />
+            <input onChange={handlerEmail} type="tel" name="phone" placeholder="Введите ваш Телефон" className="form__input shd" />
+            <input onChange={handlerPhone} type="email" name="email" placeholder="Введите ваш Email" className="form__input shd" />
 
 
             <div className="form__row">
@@ -31,8 +31,8 @@ function OrderModal({ handlerModalShow, totalPrice, totalCount, handlerSuccess, 
                             Согласие на обработку ваших данных</label>
             </div>
 
-            <button className="form__button btn shd">Подтвердить</button>
-            <div onClick={handlerModalShow} className="form__close btn"><DeleteItem className="form__svg" /></div>
+            <button className="form__button btn shd eff">Подтвердить</button>
+            <div onClick={handlerModalShow} className="form__close btn eff"><DeleteItem className="form__svg" /></div>
         </form>
     )
 }

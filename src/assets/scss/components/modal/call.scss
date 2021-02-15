@@ -3,10 +3,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    &__phone {
+    &__input {
         margin-bottom: 20px;
         padding-left: 20px;
         font-size: 30px;
+        @include adaptiv-font(30, 25);
         border-radius: 30px;
         background: transparent;
         max-width: 450px;
@@ -14,16 +15,7 @@
         &:hover {
             background: rgba(255, 255, 255, 0.6);
         }
-    }
-    &__email {
-        margin-bottom: 20px;
-        padding-left: 20px;
-        font-size: 30px;
-        border-radius: 30px;
-        background: transparent;
-        max-width: 450px;
-        width: 100%;
-        &:hover {
+        @media (max-width: 922px) {
             background: rgba(255, 255, 255, 0.6);
         }
     }
@@ -84,6 +76,7 @@
     &__text {
     }
     &__count {
+        white-space: nowrap;
     }
     &__close {
         width: 40px;
@@ -97,11 +90,8 @@
         position: absolute;
         top: 15px;
         right: 15px;
-        &:hover {
-            background: rgba(255, 255, 255, 0.6);
-        }
-        &:active {
-            background: #b2e5fb;
+        @media (max-width: 580px) {
+            top: 5px;
         }
     }
 }

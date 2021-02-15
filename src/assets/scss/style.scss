@@ -1,5 +1,11 @@
 @import "libs/mixins/mixins.scss";
 
+@import "components/header/header.scss";
+@import "components/shop/shop.scss";
+@import "components/footer/footer.scss";
+@import "components/cart/cart.scss";
+@import "components/modal/modal.scss";
+
 @import "fonts/fonts.scss";
 @import "libs/nullstyle/nullstyle.scss";
 @import "libs/links-effect/link.scss";
@@ -7,12 +13,7 @@
 @import "libs/animation/animation.scss";
 @import "libs/variables/variables.scss";
 @import "libs/shadow/box-shadow.scss";
-
-@import "components/header/header.scss";
-@import "components/shop/shop.scss";
-@import "components/footer/footer.scss";
-@import "components/cart/cart.scss";
-@import "components/modal/modal.scss";
+@import "libs/background/background.scss";
 
 body {
     font-family: Roboto;

@@ -17,6 +17,9 @@
         align-items: center;
         justify-content: space-between;
         padding: 40px 5px;
+        @media (max-width: 922px) {
+            padding: 20px 5px;
+        }
     }
 
     &__logo {
@@ -38,7 +41,7 @@
         &::before {
             content: "";
             top: 0;
-            background-color: white;
+            background-color: #b2e5fb;
             position: absolute;
             width: 100%;
             height: 3px;
@@ -48,7 +51,7 @@
         &::after {
             content: "";
             bottom: 0;
-            background-color: white;
+            background-color: #b2e5fb;
             position: absolute;
             width: 100%;
             height: 3px;
@@ -57,7 +60,7 @@
         }
         & span {
             position: absolute;
-            background-color: white;
+            background-color: #b2e5fb;
             left: 0;
             width: 100%;
             height: 3px;
@@ -66,12 +69,12 @@
         }
         &.active::before {
             transform: rotate(45deg);
-            background-color: white;
+            background-color: #b2e5fb;
             top: 9px;
         }
         &.active:after {
             transform: rotate(-45deg);
-            background-color: white;
+            background-color: #b2e5fb;
             bottom: 9px;
         }
         &.active span {
@@ -130,6 +133,13 @@
         color: #ffffff;
     }
 
+    &__phone-svg {
+        fill: #b2e5fb;
+        width: 40px;
+        height: 40px;
+        margin: 0 5px;
+    }
+
     &__cart {
         display: flex;
         align-items: center;
@@ -146,6 +156,9 @@
     &__content {
         padding-bottom: 20px;
         margin-top: 50px;
+        @media (max-width: 540px) {
+            margin-top: 150px;
+        }
     }
 
     &__row {
@@ -153,6 +166,9 @@
         justify-content: space-between;
         &:first-child {
             margin-bottom: 70px;
+            @media (max-width: 540px) {
+                margin-bottom: 15px;
+            }
         }
         &:nth-child(2) {
             align-items: center;
@@ -169,11 +185,20 @@
         @include adaptiv-lheight(60, 30);
         font-family: Lobster;
         @include adaptiv-flex-width(0, 0, 250, 150);
+        @media (max-width: 540px) {
+            flex: 0 0 100%;
+        }
         &_left {
+            @media (max-width: 540px) {
+                display: none;
+            }
         }
 
         &_right {
             text-align: right;
+            @media (max-width: 540px) {
+                text-align: center;
+            }
         }
     }
 
@@ -203,13 +228,13 @@
     }
 
     &__title {
-        @include adaptiv-font(24, 18);
-        line-height: 30px;
+        @include adaptiv-font(24, 16);
+        @include adaptiv-lheight(30, 16);
     }
 
     &__subtitle {
-        @include adaptiv-font(18, 16);
-        line-height: 22px;
+        @include adaptiv-font(18, 14);
+        @include adaptiv-lheight(22, 16);
     }
 }
 .list {
@@ -230,6 +255,7 @@
     }
 }
 .cart-header {
+    position: relative;
     &.fixed {
         position: fixed;
         top: 20px;
@@ -248,6 +274,9 @@
         width: 1px;
         background-color: #fff;
         height: 57px;
+        @media (max-width: 500px) {
+            display: none;
+        }
     }
 
     &__box {
@@ -257,6 +286,9 @@
         flex-direction: column;
         color: white;
         white-space: nowrap;
+        @media (max-width: 500px) {
+            display: none;
+        }
     }
 
     &__count {
@@ -264,6 +296,23 @@
     }
 
     &__price {
+    }
+    &__adaptive-count {
+        transform: scale(0);
+        @media (max-width: 500px) {
+            transform: scale(1);
+            background: red;
+            font-size: 14px;
+            position: absolute;
+            border-radius: 50%;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     }
 }
 .social {
@@ -296,6 +345,7 @@
         }
 
         &_facebook {
+            fill: #566bb8;
         }
     }
 }
@@ -308,9 +358,11 @@
     padding: 8px 0;
     border-radius: 33px;
     font-family: Lobster;
-    font-size: 30px;
+    @include adaptiv-font(30, 22);
     background-size: 170%;
     transition: background 1s linear;
+    @media (max-width: 540px) {
+    }
     &:hover {
         background-position: right;
     }

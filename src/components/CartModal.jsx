@@ -10,8 +10,8 @@ function CartModal({ typeModal, handlerNot, handlerYes }) {
                 {modalText[typeModal]}
             </div>
             <div className="modal__buttons">
-                <button onClick={handlerNot} className="modal__button btn shd">Нет</button>
-                <button onClick={handlerYes} className="modal__button btn shd">Да</button>
+                <button onClick={handlerNot} className="modal__button btn shd eff">Нет</button>
+                <button onClick={handlerYes} className="modal__button btn shd eff">Да</button>
             </div>
         </div>
     )
