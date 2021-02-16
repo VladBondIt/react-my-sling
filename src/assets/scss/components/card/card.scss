@@ -18,12 +18,7 @@
         flex: 0 0 100%;
         margin: 0 0 20px 0;
     }
-    &:hover {
-        transform: scale(1.02);
-        @media (max-width: 922px) {
-            transform: scale(1);
-        }
-    }
+
     &__imagebox {
         border-radius: 15px 15px 0 0;
         overflow: hidden;
@@ -66,7 +61,7 @@
         flex-direction: column;
         white-space: nowrap;
         margin-bottom: 15px;
-        @include adaptiv-lheight(41, 20);
+        @include adaptiv-lheight(30, 20);
     }
 
     &__title {

@@ -11,8 +11,6 @@ function Footer() {
     const dispatch = useDispatch();
     const { innerWidth } = useSelector(state => state.width)
 
-    console.log(innerWidth);
-
     React.useEffect(() => {
         dispatch(setInnerWidth(window.innerWidth))
         window.onresize = () => {

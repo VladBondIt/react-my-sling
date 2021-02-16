@@ -79,6 +79,7 @@ function CartItem({ id, title, img, size, material, price, description, dataForK
                 </div>
             </div>
             <div className="item__column">
+                <span className="item__text">Цена:</span>
                 <span className="item__price">{price} руб</span>
             </div>
             <div className="item__column">
@@ -99,6 +100,7 @@ function CartItem({ id, title, img, size, material, price, description, dataForK
                 </div>
             </div>
             <div className="item__column">
+                <span className="item__text">Стоимость:</span>
                 <span className="item__totalprice">{price * countsIdItems[id]} руб</span>
             </div>
             <div className="item__column">
