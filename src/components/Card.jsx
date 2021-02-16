@@ -5,6 +5,7 @@ import ForCard2 from '../assets/images/card/sling-backpack.jpg';
 import { useDispatch } from 'react-redux';
 import { setCartItems } from '../redux/actions/cart';
 import { setModalShow, setModalType, setPreviewObj } from '../redux/actions/modal';
+import { Link } from 'react-router-dom';
 
 function Card({ title, description, material, size, price, oldprice, img, id }) {
     const dispatch = useDispatch();
@@ -41,9 +42,7 @@ function Card({ title, description, material, size, price, oldprice, img, id }) 
     }
 
     const handlerPreview = () => {
-        dispatch(setModalType(3))
         dispatch(setPreviewObj(obj))
-        dispatch(setModalShow(true))
     }
 
 
@@ -52,9 +51,11 @@ function Card({ title, description, material, size, price, oldprice, img, id }) 
             <div className="card__imagebox">
                 <img className="card__image" src={img} alt={title} />
                 <div className="card__overlay overlay">
-                    <button
-                        onClick={handlerPreview}
-                        className="overlay__button btn eff">Предпросмотр</button>
+                    <Link to="/react-my-sling/cardpage">
+                        <button
+                            onClick={handlerPreview}
+                            className="overlay__button btn eff">Предпросмотр</button>
+                    </Link>
                 </div>
             </div>
             <div className="card__infobox">

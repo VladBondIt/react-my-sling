@@ -1,34 +1,44 @@
 .preview {
-    background: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 25px rgb(255, 255, 255);
-    border-radius: 30px;
-    margin: 0 20px;
-    overflow: hidden;
+    &__body {
+        padding: 20px 5px;
+    }
     &__imagebox {
     }
     &__mainimg {
     }
-    &__body {
+    &__infobox {
+        background: rgba(255, 255, 255, 0.6);
         font-size: 22px;
         padding: 20px;
     }
     &__row {
-        margin-bottom: 20px;
+        &:first-child {
+            margin-bottom: 40px;
+        }
         &:nth-child(2) {
             display: flex;
+            flex-direction: column;
             justify-content: space-between;
+            margin-bottom: 20px;
         }
         &:last-child {
             display: flex;
-            margin-bottom: 0;
             justify-content: space-between;
+            @media (max-width: 475px) {
+                flex-wrap: wrap;
+            }
         }
     }
     &__column {
-        flex: 0 0 200px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        max-width: 300px;
+        margin-bottom: 20px;
+        width: 100%;
+        @media (max-width: 500px) {
+            max-width: 100%;
+        }
     }
     &__name {
         font-size: 32px;
@@ -42,6 +52,13 @@
     &__price {
         display: flex;
         flex-direction: column;
+        white-space: nowrap;
+        margin-right: 10px;
+        @media (max-width: 475px) {
+            flex: 1 1 100%;
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
     }
     &__button {
         display: flex;
@@ -49,6 +66,10 @@
         align-items: center;
         justify-content: center;
         font-size: 22px;
+        box-shadow: 0.7px 1px 2px #000;
+        @media (max-width: 475px) {
+            margin: 0 auto;
+        }
     }
     &__size {
     }
@@ -64,27 +85,33 @@
     display: flex;
     &__column {
         &:first-child {
-            flex: 0 1 200px;
+            @include adaptiv-flex-width(0, 0, 250, 90);
+            background: #000;
         }
         &:last-child {
             border-left: 2px solid #000;
             flex: 0 1 100%;
+            position: relative;
         }
     }
     &__mainimg {
+        position: absolute;
         width: 100%;
-        height: 406px;
+        height: 100%;
+        top: 0;
+        left: 0;
     }
     &__row {
         position: relative;
+        @include adaptiv-padding-bottom(170, 60);
         &:not(:last-child) {
             border-bottom: 2px solid #000;
         }
     }
     &__mini-img {
-        max-width: 200px;
+        position: absolute;
         width: 100%;
-        height: 100px;
+        height: 100%;
     }
     &__overlay {
         position: absolute;

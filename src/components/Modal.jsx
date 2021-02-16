@@ -4,7 +4,6 @@ import OfferCallModal from './OfferCallModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { cancelPosition, clearCart } from '../redux/actions/cart';
 import { setModalShow, setModalType } from '../redux/actions/modal';
-import PreviewCardModal from './PreviewCardModal';
 import OrderModal from './OrderModal';
 import ThanksModal from './ThanksModal';
 
@@ -17,11 +16,10 @@ function Modal() {
     const [name, setName] = useState('')
 
 
-    const { modalShow, typeModal, cancelId, previewObj, totalPrice, totalCount } = useSelector((state) => ({
+    const { modalShow, typeModal, cancelId, totalPrice, totalCount } = useSelector((state) => ({
         modalShow: state.modal.modalShow,
         typeModal: state.modal.typeModal,
         cancelId: state.modal.cancelId,
-        previewObj: state.modal.previewObj,
         totalPrice: state.cart.totalPrice,
         totalCount: state.cart.totalCount,
     }))
@@ -109,10 +107,6 @@ function Modal() {
                 handlerPhone={handlerPhone}
                 handlerSuccess={handlerSuccess}
                 handlerModalShow={handlerModalShow} />
-            break;
-        case 3:
-            bodyClassName += " modal__body_preview";
-            visibleModalBody = <PreviewCardModal previewObj={previewObj} handlerModalShow={handlerModalShow} />
             break;
         case 4:
             bodyClassName += " modal__body_cart-order";

@@ -1,0 +1,36 @@
+.price {
+    &__old {
+        margin-bottom: 5px;
+        color: #999999;
+        position: relative;
+        &::before {
+            content: "";
+            position: absolute;
+            top: 8px;
+            left: 0;
+            background: rgba(255, 0, 0, 0.7);
+            width: 65px;
+            height: 2px;
+            transform: rotate(10deg);
+        }
+    }
+
+    &__old-big {
+        color: #999999;
+        margin-bottom: 10px;
+        @media (max-width: 475px) {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    &__current {
+        @media (max-width: 475px) {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    &__rub {
+        margin-left: 10px;
+    }
+}

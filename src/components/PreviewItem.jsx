@@ -1,14 +1,16 @@
 import React from 'react'
 
-function PreviewItem({ setActiveId, activeId, setActiveImg, id, name }) {
+function PreviewItem({ setActiveId, activeId, setActiveImg, index, name }) {
 
     const handlerActiveImg = () => {
         setActiveImg(name)
-        setActiveId(id)
+        setActiveId(index)
     }
 
+    console.log(index);
+
     let overlayClassName = "imagebox__overlay";
-    overlayClassName += id === activeId ? " active" : "";
+    overlayClassName += index === activeId ? " active" : "";
 
     return (
         <div onClick={handlerActiveImg} className="imagebox__row">
