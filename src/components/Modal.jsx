@@ -14,6 +14,7 @@ function Modal() {
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
     const [name, setName] = useState('')
+    const [formError, setFormError] = useState(false)
 
 
     const { modalShow, typeModal, cancelId, totalPrice, totalCount } = useSelector((state) => ({
@@ -24,24 +25,36 @@ function Modal() {
         totalCount: state.cart.totalCount,
     }))
 
+    function isEmail(email) {
+        const re = /^([A-Z|a-z|0-9](\.|_){0,1})+[A-Z|a-z|0-9]@([A-Z|a-z|0-9])+((\.){0,1}[A-Z|a-z|0-9]){2}\.[a-z]{2,3}$/gm;
+        return re.test(email);
+    }
 
-
-    const handlerSuccess = (e) => {
-        e.preventDefault();
+    const handlerSuccess = () => {
         dispatch(setModalType(5))
         console.log(phone);
-        console.log(email);
-        console.log(name);
     }
 
     const handlerPhone = (e) => {
-        setPhone(e.target.value);
+        if (e.target.value.trim()) {
+            setPhone(e.target.value);
+        } else {
+            setPhone("");
+        }
     }
     const handlerEmail = (e) => {
-        setEmail(e.target.value);
+        if (e.target.value.trim()) {
+            setEmail(e.target.value);
+        } else {
+            setEmail("");
+        }
     }
     const handlerName = (e) => {
-        setName(e.target.value);
+        if (e.target.value.trim()) {
+            setName(e.target.value);
+        } else {
+            setName("");
+        }
     }
 
     const handlerClear = () => {
@@ -102,6 +115,13 @@ function Modal() {
         case 2:
             bodyClassName += " modal__body_header";
             visibleModalBody = <OfferCallModal
+                setEmail={setEmail}
+                formError={formError}
+                setFormError={setFormError}
+                phone={phone}
+                email={email}
+                isEmail={isEmail}
+                name={name}
                 handlerName={handlerName}
                 handlerEmail={handlerEmail}
                 handlerPhone={handlerPhone}
@@ -111,6 +131,9 @@ function Modal() {
         case 4:
             bodyClassName += " modal__body_cart-order";
             visibleModalBody = <OrderModal
+                phone={phone}
+                email={email}
+                name={name}
                 handlerClear={handlerClear}
                 handlerName={handlerName}
                 handlerSuccess={handlerSuccess}

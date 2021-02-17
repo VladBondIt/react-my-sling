@@ -18,6 +18,14 @@
         @media (max-width: 922px) {
             background: rgba(255, 255, 255, 0.6);
         }
+        &.error {
+            border: 1px solid red;
+            box-shadow: 0 0 15px red;
+        }
+        &.valid {
+            border: 1px solid green;
+            box-shadow: 0 0 15px green;
+        }
     }
     &__label {
         cursor: pointer;
@@ -49,6 +57,11 @@
         margin-top: 3px;
         background: #e8f0fe;
         border-radius: 3px;
+    }
+    &__error {
+        font-family: Lobcter;
+        @include adaptiv-font(36, 26);
+        margin-bottom: 20px;
     }
     &__button {
         font-size: 26px;

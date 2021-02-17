@@ -18,14 +18,14 @@
     &__old-big {
         color: #999999;
         margin-bottom: 10px;
-        @media (max-width: 475px) {
+        @media (max-width: 768px) {
             display: flex;
             justify-content: space-between;
         }
     }
 
     &__current {
-        @media (max-width: 475px) {
+        @media (max-width: 768px) {
             display: flex;
             justify-content: space-between;
         }

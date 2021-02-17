@@ -11,9 +11,24 @@ function OrderModal({ handlerModalShow, totalPrice, totalCount, handlerSuccess, 
     return (
         <form onSubmit={handlerOrderSubmit} className="modal__form form">
 
-            <input onChange={handlerName} type="text" name="name" placeholder="Введите ваше Имя" className="form__input shd" />
-            <input onChange={handlerEmail} type="tel" name="phone" placeholder="Введите ваш Телефон" className="form__input shd" />
-            <input onChange={handlerPhone} type="email" name="email" placeholder="Введите ваш Email" className="form__input shd" />
+            <input
+                onChange={handlerName}
+                type="text"
+                name="name"
+                placeholder="Введите ваше Имя"
+                className="form__input shd" />
+            <input
+                onChange={handlerPhone}
+                type="tel"
+                name="phone"
+                placeholder="Введите ваш Телефон"
+                className="form__input shd" />
+            <input
+                onChange={handlerEmail}
+                type="email"
+                name="email"
+                placeholder="Введите ваш Email"
+                className="form__input shd" />
 
 
             <div className="form__row">
