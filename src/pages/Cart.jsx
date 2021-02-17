@@ -100,8 +100,7 @@ function Cart() {
                                 </button>
                             </Link>
                         </div>}
-                    {modalShow
-                        && <Modal />}
+                    {modalShow && <Modal />}
                 </div>
             </div>
 

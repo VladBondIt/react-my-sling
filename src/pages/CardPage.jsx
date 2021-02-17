@@ -7,6 +7,8 @@ import ForCard1 from '../assets/images/card/sling-w-ring.jpg';
 import ForCard2 from '../assets/images/card/sling-backpack.jpg';
 import ForCard3 from '../assets/images/card/modal-popup.jpg';
 import PreviewItem from '../components/PreviewItem';
+import { Link } from 'react-router-dom';
+import { ReactComponent as CardBack } from '../assets/images/svg/back-button.svg';
 
 function CardPage() {
 
@@ -81,11 +83,16 @@ function CardPage() {
                                         <span className="price__rub">{price} руб</span>
                                     </span>
                                 </div>
-                                <button
-                                    className="preview__button add-button btn"
-                                    onClick={handlerAddItemToCart}>
-                                    Добавить
-                                </button>
+                                <div className="preview__buttons">
+                                    <Link className="preview__button shd btn eff" to="/react-my-sling/">
+                                        <CardBack className="cart__backsvg" /> Вернуться
+                                    </Link>
+                                    <button
+                                        className="preview__button add-button btn"
+                                        onClick={handlerAddItemToCart}>
+                                        Добавить
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
