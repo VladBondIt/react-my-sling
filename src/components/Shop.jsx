@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import Card from './Card';
 import CategoryItem from './CategoryItem';
 import SearchForm from './SearchForm';
@@ -11,7 +11,7 @@ import { setSearchChar } from '../redux/actions/search';
 import FetchService from '../services/fetchService';
 
 
-function Shop() {
+const Shop = memo(function Shop() {
     const dispatch = useDispatch();
 
     const { items, activeItem, cardItems, loaderItems, isLoading, searchChar, } = useSelector((state) => ({
@@ -23,12 +23,20 @@ function Shop() {
         searchChar: state.search.searchChar,
     }))
 
-    useEffect(() => {
-        FetchService.getCategoryes('slings').then((res) => {
-            dispatch(setCategoryes(res));
-        })
+    const fetchItems = () => {
+        if (items.length === 0) {
+            FetchService.getCategoryes('slings').then((res) => {
+                dispatch(setCategoryes(res));
+            })
+        }
         dispatch(setLoading(false))
-        dispatch(fetchedCards())
+        if (cardItems.length === 0) {
+            dispatch(fetchedCards())
+        }
+    }
+
+    useEffect(() => {
+        fetchItems();
     }, [])
 
     const onChange = (e) => {
@@ -89,7 +97,7 @@ function Shop() {
             </div >
         </section>
     )
-}
+})
 
-export default Shop
+export default Shop;
 

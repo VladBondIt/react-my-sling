@@ -24,16 +24,10 @@
             min-height: auto;
             margin-bottom: 15px;
         }
-        &:nth-child(even) {
-            border-right: 1px solid #000;
-            border-left: 1px solid #000;
-            @media (max-width: 1024px) {
-                border: 1px solid transparent;
-            }
-        }
         &:first-child {
             flex: 0 0 220px;
             text-align: center;
+            white-space: normal;
             @media (max-width: 1024px) {
                 flex: 0 1 100%;
             }

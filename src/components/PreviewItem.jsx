@@ -7,7 +7,6 @@ function PreviewItem({ setActiveId, activeId, setActiveImg, index, name }) {
         setActiveId(index)
     }
 
-    console.log(index);
 
     let overlayClassName = "imagebox__overlay";
     overlayClassName += index === activeId ? " active" : "";
