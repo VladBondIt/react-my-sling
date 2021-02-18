@@ -11,13 +11,16 @@ import FooterMenu from './FooterMenu';
 function HeaderNav() {
 
 
-    const { totalCount, totalPrice, cartModalShow, innerWidth } = useSelector((state) => ({
+    const { totalCount, totalPrice, cartModalShow, innerWidth, modalShow } = useSelector((state) => ({
+        modalShow: state.modal.modalShow,
         cartItems: state.cart.cartItems,
         totalPrice: state.cart.totalPrice,
         totalCount: state.cart.totalCount,
         cartModalShow: state.modal.cartModalShow,
         innerWidth: state.width.innerWidth,
     }))
+
+
 
     const [offset, setOffset] = useState(0);
     const [showBurgerMenu, setShowBurgerMenu] = useState(false);
@@ -52,6 +55,13 @@ function HeaderNav() {
 
     const handlerBurger = () => {
         setShowBurgerMenu(!showBurgerMenu)
+    }
+
+
+    if (modalShow || showBurgerMenu) {
+        document.querySelector('body').classList.add('lock');
+    } else {
+        document.querySelector('body').classList.remove('lock');
     }
 
     return (

@@ -19,6 +19,9 @@
 
 body {
     font-family: Roboto;
+    &.lock {
+        overflow: hidden;
+    }
 }
 
 .container {

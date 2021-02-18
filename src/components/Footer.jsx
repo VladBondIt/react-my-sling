@@ -9,7 +9,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function Footer() {
     const dispatch = useDispatch();
-    const { innerWidth } = useSelector(state => state.width)
+    const { innerWidth, } = useSelector(state => ({
+        innerWidth: state.width.innerWidth
+    }))
 
     React.useEffect(() => {
         dispatch(setInnerWidth(window.innerWidth))
@@ -17,6 +19,8 @@ function Footer() {
             dispatch(setInnerWidth(window.innerWidth))
         }
     }, []);
+
+
 
     return (
         <footer className="footer">

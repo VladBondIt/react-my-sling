@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CartModal from './CartModal';
 import OfferCallModal from './OfferCallModal';
 import { useSelector, useDispatch } from 'react-redux';
@@ -25,9 +25,14 @@ function Modal() {
         totalCount: state.cart.totalCount,
     }))
 
+
     function isEmail(email) {
         const re = /^([A-Z|a-z|0-9](\.|_){0,1})+[A-Z|a-z|0-9]@([A-Z|a-z|0-9])+((\.){0,1}[A-Z|a-z|0-9]){2}\.[a-z]{2,3}$/gm;
         return re.test(email);
+    }
+    function isPhone(phone) {
+        const re = /^(\+{0,})(\d{0,})([(]{1}\d{1,3}[)]{0,}){0,}(\s?\d+|\+\d{2,3}\s{1}\d+|\d+){1}[\s|-]?\d+([\s|-]?\d+){1,2}(\s){0,}$/gm;
+        return re.test(phone);
     }
 
     const handlerSuccess = () => {
@@ -115,6 +120,8 @@ function Modal() {
         case 2:
             bodyClassName += " modal__body_header";
             visibleModalBody = <OfferCallModal
+                setPhone={setPhone}
+                isPhone={isPhone}
                 setEmail={setEmail}
                 formError={formError}
                 setFormError={setFormError}
