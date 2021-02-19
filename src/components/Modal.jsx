@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import CartModal from './CartModal';
 import OfferCallModal from './OfferCallModal';
 import { useSelector, useDispatch } from 'react-redux';
