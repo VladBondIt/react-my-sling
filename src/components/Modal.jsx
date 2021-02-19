@@ -15,6 +15,8 @@ function Modal() {
     const [email, setEmail] = useState('')
     const [name, setName] = useState('')
     const [formError, setFormError] = useState(false)
+    const [emailClass, setEmailClass] = useState("");
+    const [phoneClass, setPhoneClass] = useState("");
 
 
     const { modalShow, typeModal, cancelId, totalPrice, totalCount } = useSelector((state) => ({
@@ -35,12 +37,39 @@ function Modal() {
         return re.test(phone);
     }
 
-    const handlerSuccess = () => {
-        dispatch(setModalType(5))
-        console.log(phone);
+    const handlerSuccess = (e, formForReset) => {
+        e.preventDefault();
+        if (email && phone && name) {
+            formForReset.current.reset();
+            dispatch(setModalType(5))
+        } else {
+            setFormError(true)
+            setTimeout(() => {
+                setFormError(false)
+            }, 3000);
+        }
+        // console.log(phone);
+        // console.log(email);
+        // console.log(name);
+    }
+
+    const handlePhoneBlur = () => {
+        !isPhone(phone)
+            ? setPhone('')
+            : setTimeout(() => {
+                setPhoneClass("form__input shd filled")
+            }, 1000);
+    }
+    const handleEmailBlur = () => {
+        !isEmail(email)
+            ? setEmail('')
+            : setTimeout(() => {
+                setEmailClass("form__input shd filled")
+            }, 1000);
     }
 
     const handlerPhone = (e) => {
+        setPhoneClass("")
         if (e.target.value.trim()) {
             setPhone(e.target.value);
         } else {
@@ -48,6 +77,7 @@ function Modal() {
         }
     }
     const handlerEmail = (e) => {
+        setEmailClass("");
         if (e.target.value.trim()) {
             setEmail(e.target.value);
         } else {
@@ -98,6 +128,28 @@ function Modal() {
         }
 
     }
+    let emailClassName = "form__input shd",
+        phoneClassName = "form__input shd",
+        nameClassName = "form__input shd";
+
+    nameClassName += name ? " filled" : "";
+
+    if (phone) {
+        phoneClassName += " filled";
+        phoneClassName += !isPhone(phone) ? " error" : " valid";
+    } else {
+        emailClassName += "";
+    }
+
+    if (email) {
+        emailClassName += " filled";
+        emailClassName += !isEmail(email) ? " error" : " valid";
+    } else {
+        emailClassName += "";
+    }
+
+    const resultPhoneClassName = phoneClass ? phoneClass : phoneClassName;
+    const resultEmailClassName = emailClass ? emailClass : emailClassName;
 
     let bodyClassName = "modal__body mainbg";
     let visibleModalBody = null;
@@ -120,14 +172,14 @@ function Modal() {
         case 2:
             bodyClassName += " modal__body_header";
             visibleModalBody = <OfferCallModal
-                setPhone={setPhone}
-                isPhone={isPhone}
-                setEmail={setEmail}
                 formError={formError}
-                setFormError={setFormError}
+                nameClassName={nameClassName}
+                resultPhoneClassName={resultPhoneClassName}
+                resultEmailClassName={resultEmailClassName}
+                handlePhoneBlur={handlePhoneBlur}
+                handleEmailBlur={handleEmailBlur}
                 phone={phone}
                 email={email}
-                isEmail={isEmail}
                 name={name}
                 handlerName={handlerName}
                 handlerEmail={handlerEmail}
@@ -138,6 +190,12 @@ function Modal() {
         case 4:
             bodyClassName += " modal__body_cart-order";
             visibleModalBody = <OrderModal
+                nameClassName={nameClassName}
+                resultPhoneClassName={resultPhoneClassName}
+                resultEmailClassName={resultEmailClassName}
+                formError={formError}
+                handlePhoneBlur={handlePhoneBlur}
+                handleEmailBlur={handleEmailBlur}
                 phone={phone}
                 email={email}
                 name={name}

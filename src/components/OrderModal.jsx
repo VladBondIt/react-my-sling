@@ -1,34 +1,49 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { ReactComponent as DeleteItem } from '../assets/images/svg/clear-single.svg';
+import InputMask from 'react-input-mask';
 
-function OrderModal({ handlerModalShow, totalPrice, totalCount, handlerSuccess, handlerEmail, handlerPhone, handlerName, handlerClear }) {
+function OrderModal({ handlerModalShow, totalPrice, formError, resultPhoneClassName,
+    resultEmailClassName, email, nameClassName, phone, name, handlePhoneBlur,
+    handleEmailBlur, totalCount, handlerSuccess, handlerEmail, handlerPhone, handlerName, handlerClear }) {
+
+    const form = useRef(null);
 
     const handlerOrderSubmit = (e) => {
-        handlerSuccess(e);
-        handlerClear();
+        if (email && phone && name) {
+            handlerSuccess(e, form);
+            handlerClear();
+        } else {
+            handlerSuccess(e, form);
+        }
     }
 
     return (
-        <form onSubmit={handlerOrderSubmit} className="modal__form form">
+        <form ref={form} onSubmit={handlerOrderSubmit} className="modal__form form">
 
             <input
                 onChange={handlerName}
                 type="text"
                 name="name"
+                value={name}
                 placeholder="Введите ваше Имя"
-                className="form__input shd" />
-            <input
+                className={nameClassName} />
+            <InputMask
+                onBlur={handlePhoneBlur}
                 onChange={handlerPhone}
+                mask="+7(999)999 99 99"
                 type="tel"
                 name="phone"
+                value={phone}
                 placeholder="Введите ваш Телефон"
-                className="form__input shd" />
+                className={resultPhoneClassName} />
             <input
+                onBlur={handleEmailBlur}
                 onChange={handlerEmail}
-                type="email"
+                type="text"
                 name="email"
+                value={email}
                 placeholder="Введите ваш Email"
-                className="form__input shd" />
+                className={resultEmailClassName} />
 
 
             <div className="form__row">
@@ -45,7 +60,7 @@ function OrderModal({ handlerModalShow, totalPrice, totalCount, handlerSuccess, 
                     <span className="form__subcheck"></span>
                             Согласие на обработку ваших данных</label>
             </div>
-
+            {formError ? <div className="form__error">Необходимо заполнить все поля</div> : null}
             <button className="form__button btn shd eff">Подтвердить</button>
             <div onClick={handlerModalShow} className="form__close btn eff"><DeleteItem className="form__svg" /></div>
         </form>
