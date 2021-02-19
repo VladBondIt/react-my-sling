@@ -17,6 +17,7 @@ function Modal() {
     const [formError, setFormError] = useState(false)
     const [emailClass, setEmailClass] = useState("");
     const [phoneClass, setPhoneClass] = useState("");
+    const [checked, setChecked] = useState(true);
 
 
     const { modalShow, typeModal, cancelId, totalPrice, totalCount } = useSelector((state) => ({
@@ -39,7 +40,7 @@ function Modal() {
 
     const handlerSuccess = (e, formForReset) => {
         e.preventDefault();
-        if (email && phone && name) {
+        if (email && phone && name && checked) {
             formForReset.current.reset();
             dispatch(setModalType(5))
         } else {
@@ -103,7 +104,7 @@ function Modal() {
         dispatch(setModalShow(!modalShow))
     }
 
-    const delegateShowModal = e => {
+    const delegateShowModal = (e) => {
         if (e.target.matches('.modal')) {
             handlerModalShow()
         }
@@ -190,6 +191,8 @@ function Modal() {
         case 4:
             bodyClassName += " modal__body_cart-order";
             visibleModalBody = <OrderModal
+                checked={checked}
+                setChecked={setChecked}
                 nameClassName={nameClassName}
                 resultPhoneClassName={resultPhoneClassName}
                 resultEmailClassName={resultEmailClassName}

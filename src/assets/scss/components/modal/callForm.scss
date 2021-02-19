@@ -66,9 +66,7 @@
         font-family: Lobster;
         @include adaptiv-font(36, 26);
         margin-bottom: 20px;
-        @media (max-width: 768px) {
-            text-align: center;
-        }
+        text-align: center;
     }
     &__button {
         font-size: 26px;

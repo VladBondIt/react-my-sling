@@ -3,5 +3,9 @@
     &__text {
         font-family: Lobster;
         font-size: 36px;
+        @media (max-width: 922px) {
+            margin-top: -15px;
+            text-align: center;
+        }
     }
 }

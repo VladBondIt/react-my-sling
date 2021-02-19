@@ -4,17 +4,23 @@ import InputMask from 'react-input-mask';
 
 function OrderModal({ handlerModalShow, totalPrice, formError, resultPhoneClassName,
     resultEmailClassName, email, nameClassName, phone, name, handlePhoneBlur,
-    handleEmailBlur, totalCount, handlerSuccess, handlerEmail, handlerPhone, handlerName, handlerClear }) {
+    handleEmailBlur, totalCount, handlerSuccess, handlerEmail, handlerPhone,
+    handlerName, handlerClear, checked, setChecked }) {
 
     const form = useRef(null);
 
+
     const handlerOrderSubmit = (e) => {
-        if (email && phone && name) {
+        if (email && phone && name && checked) {
             handlerSuccess(e, form);
             handlerClear();
         } else {
             handlerSuccess(e, form);
         }
+    }
+
+    const handlerCheckbox = (e) => {
+        setChecked(e.target.checked)
     }
 
     return (
@@ -56,7 +62,10 @@ function OrderModal({ handlerModalShow, totalPrice, formError, resultPhoneClassN
             </div>
 
             <div className="form__checkbox">
-                <label className="form__label link"><input className="form__check-input" type="checkbox" name="license" />
+                <label className="form__label link"><input
+                    onChange={handlerCheckbox}
+                    checked={checked}
+                    className="form__check-input" type="checkbox" name="license" />
                     <span className="form__subcheck"></span>
                             Согласие на обработку ваших данных</label>
             </div>

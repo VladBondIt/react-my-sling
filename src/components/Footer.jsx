@@ -6,6 +6,7 @@ import { ReactComponent as InstaSvg } from '../assets/images/svg/instagram-foote
 import FooterMenu from './FooterMenu';
 import { setInnerWidth } from '../redux/actions/width';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function Footer() {
     const dispatch = useDispatch();
@@ -28,10 +29,12 @@ function Footer() {
                 <nav className="footer__nav">
                     <div className="footer__row">
                         <div className="footer__column">
-                            <div className="footer__logo logo">
-                                <Logo className="logo__svg" />
-                                Helenia
-                            </div>
+                            <Link to="/react-my-sling/">
+                                <div className="footer__logo logo">
+                                    <Logo className="logo__svg" />
+                                    Helenia
+                                </div>
+                            </Link>
                             <div className="footer__copyright">
                                 © Все права защищены 2021,
                                 Helenia Company
