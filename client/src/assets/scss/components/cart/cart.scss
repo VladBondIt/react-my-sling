@@ -36,6 +36,7 @@
         align-items: center;
         justify-content: center;
         white-space: nowrap;
+        color: black;
         &_red {
             @media (max-width: 500px) {
                 margin-top: 15px;

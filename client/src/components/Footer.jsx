@@ -7,6 +7,7 @@ import FooterMenu from './FooterMenu';
 import { setInnerWidth } from '../redux/actions/width';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { setHomePage } from '../redux/actions/page';
 
 function Footer() {
     const dispatch = useDispatch();
@@ -21,7 +22,9 @@ function Footer() {
         }
     }, []);
 
-
+    const handlerLinkToHome = () => {
+        dispatch(setHomePage(true))
+    }
 
     return (
         <footer className="footer">
@@ -29,7 +32,9 @@ function Footer() {
                 <nav className="footer__nav">
                     <div className="footer__row">
                         <div className="footer__column">
-                            <Link to="/react-my-sling/">
+                            <Link
+                                onClick={handlerLinkToHome}
+                                to="/react-my-sling/">
                                 <div className="footer__logo logo">
                                     <Logo className="logo__svg" />
                                     Helenia

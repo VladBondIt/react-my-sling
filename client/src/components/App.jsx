@@ -1,7 +1,8 @@
 import React from 'react';
 import Footer from './Footer';
+import Header from './Header';
 
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import Home from '../pages/Home';
 import Cart from '../pages/Cart';
 import CardPage from '../pages/CardPage';
@@ -15,11 +16,15 @@ function App() {
 
     return (
         <div className="wrapper">
-            <Route exact path="/react-my-sling/" component={Home} />
-            <Route exact path="/react-my-sling/cart" component={Cart} />
-            <Route exact path="/react-my-sling/cardpage">
-                {previewObj ? <CardPage /> : <Redirect to="/react-my-sling/" />}
-            </Route>
+            <Header />
+            <Switch>
+                <Route exact path="/react-my-sling/" component={Home} />
+                <Route exact path="/react-my-sling/cart" component={Cart} />
+                <Route exact path="/react-my-sling/cardpage">
+                    {previewObj ? <CardPage /> : <Redirect to="/react-my-sling/" />}
+                </Route>
+                <Redirect to="/react-my-sling/" />
+            </Switch>
             <Footer />
         </div>
     )

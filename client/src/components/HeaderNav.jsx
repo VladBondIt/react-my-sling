@@ -3,12 +3,14 @@ import { ReactComponent as Logo } from '../assets/images/svg/logo.svg';
 import { ReactComponent as CartSvg } from '../assets/images/svg/cart.svg';
 import { ReactComponent as Phone } from '../assets/images/svg/call-black.svg';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import FooterMenu from './FooterMenu';
+import { setHomePage } from '../redux/actions/page';
 
 
 
 function HeaderNav() {
+    const dispatch = useDispatch();
 
 
     const { totalCount, totalPrice, cartModalShow, innerWidth, modalShow } = useSelector((state) => ({
@@ -30,6 +32,13 @@ function HeaderNav() {
             setOffset(window.pageYOffset)
         }
     }, []);
+
+    const handlerLink = () => {
+        dispatch(setHomePage(false))
+    }
+    const handlerLinkToHome = () => {
+        dispatch(setHomePage(true))
+    }
 
 
     let cartClassName = "header__cart cart-header btn shd";
@@ -71,7 +80,10 @@ function HeaderNav() {
                 className={burgerClassName}>
                 <span></span>
             </div>
-            <Link to="/react-my-sling/" className="header__logo logo">
+            <Link
+                onClick={handlerLinkToHome}
+                to="/react-my-sling/"
+                className="header__logo logo">
                 <Logo className="logo__svg" />
                 <div className="logo__box">
                     <h1 className="logo__title">Товары для Мам</h1>
@@ -80,7 +92,7 @@ function HeaderNav() {
             </Link>
             <div className={menuClassName}>
                 <ul className="header__list list">
-                    <li className="list__item"><Link to="/react-my-sling/"><div className="list__link link">Главная</div></Link></li>
+                    <li className="list__item"><Link onClick={handlerLinkToHome} to="/react-my-sling/"><div className="list__link link">Главная</div></Link></li>
                     <li className="list__item"><div className="list__link link">О нас</div></li>
                     <li className="list__item"><div className="list__link link">О товаре</div></li>
                 </ul>
@@ -97,7 +109,9 @@ function HeaderNav() {
 
 
             </div>
-            <Link to="/react-my-sling/cart">
+            <Link
+                onClick={handlerLink}
+                to="/react-my-sling/cart">
                 <div className={cartClassName}>
                     <CartSvg className="cart-header__svg" />
                     <span className="cart-header__delimetr"></span>

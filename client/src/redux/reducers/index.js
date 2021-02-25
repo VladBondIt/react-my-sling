@@ -6,6 +6,7 @@ import cart from './cart';
 import modal from './modal';
 import search from './search';
 import width from './width';
+import page from './page';
 
 const rootReducer = combineReducers({
     categoryes,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     cart,
     modal,
     search,
-    width
+    width,
+    page
 });
 
 export default rootReducer;

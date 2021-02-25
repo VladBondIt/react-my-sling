@@ -1,13 +1,11 @@
 import React from 'react';
 import CartItem from '../components/CartItem';
-import HeaderNav from '../components/HeaderNav';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { ReactComponent as CartEmpty } from '../assets/images/svg/cart-empty-black.svg';
-import { ReactComponent as CartBack } from '../assets/images/svg/back-button.svg';
 import { ReactComponent as CartClear } from '../assets/images/svg/clear-all.svg';
 import Modal from '../components/Modal';
 import { setModalShow, setModalType } from '../redux/actions/modal';
+import BackButton from '../components/BackButton';
 
 function Cart() {
     const dispatch = useDispatch();
@@ -35,27 +33,21 @@ function Cart() {
 
 
     return (
-        <>
-            <div className="header__notmain">
-                <div className="container">
-                    <HeaderNav />
-                </div>
-            </div>
-            <div className="cart mainbg">
-                <div className="container">
-                    {cartItems.length > 0
-                        ?
-                        <>
-                            <div className="cart__buttons shd">
-                                Корзина Заказов
-                            <button
-                                    onClick={handlerClearModalShow}
-                                    className="cart__button shd btn reff cart__button_red">
-                                    <CartClear className="cart__clearsvg" /> Очистить
-                            </button>
-                            </div>
-                            <div className="cart__body">
-                                {/* <div className="cart__info">
+        <div className="cart mainbg">
+            <div className="container">
+                {cartItems.length > 0
+                    ?
+                    <>
+                        <div className="cart__buttons shd">
+                            Корзина Заказов
+                                <button
+                                onClick={handlerClearModalShow}
+                                className="cart__button shd btn reff cart__button_red">
+                                <CartClear className="cart__clearsvg" /> Очистить
+                                </button>
+                        </div>
+                        <div className="cart__body">
+                            {/* <div className="cart__info">
                                     <span className="cart__text">Товар</span>
                                     <span className="cart__text">Характеристики</span>
                                     <span className="cart__text">Цена</span>
@@ -63,48 +55,38 @@ function Cart() {
                                     <span className="cart__text">Стоимость</span>
                                     <span className="cart__text">Отмена</span>
                                 </div> */}
-                                <div className="cart__itembox">
-                                    {cartItems.map((cartItem) => <CartItem
-                                        {...cartItem}
-                                        handlerCancelModalShow={handlerCancelModalShow}
-                                        key={cartItem.dataForKey}
-                                    />)}
-                                </div>
+                            <div className="cart__itembox">
+                                {cartItems.map((cartItem) => <CartItem
+                                    {...cartItem}
+                                    handlerCancelModalShow={handlerCancelModalShow}
+                                    key={cartItem.dataForKey}
+                                />)}
+                            </div>
 
-                            </div>
-                            <div className="cart__buttons shd">
-                                <div className="cart__box">
-                                    <button
-                                        onClick={handlerOrderModalShow}
-                                        className="cart__button shd btn cart__button_green geff">
-                                        Оформить заказ
+                        </div>
+                        <div className="cart__buttons shd">
+                            <div className="cart__box">
+                                <button
+                                    onClick={handlerOrderModalShow}
+                                    className="cart__button shd btn cart__button_green geff">
+                                    Оформить заказ
                                 </button>
-                                    <Link to="/react-my-sling/">
-                                        <button className="cart__button shd btn eff">
-                                            <CartBack className="cart__backsvg" /> Вернуться
-                                    </button>
-                                    </Link>
-                                </div>
-                                <span className="cart__totalprice">Общая стоимость: {totalPrice} руб</span>
+                                <BackButton className={"cart__button shd btn eff"} />
                             </div>
-                        </>
-                        :
-                        <div className="cart__empty empty shd">
-                            <div className="empty__title">Корзина пуста</div>
-                            <div className="empty__imgbox">
-                                <CartEmpty className="empty__svg" />
-                            </div>
-                            <Link to="/react-my-sling/">
-                                <button className="cart__button shd btn eff">
-                                    <CartBack className="cart__backsvg" /> Вернуться
-                                </button>
-                            </Link>
-                        </div>}
-                    {modalShow && <Modal />}
-                </div>
+                            <span className="cart__totalprice">Общая стоимость: {totalPrice} руб</span>
+                        </div>
+                    </>
+                    :
+                    <div className="cart__empty empty shd">
+                        <div className="empty__title">Корзина пуста</div>
+                        <div className="empty__imgbox">
+                            <CartEmpty className="empty__svg" />
+                        </div>
+                        <BackButton className={"cart__button shd btn eff"} />
+                    </div>}
+                {modalShow && <Modal />}
             </div>
-
-        </>
+        </div>
     )
 }
 
