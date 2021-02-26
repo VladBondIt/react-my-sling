@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ReactComponent as Logo } from '../assets/images/svg/logo.svg';
 import { ReactComponent as CartSvg } from '../assets/images/svg/cart.svg';
 import { ReactComponent as Phone } from '../assets/images/svg/call-black.svg';
+import { ReactComponent as User } from '../assets/images/svg/account_circle-black-18dp.svg';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import FooterMenu from './FooterMenu';
@@ -29,15 +30,15 @@ function HeaderNav() {
 
     useEffect(() => {
         window.onscroll = () => {
-            setOffset(window.pageYOffset)
+            setOffset(window.pageYOffset);
         }
     }, []);
 
     const handlerLink = () => {
-        dispatch(setHomePage(false))
+        dispatch(setHomePage(false));
     }
     const handlerLinkToHome = () => {
-        dispatch(setHomePage(true))
+        dispatch(setHomePage(true));
     }
 
 
@@ -99,15 +100,19 @@ function HeaderNav() {
                 {innerWidth >= 540 ? null : <FooterMenu />}
             </div>
             <div className="header__contacts">
-                {innerWidth >= 540
+                {innerWidth >= 610
                     ?
                     <>
                         <a href="tel:+78009998877" className="header__phone link">8-800-999-88-77</a>
                         <div className="header__email link">bobaka@cobaka.ru</div>
                     </>
                     : <a href="tel:+78009998877"><Phone className="header__phone-svg" /></a>}
-
-
+            </div>
+            <div className="header__login login">
+                <button className="login__btn shd btn">
+                    <User className="login__svg" />
+                    <span className="login__text">Войти</span>
+                </button>
             </div>
             <Link
                 onClick={handlerLink}

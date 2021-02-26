@@ -10,15 +10,19 @@
     &__notmain {
         background: black;
         color: white;
+        padding: 0 8px;
     }
 
     &__nav {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 40px 5px;
+        padding: 40px 0;
         @media (max-width: 922px) {
-            padding: 20px 5px;
+            padding: 20px 0;
+        }
+        @media (max-width: 425px) {
+            flex-wrap: wrap;
         }
     }
 
@@ -88,7 +92,7 @@
     }
 
     &__menu {
-        flex: 0 0 30%;
+        flex: 0 0 38%;
         @media (max-width: 922px) {
             position: fixed;
             background-color: black;
@@ -110,7 +114,7 @@
     &__list {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-evenly;
         white-space: nowrap;
         @media (max-width: 922px) {
             flex-direction: column;
@@ -120,8 +124,9 @@
     &__contacts {
         display: flex;
         flex-direction: column;
+        margin-left: 5px;
         @include adaptiv-font(20, 16);
-        @include adaptiv-lheight(23, 20);
+        @include adaptiv-lheight(23, 18);
     }
 
     &__phone {
@@ -140,6 +145,15 @@
         margin: 0 5px;
     }
 
+    &__login {
+        margin: 0 5px;
+        @media (max-width: 425px) {
+            flex: 0 0 50%;
+            margin: 0;
+            margin-top: 10px;
+        }
+    }
+
     &__cart {
         display: flex;
         align-items: center;
@@ -148,9 +162,6 @@
         justify-content: space-between;
         cursor: pointer;
         transition: box-shadow 0.5s;
-        &:hover {
-            box-shadow: 0 0 15px rgb(255, 255, 255);
-        }
     }
 
     &__content {
@@ -217,10 +228,40 @@
         }
     }
 }
+
+.login {
+    &__btn {
+        display: flex;
+        align-items: center;
+        border-radius: 50px;
+        border: 1px solid #ffffff;
+        padding: 6px 7px;
+        background: transparent;
+        color: #ffffff;
+    }
+    &__svg {
+        width: 45px;
+        height: 45px;
+        fill: #b2e5fb;
+    }
+    &__text {
+        margin-left: 5px;
+        @include adaptiv-font(20, 14);
+        @media (max-width: 450px) {
+            margin: 0;
+            display: none;
+        }
+        @media (max-width: 425px) {
+            display: block;
+            margin-left: 5px;
+        }
+    }
+}
+
 .logo {
     font-family: Lobster;
     &__svg {
-        width: 65px;
+        @include adaptiv-flex-width(0, 0, 65, 50);
         height: 65px;
     }
     &__box {
@@ -256,6 +297,9 @@
 }
 .cart-header {
     position: relative;
+    &:hover {
+        box-shadow: 0 0 15px rgb(255, 255, 255);
+    }
     &.fixed {
         position: fixed;
         top: 20px;
@@ -265,8 +309,8 @@
     }
     &__svg {
         fill: #b2e5fb;
-        width: 57px;
-        height: 57px;
+        width: 58px;
+        height: 58.5px;
         padding: 10px;
     }
 
