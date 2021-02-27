@@ -15,3 +15,4 @@ export const SET_FOUND_CARDS = "SET_FOUND_CARDS";
 export const CLEAR_FOUND_CARDS = "CLEAR_FOUND_CARDS";
 export const SET_INNER_WIDTH = "SET_INNER_WIDTH";
 export const SET_HOME_PAGE = "SET_HOME_PAGE";
+export const SET_AUTH = "SET_AUTH";

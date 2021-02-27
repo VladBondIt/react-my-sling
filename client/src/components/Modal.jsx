@@ -6,6 +6,10 @@ import { cancelPosition, clearCart } from '../redux/actions/cart';
 import { setModalShow, setModalType } from '../redux/actions/modal';
 import OrderModal from './OrderModal';
 import ThanksModal from './ThanksModal';
+import LoginModal from './LoginModal';
+import RegistrationModal from './RegistrationModal';
+import ThanksRegModal from './ThanksRegModal';
+import httpService from '../services/httpService';
 
 function Modal() {
 
@@ -18,6 +22,7 @@ function Modal() {
     const [emailClass, setEmailClass] = useState("");
     const [phoneClass, setPhoneClass] = useState("");
     const [checked, setChecked] = useState(true);
+    const [password, setPassword] = useState("");
 
 
     const { modalShow, typeModal, cancelId, totalPrice, totalCount } = useSelector((state) => ({
@@ -38,6 +43,18 @@ function Modal() {
         return re.test(phone);
     }
 
+    const handlerCallSuccess = (e, formForReset) => {
+        e.preventDefault();
+        if (email && phone && name) {
+            formForReset.current.reset();
+            dispatch(setModalType(5))
+        } else {
+            setFormError(true)
+            setTimeout(() => {
+                setFormError(false)
+            }, 3000);
+        }
+    }
     const handlerSuccess = (e, formForReset) => {
         e.preventDefault();
         if (email && phone && name && checked) {
@@ -49,9 +66,31 @@ function Modal() {
                 setFormError(false)
             }, 3000);
         }
-        // console.log(phone);
-        // console.log(email);
-        // console.log(name);
+    }
+    const handlerLoginSuccess = (e, formForReset) => {
+        e.preventDefault();
+        if (email && password) {
+            formForReset.current.reset();
+            // dispatch(setModalType(5))
+        } else {
+            setFormError(true)
+            setTimeout(() => {
+                setFormError(false)
+            }, 3000);
+        }
+    }
+    const handlerRegSuccess = (e, formForReset) => {
+        e.preventDefault();
+        if (email && phone && name && password && checked) {
+            httpService.registration(name, phone, email, password).then(res => console.log(res))
+            formForReset.current.reset();
+            dispatch(setModalType(7))
+        } else {
+            setFormError(true)
+            setTimeout(() => {
+                setFormError(false)
+            }, 3000);
+        }
     }
 
     const handlePhoneBlur = () => {
@@ -93,6 +132,14 @@ function Modal() {
         }
     }
 
+    const handlerPassword = (e) => {
+        if (e.target.value.trim()) {
+            setPassword(e.target.value);
+        } else {
+            setPassword("");
+        }
+    }
+
     const handlerClear = () => {
         dispatch(clearCart())
     }
@@ -110,9 +157,14 @@ function Modal() {
         }
     }
 
+    const handlerRegModal = () => {
+        dispatch(setModalType(6))
+    }
+
     const handlerNot = () => {
         handlerModalShow()
     }
+
     const handlerYes = () => {
         switch (typeModal) {
             case 0:
@@ -131,9 +183,11 @@ function Modal() {
     }
     let emailClassName = "form__input shd",
         phoneClassName = "form__input shd",
-        nameClassName = "form__input shd";
+        nameClassName = "form__input shd",
+        passClassName = "form__input shd"
 
     nameClassName += name ? " filled" : "";
+    passClassName += password ? " filled" : "";
 
     if (phone) {
         phoneClassName += " filled";
@@ -185,8 +239,22 @@ function Modal() {
                 handlerName={handlerName}
                 handlerEmail={handlerEmail}
                 handlerPhone={handlerPhone}
-                handlerSuccess={handlerSuccess}
+                handlerCallSuccess={handlerCallSuccess}
                 handlerModalShow={handlerModalShow} />
+            break;
+        case 3:
+            bodyClassName += " modal__body_header";
+            visibleModalBody = <LoginModal
+                handlerRegModal={handlerRegModal}
+                passClassName={passClassName}
+                password={password}
+                handlerModalShow={handlerModalShow}
+                handlerPassword={handlerPassword}
+                handlerLoginSuccess={handlerLoginSuccess}
+                handlerEmail={handlerEmail}
+                email={email}
+                resultEmailClassName={resultEmailClassName}
+                handleEmailBlur={handleEmailBlur} />
             break;
         case 4:
             bodyClassName += " modal__body_cart-order";
@@ -215,7 +283,34 @@ function Modal() {
             bodyClassName += " modal__body_thanks";
             visibleModalBody = <ThanksModal handlerModalShow={handlerModalShow} />
             break;
-
+        case 6:
+            bodyClassName += " modal__body_cart-order";
+            visibleModalBody = <RegistrationModal
+                passClassName={passClassName}
+                password={password}
+                handlerPassword={handlerPassword}
+                checked={checked}
+                setChecked={setChecked}
+                nameClassName={nameClassName}
+                resultPhoneClassName={resultPhoneClassName}
+                resultEmailClassName={resultEmailClassName}
+                formError={formError}
+                handlePhoneBlur={handlePhoneBlur}
+                handleEmailBlur={handleEmailBlur}
+                phone={phone}
+                email={email}
+                name={name}
+                handlerName={handlerName}
+                handlerRegSuccess={handlerRegSuccess}
+                handlerEmail={handlerEmail}
+                handlerPhone={handlerPhone}
+                handlerModalShow={handlerModalShow}
+            />
+            break;
+        case 7:
+            bodyClassName += " modal__body_thanks";
+            visibleModalBody = <ThanksRegModal handlerModalShow={handlerModalShow} />
+            break;
         default:
             break;
     }

@@ -7,6 +7,7 @@ import modal from './modal';
 import search from './search';
 import width from './width';
 import page from './page';
+import login from './login';
 
 const rootReducer = combineReducers({
     categoryes,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     modal,
     search,
     width,
+    login,
     page
 });
 

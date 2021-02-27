@@ -69,7 +69,7 @@
         text-align: center;
     }
     &__button {
-        font-size: 26px;
+        @include adaptiv-font(26, 20);
         background: transparent;
         border-radius: 30px;
         padding: 7px 10px;
@@ -115,5 +115,21 @@
         @media (max-width: 580px) {
             top: 5px;
         }
+    }
+    &__auth {
+    }
+}
+
+.auth {
+    margin-top: 20px;
+    color: black;
+    @include adaptiv-font(20, 16);
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 10px;
+    &__text {
+        margin-right: 10px;
+    }
+    &__link {
     }
 }

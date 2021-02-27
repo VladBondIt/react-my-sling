@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import FooterMenu from './FooterMenu';
 import { setHomePage } from '../redux/actions/page';
+import { setModalShow, setModalType } from '../redux/actions/modal';
 
 
 
@@ -14,13 +15,14 @@ function HeaderNav() {
     const dispatch = useDispatch();
 
 
-    const { totalCount, totalPrice, cartModalShow, innerWidth, modalShow } = useSelector((state) => ({
+    const { totalCount, totalPrice, cartModalShow, innerWidth, modalShow, isAuth } = useSelector((state) => ({
         modalShow: state.modal.modalShow,
         cartItems: state.cart.cartItems,
         totalPrice: state.cart.totalPrice,
         totalCount: state.cart.totalCount,
         cartModalShow: state.modal.cartModalShow,
         innerWidth: state.width.innerWidth,
+        isAuth: state.login.isAuth,
     }))
 
 
@@ -39,6 +41,11 @@ function HeaderNav() {
     }
     const handlerLinkToHome = () => {
         dispatch(setHomePage(true));
+    }
+
+    const handlerLogin = () => {
+        dispatch(setModalType(3))
+        dispatch(setModalShow(true))
     }
 
 
@@ -108,25 +115,28 @@ function HeaderNav() {
                     </>
                     : <a href="tel:+78009998877"><Phone className="header__phone-svg" /></a>}
             </div>
-            <div className="header__login login">
+            <div
+                onClick={handlerLogin}
+                className="header__login login">
                 <button className="login__btn shd btn">
                     <User className="login__svg" />
                     <span className="login__text">Войти</span>
                 </button>
             </div>
-            <Link
-                onClick={handlerLink}
-                to="/react-my-sling/cart">
-                <div className={cartClassName}>
-                    <CartSvg className="cart-header__svg" />
-                    <span className="cart-header__delimetr"></span>
-                    <div className="cart-header__box">
-                        <span className="cart-header__count">{totalCount} шт</span>
-                        <span className="cart-header__price">{totalPrice} руб</span>
+            {isAuth &&
+                <Link
+                    onClick={handlerLink}
+                    to="/react-my-sling/cart">
+                    <div className={cartClassName}>
+                        <CartSvg className="cart-header__svg" />
+                        <span className="cart-header__delimetr"></span>
+                        <div className="cart-header__box">
+                            <span className="cart-header__count">{totalCount} шт</span>
+                            <span className="cart-header__price">{totalPrice} руб</span>
+                        </div>
+                        <div className="cart-header__adaptive-count">{totalCount}</div>
                     </div>
-                    <div className="cart-header__adaptive-count">{totalCount}</div>
-                </div>
-            </Link>
+                </Link>}
         </nav>
     )
 }

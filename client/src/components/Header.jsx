@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setModalShow, setModalType } from '../redux/actions/modal';
 import Modal from './Modal';
 
+import httpService from '../services/httpService';
+
 
 function Header() {
 
@@ -28,6 +30,12 @@ function Header() {
         dispatch(setModalType(2))
     }
 
+    const test = () => {
+        httpService.check().then((res) => {
+            console.log(res.token);
+        })
+    }
+
 
     return (
         <header className="header">
@@ -45,9 +53,11 @@ function Header() {
                             <div className="header__row">
                                 <div className="header__social social">
                                     <ul className="social__list">
-                                        <li className="social__item"><div className="social__link">
-                                            <VkSvg className="social__svg social__svg_vk btn" />
-                                        </div></li>
+                                        <li
+                                            onClick={test}
+                                            className="social__item"><div className="social__link">
+                                                <VkSvg className="social__svg social__svg_vk btn" />
+                                            </div></li>
                                         <li className="social__item"><div className="social__link">
                                             <InstaSvg className="social__svg social__svg_insta btn" />
                                         </div></li>

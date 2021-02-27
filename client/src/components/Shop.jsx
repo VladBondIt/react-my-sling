@@ -8,7 +8,7 @@ import { fetchedCards } from '../redux/actions/cards';
 import Loader from './Loader';
 import { setLoading } from '../redux/actions/loader';
 import { setSearchChar } from '../redux/actions/search';
-import FetchService from '../services/fetchService';
+import httpService from '../services/httpService';
 
 
 const Shop = memo(function Shop() {
@@ -25,7 +25,7 @@ const Shop = memo(function Shop() {
 
     const fetchItems = () => {
         if (items.length === 0) {
-            FetchService.getCategoryes('slings').then((res) => {
+            httpService.getCategoryes('slings').then((res) => {
                 dispatch(setCategoryes(res));
             })
         }
