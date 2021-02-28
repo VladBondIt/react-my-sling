@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { ReactComponent as CloseModal } from '../assets/images/svg/clear-single.svg';
+import { ReactComponent as CloseModal } from '../../assets/images/svg/clear-single.svg';
 
 function OfferCallModal({ handlerModalShow, handlerLoginSuccess, handlerRegModal,
     handlerEmail, email, handlerPassword, password
@@ -13,14 +13,13 @@ function OfferCallModal({ handlerModalShow, handlerLoginSuccess, handlerRegModal
         handlerLoginSuccess(e, form);
     }
 
-    const handlerCreate = () => {
+    const handlerCreateLogin = () => {
         handlerRegModal()
     }
 
 
     return (
         <form ref={form} onSubmit={handlerSubmit} className="modal__form form">
-
 
             <input
                 onBlur={handleEmailBlur}
@@ -43,7 +42,7 @@ function OfferCallModal({ handlerModalShow, handlerLoginSuccess, handlerRegModal
             <div className="form__auth auth">
                 <span className="auth__text">Нет аккунта?</span>
                 <span
-                    onClick={handlerCreate}
+                    onClick={handlerCreateLogin}
                     className="auth__link link">Создать аккаунт</span>
             </div>
             <div onClick={handlerModalShow} className="form__close btn eff"><CloseModal className="form__svg" /></div>

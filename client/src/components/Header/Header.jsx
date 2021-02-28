@@ -1,13 +1,13 @@
 import React from 'react';
-import { ReactComponent as VkSvg } from '../assets/images/svg/header-vk.svg';
-import { ReactComponent as InstaSvg } from '../assets/images/svg/header-instagram.svg';
-import { ReactComponent as FbSvg } from '../assets/images/svg/header-facebook.svg';
+import { ReactComponent as VkSvg } from '../../assets/images/svg/header-vk.svg';
+import { ReactComponent as InstaSvg } from '../../assets/images/svg/header-instagram.svg';
+import { ReactComponent as FbSvg } from '../../assets/images/svg/header-facebook.svg';
 import HeaderNav from './HeaderNav';
 import { useSelector, useDispatch } from 'react-redux';
-import { setModalShow, setModalType } from '../redux/actions/modal';
-import Modal from './Modal';
+import { setModalShow, setModalType } from '../../redux/actions/modal';
+import Modal from '../Modal/Modal';
 
-import httpService from '../services/httpService';
+import httpService from '../../services/httpService';
 
 
 function Header() {
@@ -53,11 +53,9 @@ function Header() {
                             <div className="header__row">
                                 <div className="header__social social">
                                     <ul className="social__list">
-                                        <li
-                                            onClick={test}
-                                            className="social__item"><div className="social__link">
-                                                <VkSvg className="social__svg social__svg_vk btn" />
-                                            </div></li>
+                                        <li className="social__item"><div className="social__link">
+                                            <VkSvg className="social__svg social__svg_vk btn" />
+                                        </div></li>
                                         <li className="social__item"><div className="social__link">
                                             <InstaSvg className="social__svg social__svg_insta btn" />
                                         </div></li>

@@ -1,10 +1,11 @@
 import React from 'react';
-import Footer from './Footer';
-import Header from './Header';
+import Footer from './Footer/Footer';
+import Header from './Header/Header';
 
 import { Redirect, Route, Switch } from 'react-router-dom';
 import Home from '../pages/Home';
 import Cart from '../pages/Cart';
+import Admin from '../pages/Admin';
 import CardPage from '../pages/CardPage';
 import { useSelector } from 'react-redux';
 
@@ -12,7 +13,12 @@ import { useSelector } from 'react-redux';
 
 function App() {
 
-    const previewObj = useSelector(({ modal }) => modal.previewObj)
+    const { previewObj, user } = useSelector(({ modal, login }) => ({
+        user: login.user,
+        previewObj: modal.previewObj
+    }))
+
+    console.log(user);
 
     return (
         <div className="wrapper">
@@ -20,6 +26,7 @@ function App() {
             <Switch>
                 <Route exact path="/react-my-sling/" component={Home} />
                 <Route exact path="/react-my-sling/cart" component={Cart} />
+                <Route exact path="/react-my-sling/admin" component={Admin} />
                 <Route exact path="/react-my-sling/cardpage">
                     {previewObj ? <CardPage /> : <Redirect to="/react-my-sling/" />}
                 </Route>

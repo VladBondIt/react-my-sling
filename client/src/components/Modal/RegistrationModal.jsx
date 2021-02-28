@@ -1,22 +1,17 @@
 import React, { useRef } from 'react';
-import { ReactComponent as DeleteItem } from '../assets/images/svg/clear-single.svg';
+import { ReactComponent as CloseModal } from '../../assets/images/svg/clear-single.svg';
 import InputMask from 'react-input-mask';
 
-function OrderModal({ handlerModalShow, totalPrice, formError, resultPhoneClassName,
-    resultEmailClassName, email, nameClassName, phone, name, handlePhoneBlur,
-    handleEmailBlur, totalCount, handlerSuccess, handlerEmail, handlerPhone,
-    handlerName, handlerClear, checked, setChecked }) {
+function OrderModal({ handlerModalShow, formError, resultPhoneClassName,
+    handlerPassword, password, passClassName, resultEmailClassName, email, nameClassName, phone,
+    name, handlePhoneBlur, handleEmailBlur, handlerRegSuccess, handlerEmail, handlerPhone,
+    handlerName, checked, setChecked }) {
 
     const form = useRef(null);
 
 
-    const handlerOrderSubmit = (e) => {
-        if (email && phone && name && checked) {
-            handlerSuccess(e, form);
-            handlerClear();
-        } else {
-            handlerSuccess(e, form);
-        }
+    const handlerRegSubmit = (e) => {
+        handlerRegSuccess(e, form);
     }
 
     const handlerCheckbox = (e) => {
@@ -24,7 +19,7 @@ function OrderModal({ handlerModalShow, totalPrice, formError, resultPhoneClassN
     }
 
     return (
-        <form ref={form} onSubmit={handlerOrderSubmit} className="modal__form form">
+        <form ref={form} onSubmit={handlerRegSubmit} className="modal__form form">
 
             <input
                 onChange={handlerName}
@@ -50,16 +45,13 @@ function OrderModal({ handlerModalShow, totalPrice, formError, resultPhoneClassN
                 value={email}
                 placeholder="Введите ваш Email"
                 className={resultEmailClassName} />
-
-
-            <div className="form__row">
-                <span className="form__text">Количество ваших товаров:</span>
-                <span className="form__count">{totalCount} шт</span>
-            </div>
-            <div className="form__row">
-                <span className="form__text">Общая стоимость товаров:</span>
-                <span className="form__count">{totalPrice} руб</span>
-            </div>
+            <input
+                onChange={handlerPassword}
+                type="password"
+                name="password"
+                value={password}
+                placeholder="Введите ваш Пароль"
+                className={passClassName} />
 
             <div className="form__checkbox">
                 <label className="form__label link"><input
@@ -70,8 +62,8 @@ function OrderModal({ handlerModalShow, totalPrice, formError, resultPhoneClassN
                             Согласие на обработку ваших данных</label>
             </div>
             {formError ? <div className="form__error">Необходимо заполнить все поля</div> : null}
-            <button className="form__button btn shd eff">Подтвердить</button>
-            <div onClick={handlerModalShow} className="form__close btn eff"><DeleteItem className="form__svg" /></div>
+            <button className="form__button btn shd eff">Регистрация</button>
+            <div onClick={handlerModalShow} className="form__close btn eff"><CloseModal className="form__svg" /></div>
         </form>
     )
 }

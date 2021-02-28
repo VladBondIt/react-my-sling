@@ -66,7 +66,7 @@ class FetchService {
         })
         if (!res.ok) {
             throw new Error(`Could not fetch ${this._apiBaseServer}api/user/login 
-            , received ${res.message}`);
+            , received ${res.status}`);
         }
 
         const data = await res.json();

@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { ReactComponent as Logo } from '../assets/images/svg/logo.svg';
-import { ReactComponent as CartSvg } from '../assets/images/svg/cart.svg';
-import { ReactComponent as Phone } from '../assets/images/svg/call-black.svg';
-import { ReactComponent as User } from '../assets/images/svg/account_circle-black-18dp.svg';
-import { Link } from 'react-router-dom';
+import { ReactComponent as Logo } from '../../assets/images/svg/logo.svg';
+import { ReactComponent as CartSvg } from '../../assets/images/svg/cart.svg';
+import { ReactComponent as Phone } from '../../assets/images/svg/call-black.svg';
+import { ReactComponent as User } from '../../assets/images/svg/account_circle-black-18dp.svg';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import FooterMenu from './FooterMenu';
-import { setHomePage } from '../redux/actions/page';
-import { setModalShow, setModalType } from '../redux/actions/modal';
+import FooterMenu from '../Footer/FooterMenu';
+import { setHomePage } from '../../redux/actions/page';
+import { setModalShow, setModalType } from '../../redux/actions/modal';
+import { setAuth, setUser } from '../../redux/actions/login';
 
 
 
 function HeaderNav() {
+    const history = useHistory()
     const dispatch = useDispatch();
 
 
-    const { totalCount, totalPrice, cartModalShow, innerWidth, modalShow, isAuth } = useSelector((state) => ({
+    const { totalCount, totalPrice, cartModalShow, innerWidth, modalShow, isAuth, user } = useSelector((state) => ({
         modalShow: state.modal.modalShow,
         cartItems: state.cart.cartItems,
         totalPrice: state.cart.totalPrice,
@@ -23,6 +25,7 @@ function HeaderNav() {
         cartModalShow: state.modal.cartModalShow,
         innerWidth: state.width.innerWidth,
         isAuth: state.login.isAuth,
+        user: state.login.user,
     }))
 
 
@@ -43,9 +46,21 @@ function HeaderNav() {
         dispatch(setHomePage(true));
     }
 
-    const handlerLogin = () => {
-        dispatch(setModalType(3))
-        dispatch(setModalShow(true))
+    const handlerLoginLogout = () => {
+        if (user) {
+            dispatch(setAuth(false))
+            dispatch(setUser(false))
+        } else {
+            dispatch(setModalType(3))
+            dispatch(setModalShow(true))
+        }
+        dispatch(setHomePage(true))
+        history.push('/react-my-sling/')
+    }
+
+    const handlerAdmin = () => {
+        dispatch(setHomePage(false));
+        history.push('/react-my-sling/admin')
     }
 
 
@@ -116,27 +131,36 @@ function HeaderNav() {
                     : <a href="tel:+78009998877"><Phone className="header__phone-svg" /></a>}
             </div>
             <div
-                onClick={handlerLogin}
+                onClick={handlerLoginLogout}
                 className="header__login login">
                 <button className="login__btn shd btn">
                     <User className="login__svg" />
-                    <span className="login__text">Войти</span>
+                    <span className="login__text">{user ? "Выйти" : "Войти"}</span>
                 </button>
             </div>
-            {isAuth &&
-                <Link
-                    onClick={handlerLink}
-                    to="/react-my-sling/cart">
-                    <div className={cartClassName}>
-                        <CartSvg className="cart-header__svg" />
-                        <span className="cart-header__delimetr"></span>
-                        <div className="cart-header__box">
-                            <span className="cart-header__count">{totalCount} шт</span>
-                            <span className="cart-header__price">{totalPrice} руб</span>
+            {isAuth
+                ? user.role === "USER"
+                    ?
+                    <Link
+                        onClick={handlerLink}
+                        to="/react-my-sling/cart">
+                        <div className={cartClassName}>
+                            <CartSvg className="cart-header__svg" />
+                            <span className="cart-header__delimetr"></span>
+                            <div className="cart-header__box">
+                                <span className="cart-header__count">{totalCount} шт</span>
+                                <span className="cart-header__price">{totalPrice} руб</span>
+                            </div>
+                            <div className="cart-header__adaptive-count">{totalCount}</div>
                         </div>
-                        <div className="cart-header__adaptive-count">{totalCount}</div>
+                    </Link>
+                    :
+                    <div
+                        onClick={handlerAdmin}
+                        className="header__admin btn shd">
+                        Админ<br />панель
                     </div>
-                </Link>}
+                : null}
         </nav>
     )
 }

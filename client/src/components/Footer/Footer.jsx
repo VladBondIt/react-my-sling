@@ -1,13 +1,13 @@
 import React from 'react';
-import { ReactComponent as Logo } from '../assets/images/svg/logo.svg';
-import { ReactComponent as VkSvg } from '../assets/images/svg/footer-vk.svg';
-import { ReactComponent as FbSvg } from '../assets/images/svg/facebook-foot.svg';
-import { ReactComponent as InstaSvg } from '../assets/images/svg/instagram-footer.svg';
+import { ReactComponent as Logo } from '../../assets/images/svg/logo.svg';
+import { ReactComponent as VkSvg } from '../../assets/images/svg/footer-vk.svg';
+import { ReactComponent as FbSvg } from '../../assets/images/svg/facebook-foot.svg';
+import { ReactComponent as InstaSvg } from '../../assets/images/svg/instagram-footer.svg';
 import FooterMenu from './FooterMenu';
-import { setInnerWidth } from '../redux/actions/width';
+import { setInnerWidth } from '../../redux/actions/width';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setHomePage } from '../redux/actions/page';
+import { setHomePage } from '../../redux/actions/page';
 
 function Footer() {
     const dispatch = useDispatch();

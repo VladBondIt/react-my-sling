@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { ReactComponent as CloseModal } from '../assets/images/svg/clear-single.svg';
+import { ReactComponent as CloseModal } from '../../assets/images/svg/clear-single.svg';
 import InputMask from 'react-input-mask';
 
 function OfferCallModal({ handlerModalShow, handlerCallSuccess,

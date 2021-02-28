@@ -1,7 +1,8 @@
-import { SET_AUTH } from "../types";
+import { SET_AUTH, SET_USER } from "../types";
 
 const initialState = {
-    isAuth: false
+    isAuth: false,
+    user: false
 
 }
 const search = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const search = (state = initialState, action) => {
             return {
                 ...state,
                 isAuth: action.payload,
+            }
+        case SET_USER:
+            return {
+                ...state,
+                user: action.payload,
             }
         default:
             return state;

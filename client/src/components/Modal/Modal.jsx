@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import CartModal from './CartModal';
 import OfferCallModal from './OfferCallModal';
 import { useSelector, useDispatch } from 'react-redux';
-import { cancelPosition, clearCart } from '../redux/actions/cart';
-import { setModalShow, setModalType } from '../redux/actions/modal';
+import { cancelPosition, clearCart } from '../../redux/actions/cart';
+import { setModalShow, setModalType } from '../../redux/actions/modal';
 import OrderModal from './OrderModal';
 import ThanksModal from './ThanksModal';
 import LoginModal from './LoginModal';
 import RegistrationModal from './RegistrationModal';
 import ThanksRegModal from './ThanksRegModal';
-import httpService from '../services/httpService';
+import httpService from '../../services/httpService';
+import { setAuth, setUser } from '../../redux/actions/login';
 
 function Modal() {
 
@@ -55,6 +56,8 @@ function Modal() {
             }, 3000);
         }
     }
+
+    // Order form cart
     const handlerSuccess = (e, formForReset) => {
         e.preventDefault();
         if (email && phone && name && checked) {
@@ -70,8 +73,12 @@ function Modal() {
     const handlerLoginSuccess = (e, formForReset) => {
         e.preventDefault();
         if (email && password) {
+            httpService.login(email, password).then(res => {
+                dispatch(setUser(res))
+                dispatch(setAuth(true))
+            })
             formForReset.current.reset();
-            // dispatch(setModalType(5))
+            handlerModalShow()
         } else {
             setFormError(true)
             setTimeout(() => {
