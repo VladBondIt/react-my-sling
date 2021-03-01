@@ -17,8 +17,9 @@ function HeaderNav() {
     const dispatch = useDispatch();
 
 
-    const { totalCount, totalPrice, cartModalShow, innerWidth, modalShow, isAuth, user } = useSelector((state) => ({
+    const { totalCount, totalPrice, cartModalShow, innerWidth, modalShow, isAuth, user, adminModalShow } = useSelector((state) => ({
         modalShow: state.modal.modalShow,
+        adminModalShow: state.modal.adminModalShow,
         cartItems: state.cart.cartItems,
         totalPrice: state.cart.totalPrice,
         totalCount: state.cart.totalCount,
@@ -90,7 +91,7 @@ function HeaderNav() {
     }
 
 
-    if (modalShow || showBurgerMenu) {
+    if (modalShow || showBurgerMenu || adminModalShow) {
         document.querySelector('body').classList.add('lock');
     } else {
         document.querySelector('body').classList.remove('lock');

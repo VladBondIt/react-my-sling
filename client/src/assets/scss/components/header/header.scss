@@ -230,11 +230,12 @@
 
     &__admin {
         border-radius: 50px;
-        padding: 10.9px 15px;
+        padding: 7.5px 15px;
         @include adaptiv-font(20, 16);
         display: block;
         text-align: center;
         border: 1px solid #ffffff;
+        cursor: pointer;
         &:hover {
             box-shadow: 0 0 15px rgb(255, 255, 255);
         }

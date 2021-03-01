@@ -1,19 +1,32 @@
 import React from 'react';
 import AdminModal from '../components/AdminModal/AdminModal';
 import { useSelector, useDispatch } from 'react-redux';
-import { setModalShow } from '../redux/actions/modal';
+import { setAdminModalType, setAdminModalShow } from '../redux/actions/modal';
 
 function Admin() {
 
 
     const dispatch = useDispatch();
 
-    const { modalShow, } = useSelector((state) => ({
-        modalShow: state.modal.modalShow,
+    const { adminModalShow, adminTypeModal } = useSelector((state) => ({
+        adminModalShow: state.modal.adminModalShow,
+        adminTypeModal: state.modal.adminTypeModal,
     }))
 
     const handlerAdminModal = () => {
-        dispatch(setModalShow(!modalShow))
+        dispatch(setAdminModalShow(!adminModalShow))
+    }
+    const handlerTypeModal = () => {
+        dispatch(setAdminModalType(0))
+        dispatch(setAdminModalShow(!adminModalShow))
+    }
+    const handlerBrandModal = () => {
+        dispatch(setAdminModalType(1))
+        dispatch(setAdminModalShow(!adminModalShow))
+    }
+    const handlerObjectModal = () => {
+        dispatch(setAdminModalType(2))
+        dispatch(setAdminModalShow(!adminModalShow))
     }
 
     const delegateShowModal = (e) => {
@@ -28,12 +41,17 @@ function Admin() {
                 <div className="admin__title">Административная панель</div>
 
                 <div
-                    onClick={handlerAdminModal}
+                    onClick={handlerTypeModal}
                     className="admin__row shd eff">Добавить Тип</div>
-                <div className="admin__row shd eff">Добавить Бренд</div>
-                <div className="admin__row shd eff">Добавить Объект</div>
+                <div
+                    onClick={handlerBrandModal}
+                    className="admin__row shd eff">Добавить Бренд</div>
+                <div
+                    onClick={handlerObjectModal}
+                    className="admin__row shd eff">Добавить Объект</div>
 
-                {modalShow && <AdminModal
+                {adminModalShow && <AdminModal
+                    adminTypeModal={adminTypeModal}
                     handlerAdminModal={handlerAdminModal}
                     delegateShowModal={delegateShowModal}
                 />}

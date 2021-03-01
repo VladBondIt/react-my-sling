@@ -18,8 +18,6 @@ function App() {
         previewObj: modal.previewObj
     }))
 
-    console.log(user);
-
     return (
         <div className="wrapper">
             <Header />
