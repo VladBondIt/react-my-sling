@@ -4,7 +4,7 @@ const { Item, ItemInfo } = require('../models/models')
 const ApiError = require('../error/ApiError')
 
 class ItemController {
-    async create(rea, res, next) {
+    async create(req, res, next) {
         try {
             let { name, oldprice, price, brandId, typeId, info } = req.body
             const { img } = req.files
@@ -36,29 +36,30 @@ class ItemController {
     }
 
     async getAll(req, res) {
-        let { brandId, typeId, limit = 9, page = 1 } = req.query
+        // let { brandId, typeId, limit = 9, page = 1 } = req.query
 
-        let offset = page * limit - limit
+        // let offset = page * limit - limit
 
         let items;
 
-        if (!brandId && !typeId) {
-            items = await Item.findAndCountAll({ limit, offset })
-        }
-        if (brandId && !typeId) {
-            items = await Item.findAndCountAll({ where: { brandId }, limit, offset })
+        // if (!brandId && !typeId) {
+        //     items = await Item.findAndCountAll({ limit, offset })
+        // }
+        // if (brandId && !typeId) {
+        //     items = await Item.findAndCountAll({ where: { brandId }, limit, offset })
 
-        }
-        if (!brandId && typeId) {
-            items = await Item.findAndCountAll({ where: { typeId }, limit, offset })
+        // }
+        // if (!brandId && typeId) {
+        //     items = await Item.findAndCountAll({ where: { typeId }, limit, offset })
 
-        }
-        if (brandId && typeId) {
-            items = await Item.findAndCountAll({ where: { typeId, brandId }, limit, offset })
+        // }
+        // if (brandId && typeId) {
+        //     items = await Item.findAndCountAll({ where: { typeId, brandId }, limit, offset })
 
-        }
+        // }
+        items = await Item.findAll()
 
-        return items
+        return res.json(items)
     }
     async getOne(req, res) {
         const { id } = req.params

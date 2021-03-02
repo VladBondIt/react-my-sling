@@ -36,6 +36,9 @@ const Shop = memo(function Shop() {
     }
 
     useEffect(() => {
+        httpService.getItems().then((res) => {
+            console.log(res);
+        })
         fetchItems();
     }, [])
 

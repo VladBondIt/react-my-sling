@@ -7,8 +7,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setModalShow, setModalType } from '../../redux/actions/modal';
 import Modal from '../Modal/Modal';
 
-import httpService from '../../services/httpService';
-
 
 function Header() {
 
@@ -28,12 +26,6 @@ function Header() {
     const handlerOfferCallModal = () => {
         handlerOfferCallModalShow()
         dispatch(setModalType(2))
-    }
-
-    const test = () => {
-        httpService.check().then((res) => {
-            console.log(res.token);
-        })
     }
 
 

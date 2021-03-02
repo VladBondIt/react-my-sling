@@ -86,6 +86,55 @@ class FetchService {
 
         return await res.json()
     }
+
+    async getTypes() {
+        const res = await fetch(`${this._apiBaseServer}api/type/`);
+
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${this._apiBaseServer}api/type/, received ${res.status}`);
+        }
+        const data = await res.json();
+
+        return data.map(({ id, name }) => ({ id, name }));
+    }
+    async getBrand() {
+        const res = await fetch(`${this._apiBaseServer}api/brand/`);
+
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${this._apiBaseServer}api/brand/, received ${res.status}`);
+        }
+        const data = await res.json();
+
+        return data.map(({ id, name }) => ({ id, name }));
+    }
+
+    async createItem(item) {
+
+        const res = await fetch(`${this._apiBaseServer}api/item/add`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: item
+        })
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${this._apiBaseServer}api/item/add
+            , received ${res.status}`);
+        }
+
+
+        return await res.json();
+    }
+
+    async getItems() {
+        const res = await fetch(`${this._apiBaseServer}api/item`);
+
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${this._apiBaseServer}api/item` +
+                `, received ${res.status}`);
+        }
+        return await res.json();
+    }
 }
 
 export default new FetchService();

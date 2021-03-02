@@ -7,28 +7,47 @@ import Home from '../pages/Home';
 import Cart from '../pages/Cart';
 import Admin from '../pages/Admin';
 import CardPage from '../pages/CardPage';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAuth, setUser } from '../redux/actions/login';
+import httpService from '../services/httpService';
+import { ADMIN_ROUTE, CART_ROUTE, HOME_ROUTE } from '../consts/const';
 
 
 
 function App() {
+    const dispatch = useDispatch();
 
-    const { previewObj, user } = useSelector(({ modal, login }) => ({
+    const { previewObj, user, isAuth } = useSelector(({ modal, login }) => ({
         user: login.user,
+        isAuth: login.isAuth,
         previewObj: modal.previewObj
     }))
+
+    React.useEffect(() => {
+
+        httpService.check().then((res) => {
+            console.log(res);
+        })
+        // dispatch(setUser(true))
+        // dispatch(setAuth(true))
+
+    }, [])
 
     return (
         <div className="wrapper">
             <Header />
             <Switch>
-                <Route exact path="/react-my-sling/" component={Home} />
-                <Route exact path="/react-my-sling/cart" component={Cart} />
-                <Route exact path="/react-my-sling/admin" component={Admin} />
+                <Route exact path={HOME_ROUTE} component={Home} />
+                {isAuth &&
+                    <>
+                        <Route exact path={CART_ROUTE} component={Cart} />
+                        <Route exact path={ADMIN_ROUTE} component={Admin} />
+                    </>
+                }
                 <Route exact path="/react-my-sling/cardpage">
-                    {previewObj ? <CardPage /> : <Redirect to="/react-my-sling/" />}
+                    {previewObj ? <CardPage /> : <Redirect to={HOME_ROUTE} />}
                 </Route>
-                <Redirect to="/react-my-sling/" />
+                <Redirect to={HOME_ROUTE} />
             </Switch>
             <Footer />
         </div>
