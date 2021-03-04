@@ -1,22 +1,35 @@
-import { GET_CATEGORYES, SET_ACTIVE_CATEGORY } from '../types'
+import { SET_CATEGORY_TYPES, SET_ACTIVE_CATEGORY_TYPE, SET_CATEGORY_BRANDS, SET_ACTIVE_CATEGORY_BRAND } from '../types'
 
 const initialState = {
-    items: [],
-    activeItem: 0,
+    typeItems: [],
+    brandItems: [],
+    activeTypeItem: 0,
+    activeBrandItem: 0,
 
 }
 const categoryes = (state = initialState, action) => {
     switch (action.type) {
-        case GET_CATEGORYES:
+        case SET_CATEGORY_TYPES:
             return {
                 ...state,
-                items: action.payload,
-                activeItem: action.payload[0].id
+                typeItems: action.payload,
+                activeTypeItem: action.payload[0].id
             }
-        case SET_ACTIVE_CATEGORY:
+        case SET_CATEGORY_BRANDS:
             return {
                 ...state,
-                activeItem: action.payload
+                brandItems: action.payload,
+                activeBrandItem: action.payload[0].id
+            }
+        case SET_ACTIVE_CATEGORY_TYPE:
+            return {
+                ...state,
+                activeTypeItem: action.payload
+            }
+        case SET_ACTIVE_CATEGORY_BRAND:
+            return {
+                ...state,
+                activeBrandItem: action.payload
             }
         default:
             return state;

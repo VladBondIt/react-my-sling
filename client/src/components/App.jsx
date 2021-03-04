@@ -10,7 +10,7 @@ import CardPage from '../pages/CardPage';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuth, setUser } from '../redux/actions/login';
 import httpService from '../services/httpService';
-import { ADMIN_ROUTE, CART_ROUTE, HOME_ROUTE } from '../consts/const';
+import { ADMIN_ROUTE, CARD_PAGE_ROUTE, CART_ROUTE, HOME_ROUTE } from '../consts/consts';
 
 
 
@@ -25,12 +25,19 @@ function App() {
 
     React.useEffect(() => {
 
-        httpService.check().then((res) => {
-            console.log(res);
-        })
-        // dispatch(setUser(true))
-        // dispatch(setAuth(true))
-
+        if (!user) {
+            dispatch(setAuth(false))
+        } else {
+            httpService.check()
+                .then((res) => {
+                    dispatch(setUser(user))
+                    dispatch(setAuth(true))
+                })
+                .catch(e => {
+                    dispatch(setUser(false))
+                    dispatch(setAuth(false))
+                })
+        }
     }, [])
 
     return (
@@ -38,15 +45,14 @@ function App() {
             <Header />
             <Switch>
                 <Route exact path={HOME_ROUTE} component={Home} />
+                <Route exact path={CARD_PAGE_ROUTE + '/:id'} component={CardPage} />
                 {isAuth &&
                     <>
                         <Route exact path={CART_ROUTE} component={Cart} />
-                        <Route exact path={ADMIN_ROUTE} component={Admin} />
+                        {user.role === "ADMIN" &&
+                            < Route exact path={ADMIN_ROUTE} component={Admin} />}
                     </>
                 }
-                <Route exact path="/react-my-sling/cardpage">
-                    {previewObj ? <CardPage /> : <Redirect to={HOME_ROUTE} />}
-                </Route>
                 <Redirect to={HOME_ROUTE} />
             </Switch>
             <Footer />

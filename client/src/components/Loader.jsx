@@ -5,7 +5,7 @@ const Loader = (props) => (
     <ContentLoader
         className="shop__card card"
         speed={2}
-        viewBox="0 0 320 532"
+        viewBox="0 0 312 532"
         backgroundColor="#f3f3f3"
         foregroundColor="#ecebeb"
         {...props}

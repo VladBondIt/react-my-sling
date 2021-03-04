@@ -1,8 +1,9 @@
 import jwtDecode from "jwt-decode";
+import { HOST } from "../consts/consts";
 
 class FetchService {
     _apiBase = 'https://my-json-server.typicode.com/VladBondIt/FakeDBjson/';
-    _apiBaseServer = 'http://localhost:5000/';
+    _apiBaseServer = HOST;
 
     async getResource(url) {
         const res = await fetch(`${this._apiBase}${url}`);
@@ -133,6 +134,27 @@ class FetchService {
             throw new Error(`Could not fetch ${this._apiBaseServer}api/item` +
                 `, received ${res.status}`);
         }
+        return await res.json();
+    }
+
+    async getItem(id) {
+        const res = await fetch(`${this._apiBaseServer}api/item/${id}`);
+
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${this._apiBaseServer}api/item/${id}` +
+                `, received ${res.status}`);
+        }
+        return await res.json();
+    }
+
+    async getInfo(id) {
+        const res = await fetch(`${this._apiBaseServer}api/info/${id}`);
+
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${this._apiBaseServer}api/info/${id}` +
+                `, received ${res.status}`);
+        }
+
         return await res.json();
     }
 }

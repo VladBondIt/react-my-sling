@@ -139,7 +139,7 @@ function HeaderNav() {
                     <span className="login__text">{user ? "Выйти" : "Войти"}</span>
                 </button>
             </div>
-            {isAuth
+            {isAuth && user
                 ? user.role === "USER"
                     ?
                     <Link

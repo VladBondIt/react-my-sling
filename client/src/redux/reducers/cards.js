@@ -1,4 +1,4 @@
-import { GET_CARDS, SET_LOADING } from "../types";
+import { SET_CARDS, SET_LOADING } from "../types";
 
 const initialState = {
     cardItems: [],
@@ -7,7 +7,7 @@ const initialState = {
 }
 const cards = (state = initialState, action) => {
     switch (action.type) {
-        case GET_CARDS:
+        case SET_CARDS:
             return {
                 ...state,
                 cardItems: action.payload,
