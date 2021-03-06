@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCartItems } from '../redux/actions/cart';
-import ForCard0 from '../assets/images/card/for_card-cut.png';
-import ForCard1 from '../assets/images/card/sling-w-ring.jpg';
-import ForCard2 from '../assets/images/card/sling-backpack.jpg';
-import ForCard3 from '../assets/images/card/modal-popup.jpg';
 import PreviewItem from '../components/PreviewItem';
 import BackButton from '../components/BackButton';
 import httpService from '../services/httpService';
@@ -19,16 +15,14 @@ function CardPage() {
 
     const previewObj = useSelector(({ modal }) => modal.previewObj)
 
+    console.log(previewObj);
 
-    // const [activeImg, setActiveImg] = useState(HOST + img)
-    // const [activeId, setActiveId] = useState(1)
 
-    // const testArr = [
-    //     { name: ForCard0 },
-    //     { name: ForCard1 },
-    //     { name: ForCard2 },
-    //     { name: ForCard3 }
-    // ];
+    const [activeImg, setActiveImg] = useState(previewObj && HOST + previewObj.img)
+    const [activeId, setActiveId] = useState(1)
+    const [sideImgs, setSideImgs] = useState([])
+
+
 
 
     const dispatch = useDispatch();
@@ -38,6 +32,10 @@ function CardPage() {
     }
 
     useEffect(() => {
+        if (previewObj) {
+            const { firstSideImg, secondSideImg, thirdSideImg, } = previewObj.info[0]
+            setSideImgs([HOST + firstSideImg, HOST + secondSideImg, HOST + thirdSideImg])
+        }
         dispatch(setHomePage(false))
         httpService.getItem(id).then(res => {
             dispatch(setPreviewObj(res))
@@ -52,16 +50,16 @@ function CardPage() {
                 <div className="preview__body">
                     <div className="preview__imagebox imagebox">
                         <div className="imagebox__column">
-                            {/* {testArr.map((x, i) => <PreviewItem
-                                key={x.name}
+                            {sideImgs.map((path, i) => <PreviewItem
+                                key={path}
                                 setActiveImg={setActiveImg}
-                                {...x}
+                                path={path}
                                 index={i + 1}
                                 activeId={activeId}
-                                setActiveId={setActiveId} />)} */}
+                                setActiveId={setActiveId} />)}
                         </div>
                         <div className="imagebox__column">
-                            <img className="imagebox__mainimg" src={previewObj && HOST + previewObj.img} alt="" />
+                            <img className="imagebox__mainimg" src={activeImg} alt="" />
                         </div>
                     </div>
                     <div className="preview__infobox">

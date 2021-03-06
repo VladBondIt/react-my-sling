@@ -47,6 +47,9 @@ const ItemInfo = sequelize.define("item_info", {
     description: { type: DataTypes.STRING, allowNull: false },
     material: { type: DataTypes.STRING, allowNull: false },
     size: { type: DataTypes.INTEGER, allowNull: false },
+    firstSideImg: { type: DataTypes.STRING, allowNull: false },
+    secondSideImg: { type: DataTypes.STRING, allowNull: false },
+    thirdSideImg: { type: DataTypes.STRING, allowNull: false },
 })
 
 const TypeBrand = sequelize.define('type_brand', {

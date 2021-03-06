@@ -4,6 +4,7 @@ import { HOST } from "../consts/consts";
 class FetchService {
     _apiBase = 'https://my-json-server.typicode.com/VladBondIt/FakeDBjson/';
     _apiBaseServer = HOST;
+    _auth = `Bearer ${localStorage.getItem('token')}`
 
     async getResource(url) {
         const res = await fetch(`${this._apiBase}${url}`);
@@ -98,6 +99,7 @@ class FetchService {
 
         return data.map(({ id, name }) => ({ id, name }));
     }
+
     async getBrand() {
         const res = await fetch(`${this._apiBaseServer}api/brand/`);
 
@@ -107,6 +109,52 @@ class FetchService {
         const data = await res.json();
 
         return data.map(({ id, name }) => ({ id, name }));
+    }
+
+    async createType(type) {
+
+        const typeObj = {
+            name: type
+        }
+
+        const res = await fetch(`${this._apiBaseServer}api/type/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'Authorization': `${this._auth}`
+            },
+            body: JSON.stringify(typeObj)
+        })
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${this._apiBaseServer}api/type/ 
+            , received ${res.status}`);
+        }
+
+
+        return await res.json();
+    }
+
+    async createBrand(brand) {
+
+        const brandObj = {
+            name: brand
+        }
+
+        const res = await fetch(`${this._apiBaseServer}api/brand/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'Authorization': `${this._auth}`
+            },
+            body: JSON.stringify(brandObj)
+        })
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${this._apiBaseServer}api/brand/ 
+            , received ${res.status}`);
+        }
+
+
+        return await res.json();
     }
 
     async createItem(item) {

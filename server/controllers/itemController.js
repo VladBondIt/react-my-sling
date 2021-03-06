@@ -7,14 +7,21 @@ class ItemController {
     async create(req, res, next) {
         try {
             let { name, oldprice, price, brandId, typeId, info } = req.body
-            const { img } = req.files
+            const { img, firstSideImg, secondSideImg, thirdSideImg, } = req.files
 
-            let fileName = uuid.v4() + ".jpg"
+            let imgsArr = [img, firstSideImg, secondSideImg, thirdSideImg]
+            let fileNames = []
             //Экспортируем объект path из експресса, передаем в функцию МВ метод резолв
             // с параметрами пути к папке статик, для адаптации пути под разные ОС.
-            img.mv(path.resolve(__dirname, '..', 'static', fileName))
 
-            const item = await Item.create({ name, oldprice, price, brandId, typeId, img: fileName })
+
+            imgsArr.forEach((value) => {
+                let fileName = uuid.v4() + ".jpg"
+                value.mv(path.resolve(__dirname, '..', 'static', fileName))
+                fileNames.push(fileName)
+            })
+
+            const item = await Item.create({ name, oldprice, price, brandId, typeId, img: fileNames[0] })
 
             if (info) {
                 info = JSON.parse(info)
@@ -23,6 +30,9 @@ class ItemController {
                         description,
                         material,
                         size,
+                        firstSideImg: fileNames[1],
+                        secondSideImg: fileNames[2],
+                        thirdSideImg: fileNames[3],
                         itemId: item.id
                     })
                 )

@@ -1,9 +1,9 @@
 import React from 'react'
 
-function PreviewItem({ setActiveId, activeId, setActiveImg, index, name }) {
+function PreviewItem({ setActiveId, activeId, setActiveImg, index, path }) {
 
     const handlerActiveImg = () => {
-        setActiveImg(name)
+        setActiveImg(path)
         setActiveId(index)
     }
 
@@ -13,7 +13,7 @@ function PreviewItem({ setActiveId, activeId, setActiveImg, index, name }) {
 
     return (
         <div onClick={handlerActiveImg} className="imagebox__row">
-            <img className="imagebox__mini-img" src={name} alt="" />
+            <img className="imagebox__mini-img" src={path} alt="" />
             <div className={overlayClassName}></div>
         </div>
     )

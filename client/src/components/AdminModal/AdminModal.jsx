@@ -29,8 +29,6 @@ function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
 
     let visibleBody = null;
 
-    console.log(sideImgs);
-
     const obj = {
         name,
         setName,
@@ -73,7 +71,11 @@ function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
 
 
     const selectedSideFiles = (e) => {
-        setSideImgs(e.target.files)
+        setSideImgs([
+            { name: "firstSideImg", file: e.target.files[0] },
+            { name: "secondSideImg", file: e.target.files[0] },
+            { name: "thirdSideImg", file: e.target.files[0] },
+        ])
     }
 
 
@@ -82,20 +84,39 @@ function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
             description,
             material,
             size,
-            sideImgs
         }]
 
         const formData = new FormData();
-        formData.append('name', name)
-        formData.append('price', `${Number(price)}`)
-        formData.append('oldprice', `${Number(oldprice)}`)
-        formData.append('img', mainImg)
-        formData.append('brandId', `${brandId}`)
-        formData.append('typeId', `${typeId}`)
-        formData.append('info', JSON.stringify(info))
+        switch (adminTypeModal) {
+            case 0:
+                httpService.createType(addedType).then(res => console.log(res))
+                break;
+            case 1:
+                httpService.createBrand(addedBrand).then(res => console.log(res))
+                break;
+            case 2:
+                formData.append('name', name)
+                formData.append('price', `${Number(price)}`)
+                formData.append('oldprice', `${Number(oldprice)}`)
+                formData.append('img', mainImg)
+                for (const { name, file } of sideImgs) {
+                    formData.append(name, file)
+                }
+                formData.append('brandId', `${brandId}`)
+                formData.append('typeId', `${typeId}`)
+                formData.append('info', JSON.stringify(info))
 
+                for (var pair of formData.values()) {
+                    console.log(pair);
+                }
 
-        httpService.createItem(formData).then(res => console.log(res))
+                httpService.createItem(formData).then(res => console.log(res))
+                break;
+
+            default:
+                break;
+        }
+
 
         handlerAdminModal()
     }

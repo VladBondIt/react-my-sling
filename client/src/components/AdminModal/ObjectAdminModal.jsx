@@ -4,15 +4,15 @@ import ModalFileInput from './ModalFileInput';
 import ModalInput from './ModalInput';
 
 function ObjectAdminModal({ typesDropDown, activeDropList, setAсtiveDropList, selectType, selectedSideFiles,
-    selectBrand, sideImgs, typesNames, setTypeId, setSelectType, brandNames, setBrandId, setSelectBrand, obj }) {
+    selectBrand, typesNames, setTypeId, setSelectType, brandNames, setBrandId, setSelectBrand, obj, selectedFile }) {
 
-    const { name, setName, price, setPrice, oldprice, setOldprice, selectedFile,
+    const { name, setName, price, setPrice, oldprice, setOldprice,
         description, setDescription, material, setMaterial, size, setSize, } = obj;
 
     const inputsArr = [
         { type: "text", name: "name", value: name, callback: setName, placeholder: "Введите имя объекта" },
         { type: "number", name: "price", value: price, callback: setPrice, placeholder: "Введите цену объекта" },
-        { type: "number", name: "oldPrice", value: oldprice, callback: setOldprice, placeholder: "Введите старую цену объекта" },
+        { type: "number", name: "oldprice", value: oldprice, callback: setOldprice, placeholder: "Введите старую цену объекта" },
         { type: "text", name: "material", value: material, callback: setMaterial, placeholder: "Введите материал объекта" },
         { type: "number", name: "size", value: size, callback: setSize, placeholder: "Введите размер объекта" },
     ]
@@ -94,7 +94,7 @@ function ObjectAdminModal({ typesDropDown, activeDropList, setAсtiveDropList, s
                 name="description"
                 value={description}
                 placeholder="Введите описание объекта" />
-            {fileInputsArr.map(({ callback, label, name, multiple, }) =>
+            {fileInputsArr.map(({ callback, label, name, multiple }) =>
                 <ModalFileInput
                     key={label}
                     callback={callback}
