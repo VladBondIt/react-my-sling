@@ -35,7 +35,7 @@
         max-width: 900px;
         width: 100%;
         padding: 20px 30px;
-        margin: 0 5px;
+        margin: 0 10px;
         &_big {
             max-height: 750px;
             height: 100%;
@@ -62,6 +62,19 @@
         &_textarea {
             resize: vertical;
         }
+    }
+    &__input-box {
+        text-align: left;
+        border-radius: 35px;
+        background: white;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    &__input-file {
+        @include adaptiv-font(24, 22);
+        margin-top: 20px;
+    }
+    &__label {
     }
     &__dropdown {
         margin-bottom: 20px;
