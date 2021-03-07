@@ -28,6 +28,7 @@ function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
     const [addedBrand, setAddedBrand] = useState("")
 
     let visibleBody = null;
+    console.log(sideImgs);
 
     const obj = {
         name,
@@ -73,8 +74,8 @@ function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
     const selectedSideFiles = (e) => {
         setSideImgs([
             { name: "firstSideImg", file: e.target.files[0] },
-            { name: "secondSideImg", file: e.target.files[0] },
-            { name: "thirdSideImg", file: e.target.files[0] },
+            { name: "secondSideImg", file: e.target.files[1] },
+            { name: "thirdSideImg", file: e.target.files[2] },
         ])
     }
 
