@@ -19,7 +19,7 @@ function ObjectAdminModal({ typesDropDown, activeDropList, setAсtiveDropList, s
 
     const fileInputsArr = [
         { callback: selectedFile, label: "основное", name: "image" },
-        { callback: selectedSideFiles, label: "3 дополнительных", name: "images", multiple: true },
+        { callback: selectedSideFiles, label: "2 дополнительных", name: "images", multiple: true },
     ]
 
 

@@ -15,27 +15,22 @@ function CardPage() {
 
     const previewObj = useSelector(({ modal }) => modal.previewObj)
 
-    console.log(previewObj);
-
-
-    const [activeImg, setActiveImg] = useState(previewObj && HOST + previewObj.img)
+    const [activeImg, setActiveImg] = useState('')
     const [activeId, setActiveId] = useState(1)
     const [sideImgs, setSideImgs] = useState([])
-
-
-
 
     const dispatch = useDispatch();
 
     const handlerAddItemToCart = () => {
         dispatch(setCartItems(previewObj))
     }
+    if (previewObj && sideImgs.length === 0) {
+        setActiveImg(HOST + previewObj.img)
+        const { firstSideImg, secondSideImg, } = previewObj.info[0]
+        setSideImgs([HOST + previewObj.img, HOST + firstSideImg, HOST + secondSideImg])
+    }
 
     useEffect(() => {
-        if (previewObj) {
-            const { firstSideImg, secondSideImg, thirdSideImg, } = previewObj.info[0]
-            setSideImgs([HOST + firstSideImg, HOST + secondSideImg, HOST + thirdSideImg])
-        }
         dispatch(setHomePage(false))
         httpService.getItem(id).then(res => {
             dispatch(setPreviewObj(res))
