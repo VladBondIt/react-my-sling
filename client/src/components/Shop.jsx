@@ -3,39 +3,51 @@ import Card from './Card';
 import CategoryItem from './CategoryItem';
 import SearchForm from './SearchForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategoryTypes, } from '../redux/actions/categoryes';
-import { setCards, setInfoCards } from '../redux/actions/cards';
+import { setCategoryBrands, setCategoryTypes, } from '../redux/actions/categoryes';
+import { setCards, setInfoCards, setTotalCount } from '../redux/actions/cards';
 import Loader from './Loader';
 import { setLoading } from '../redux/actions/loader';
 import { setSearchChar } from '../redux/actions/search';
 import httpService from '../services/httpService';
+import BrandItem from './BrandItem';
+import Pagination from './Pagination';
 
 
 const Shop = memo(function Shop() {
     const dispatch = useDispatch();
 
-    const { activeTypeItem, cardItems, loaderItems, isLoading, typeItems, cardInfos, searchChar } = useSelector((state) => ({
-        activeTypeItem: state.categoryes.activeTypeItem,
-        cardItems: state.cards.cardItems,
-        cardInfos: state.cards.cardInfos,
-        typeItems: state.categoryes.typeItems,
-        loaderItems: state.loader.loaderItems,
-        isLoading: state.loader.isLoading,
-        searchChar: state.search.searchChar,
-    }))
+    const { activeTypeItem, cardItems, loaderItems, limit, totalCount, activePage, activeBrandItem,
+        isLoading, typeItems, cardInfos, searchChar, brandItems } = useSelector((state) => ({
+            activeTypeItem: state.categoryes.activeTypeItem,
+            cardItems: state.cards.cardItems,
+            cardInfos: state.cards.cardInfos,
+            totalCount: state.cards.totalCount,
+            activePage: state.cards.activePage,
+            limit: state.cards.limit,
+            typeItems: state.categoryes.typeItems,
+            brandItems: state.categoryes.brandItems,
+            activeBrandItem: state.categoryes.activeBrandItem,
+            loaderItems: state.loader.loaderItems,
+            isLoading: state.loader.isLoading,
+            searchChar: state.search.searchChar,
+        }))
 
     useEffect(() => {
         httpService.getInfo().then((res) => {
             dispatch(setInfoCards(res))
         })
-        httpService.getItems().then((res) => {
-            dispatch(setCards(res))
+        httpService.getItems(activeTypeItem, activeBrandItem, activePage, limit).then((res) => {
+            dispatch(setTotalCount(res.count))
+            dispatch(setCards(res.rows))
             dispatch(setLoading(false))
         })
         httpService.getTypes().then(res => {
             dispatch(setCategoryTypes(res))
         })
-    }, [])
+        httpService.getBrand().then(res => {
+            dispatch(setCategoryBrands(res))
+        })
+    }, [activePage, activeTypeItem, activeBrandItem])
 
     const onChange = (e) => {
         dispatch(setSearchChar((e.target.value).toLowerCase()))
@@ -66,9 +78,7 @@ const Shop = memo(function Shop() {
                     <span className="search__count">
                         Товара найдено:
                         <span className="search__number">
-                            {visibleCards.length >= 0 && searchChar !== null
-                                ? visibleCards.length
-                                : cardItems.length}
+                            {totalCount}
                         </span>
                     </span>
                     <SearchForm
@@ -92,6 +102,14 @@ const Shop = memo(function Shop() {
                         </div>
                     </div>
                     <div className="shop__column shop__column_right">
+                        <div className="shop__brand brand shd">
+                            <div className="brand__title">Выберите Бренд:</div>
+                            <ul className="brand__list">
+                                {brandItems && brandItems.map((item) =>
+                                    <BrandItem key={item.name} {...item} activeBrandItem={activeBrandItem} />
+                                )}
+                            </ul>
+                        </div>
                         <div className="shop__cardbox">
                             {!isLoading
                                 ? visibleCards.map((card) =>
@@ -100,6 +118,10 @@ const Shop = memo(function Shop() {
                                         key={card.id} />)
                                 : loaderItems.map((loader) => <Loader key={loader.id} />)}
                         </div>
+                        <Pagination
+                            limit={limit}
+                            totalCount={totalCount}
+                        />
                     </div>
                 </div>
             </div >

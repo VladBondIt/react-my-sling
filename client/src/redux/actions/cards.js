@@ -1,4 +1,4 @@
-import { SET_CARDS, SET_INFOS } from "../types";
+import { SET_ACTIVE_PAGE, SET_CARDS, SET_INFOS, SET_TOTAL_COUNT } from "../types";
 
 export const setCards = (items) => ({
     type: SET_CARDS,
@@ -7,6 +7,14 @@ export const setCards = (items) => ({
 export const setInfoCards = (arrInfo) => ({
     type: SET_INFOS,
     payload: arrInfo
+});
+export const setActivePage = (num) => ({
+    type: SET_ACTIVE_PAGE,
+    payload: num
+});
+export const setTotalCount = (numCount) => ({
+    type: SET_TOTAL_COUNT,
+    payload: numCount
 });
 
 

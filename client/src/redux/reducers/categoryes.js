@@ -1,7 +1,7 @@
 import { SET_CATEGORY_TYPES, SET_ACTIVE_CATEGORY_TYPE, SET_CATEGORY_BRANDS, SET_ACTIVE_CATEGORY_BRAND } from '../types'
 
 const initialState = {
-    typeItems: [],
+    typeItems: [{ id: 0, name: "Весь каталог" }],
     brandItems: [],
     activeTypeItem: 0,
     activeBrandItem: 0,
@@ -12,14 +12,15 @@ const categoryes = (state = initialState, action) => {
         case SET_CATEGORY_TYPES:
             return {
                 ...state,
-                typeItems: action.payload,
-                activeTypeItem: action.payload[0].id
+                typeItems: [
+                    state.typeItems[0],
+                    ...action.payload
+                ],
             }
         case SET_CATEGORY_BRANDS:
             return {
                 ...state,
                 brandItems: action.payload,
-                activeBrandItem: action.payload[0].id
             }
         case SET_ACTIVE_CATEGORY_TYPE:
             return {

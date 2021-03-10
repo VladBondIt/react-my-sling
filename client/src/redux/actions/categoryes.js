@@ -5,15 +5,15 @@ export const setCategoryTypes = (typeItems) => ({
     type: SET_CATEGORY_TYPES,
     payload: typeItems
 });
-export const setCategoryBrands = (typeItems) => ({
+export const setCategoryBrands = (brandItems) => ({
     type: SET_CATEGORY_BRANDS,
-    payload: typeItems
+    payload: brandItems
 });
-export const setActiveCategoryType = (id) => ({
+export const setActiveCategoryType = (idType) => ({
     type: SET_ACTIVE_CATEGORY_TYPE,
-    payload: id
+    payload: idType
 });
-export const setActiveCategoryBrand = (id) => ({
+export const setActiveCategoryBrand = (idBrand) => ({
     type: SET_ACTIVE_CATEGORY_BRAND,
-    payload: id
+    payload: idBrand
 });

@@ -1,9 +1,12 @@
-import { SET_INFOS, SET_CARDS, SET_LOADING } from "../types";
+import { SET_INFOS, SET_CARDS, SET_LOADING, SET_ACTIVE_PAGE, SET_TOTAL_COUNT } from "../types";
 
 const initialState = {
     cardItems: [],
     cardInfos: [],
     isLoaded: false,
+    limit: 3,
+    activePage: 1,
+    totalCount: 0
 
 }
 const cards = (state = initialState, action) => {
@@ -22,6 +25,16 @@ const cards = (state = initialState, action) => {
             return {
                 ...state,
                 isLoaded: action.payload,
+            }
+        case SET_ACTIVE_PAGE:
+            return {
+                ...state,
+                activePage: action.payload,
+            }
+        case SET_TOTAL_COUNT:
+            return {
+                ...state,
+                totalCount: action.payload,
             }
         // case SET_FOUND_CARDS:
         //     return {

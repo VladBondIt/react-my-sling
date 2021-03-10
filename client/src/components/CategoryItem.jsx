@@ -1,6 +1,7 @@
 import React from 'react'
-import { setActiveCategoryType } from '../redux/actions/categoryes';
+import { setActiveCategoryBrand, setActiveCategoryType } from '../redux/actions/categoryes';
 import { useDispatch } from 'react-redux';
+import { setActivePage } from '../redux/actions/cards';
 
 
 function CategoryItem({ name, activeTypeItem, id }) {
@@ -10,6 +11,10 @@ function CategoryItem({ name, activeTypeItem, id }) {
 
     const handlerClick = () => {
         dispatch(setActiveCategoryType(id))
+        dispatch(setActivePage(1))
+        if (id === 0) {
+            dispatch(setActiveCategoryBrand(id))
+        }
 
     }
 
