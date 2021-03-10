@@ -195,11 +195,11 @@ class FetchService {
         return await res.json();
     }
 
-    async getInfo(id) {
-        const res = await fetch(`${this._apiBaseServer}api/info/${id}`);
+    async getInfo() {
+        const res = await fetch(`${this._apiBaseServer}api/info`);
 
         if (!res.ok) {
-            throw new Error(`Could not fetch ${this._apiBaseServer}api/info/${id}` +
+            throw new Error(`Could not fetch ${this._apiBaseServer}api/info` +
                 `, received ${res.status}`);
         }
 

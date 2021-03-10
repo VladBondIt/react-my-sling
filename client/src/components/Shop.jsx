@@ -4,7 +4,7 @@ import CategoryItem from './CategoryItem';
 import SearchForm from './SearchForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCategoryTypes, } from '../redux/actions/categoryes';
-import { setCards } from '../redux/actions/cards';
+import { setCards, setInfoCards } from '../redux/actions/cards';
 import Loader from './Loader';
 import { setLoading } from '../redux/actions/loader';
 import { setSearchChar } from '../redux/actions/search';
@@ -14,28 +14,20 @@ import httpService from '../services/httpService';
 const Shop = memo(function Shop() {
     const dispatch = useDispatch();
 
-    const { activeTypeItem, cardItems, loaderItems, isLoading, searchChar, typeItems } = useSelector((state) => ({
+    const { activeTypeItem, cardItems, loaderItems, isLoading, typeItems, cardInfos, searchChar } = useSelector((state) => ({
         activeTypeItem: state.categoryes.activeTypeItem,
         cardItems: state.cards.cardItems,
+        cardInfos: state.cards.cardInfos,
         typeItems: state.categoryes.typeItems,
         loaderItems: state.loader.loaderItems,
         isLoading: state.loader.isLoading,
         searchChar: state.search.searchChar,
     }))
 
-    // const fetchItems = () => {
-    //     if (items.length === 0) {
-    //         httpService.getCategoryes('slings').then((res) => {
-    //             dispatch(setCategoryes(res));
-    //         })
-    //     }
-    //     dispatch(setLoading(false))
-    //     if (cardItems.length === 0) {
-    //         dispatch(fetchedCards())
-    //     }
-    // }
-
     useEffect(() => {
+        httpService.getInfo().then((res) => {
+            dispatch(setInfoCards(res))
+        })
         httpService.getItems().then((res) => {
             dispatch(setCards(res))
             dispatch(setLoading(false))
@@ -43,19 +35,29 @@ const Shop = memo(function Shop() {
         httpService.getTypes().then(res => {
             dispatch(setCategoryTypes(res))
         })
-        // fetchItems();
     }, [])
 
     const onChange = (e) => {
-        dispatch(setSearchChar(e.target.value))
+        dispatch(setSearchChar((e.target.value).toLowerCase()))
     }
 
-    const visibleCards = searchChar !== null
+    const visibleCards = searchChar
         ? cardItems
-            .filter((x) => Object
-                .values(x)
-                .some((value) => (value + '').toLowerCase().includes(searchChar.toLowerCase())))
+            .filter((x) => {
+                const [info] = cardInfos.filter((info) => info.itemId === x.id)
+                const result = Object.values({
+                    price: x.price,
+                    oldprice: x.oldprice,
+                    name: x.name,
+                    size: info.size,
+                    material: info.material
+                }).some((value) => {
+                    return (value + '').toLowerCase().includes(searchChar.toLowerCase())
+                })
+                return result && x
+            })
         : cardItems;
+
 
     return (
         <section className="shop mainbg">
@@ -100,7 +102,6 @@ const Shop = memo(function Shop() {
                         </div>
                     </div>
                 </div>
-
             </div >
         </section>
     )

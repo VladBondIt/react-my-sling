@@ -1,8 +1,12 @@
-import { SET_CARDS, } from "../types";
+import { SET_CARDS, SET_INFOS } from "../types";
 
 export const setCards = (items) => ({
     type: SET_CARDS,
     payload: items
+});
+export const setInfoCards = (arrInfo) => ({
+    type: SET_INFOS,
+    payload: arrInfo
 });
 
 

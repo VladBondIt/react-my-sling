@@ -1,7 +1,8 @@
-import { SET_CARDS, SET_LOADING } from "../types";
+import { SET_INFOS, SET_CARDS, SET_LOADING } from "../types";
 
 const initialState = {
     cardItems: [],
+    cardInfos: [],
     isLoaded: false,
 
 }
@@ -11,6 +12,11 @@ const cards = (state = initialState, action) => {
             return {
                 ...state,
                 cardItems: action.payload,
+            }
+        case SET_INFOS:
+            return {
+                ...state,
+                cardInfos: action.payload
             }
         case SET_LOADING:
             return {

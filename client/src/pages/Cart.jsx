@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import CartItem from '../components/CartItem';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as CartEmpty } from '../assets/images/svg/cart-empty-black.svg';
@@ -9,12 +9,17 @@ import BackButton from '../components/BackButton';
 
 function Cart() {
     const dispatch = useDispatch();
+    const scrollPoint = useRef()
 
     const { cartItems, totalPrice, modalShow } = useSelector((state) => ({
         cartItems: state.cart.cartItems,
         totalPrice: state.cart.totalPrice,
         modalShow: state.modal.modalShow,
     }))
+
+    useEffect(() => {
+        scrollPoint.current.scrollIntoView({ behavior: "smooth" })
+    }, [])
 
 
     const handlerClearModalShow = () => {
@@ -33,7 +38,7 @@ function Cart() {
 
 
     return (
-        <div className="cart mainbg">
+        <div ref={scrollPoint} className="cart mainbg">
             <div className="container">
                 {cartItems.length > 0
                     ?

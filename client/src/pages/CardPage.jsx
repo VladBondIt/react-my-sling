@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCartItems } from '../redux/actions/cart';
 import PreviewItem from '../components/PreviewItem';
@@ -8,12 +8,18 @@ import { HOST } from '../consts/consts';
 import { useParams } from 'react-router-dom';
 import { setPreviewObj } from '../redux/actions/modal';
 import { setHomePage } from '../redux/actions/page';
+import AddButton from '../components/AddButton';
 
 function CardPage() {
 
+    const scrollPoint = useRef()
+
     const { id } = useParams();
 
-    const previewObj = useSelector(({ modal }) => modal.previewObj)
+    const { previewObj, user } = useSelector(({ modal, login }) => ({
+        ...modal,
+        ...login
+    }))
 
     const [activeImg, setActiveImg] = useState('')
     const [activeId, setActiveId] = useState(1)
@@ -31,6 +37,7 @@ function CardPage() {
     }
 
     useEffect(() => {
+        scrollPoint.current.scrollIntoView({ behavior: "smooth" })
         dispatch(setHomePage(false))
         httpService.getItem(id).then(res => {
             dispatch(setPreviewObj(res))
@@ -40,7 +47,7 @@ function CardPage() {
 
 
     return (
-        <div className="preview mainbg">
+        <div ref={scrollPoint} className="preview mainbg">
             <div className="container">
                 <div className="preview__body">
                     <div className="preview__imagebox imagebox">
@@ -85,11 +92,7 @@ function CardPage() {
                             </div>
                             <div className="preview__buttons">
                                 <BackButton className={"preview__button shd btn eff"} />
-                                <button
-                                    className="preview__button add-button btn"
-                                    onClick={handlerAddItemToCart}>
-                                    Добавить
-                                </button>
+                                <AddButton user={user} />
                             </div>
                         </div>
                     </div>

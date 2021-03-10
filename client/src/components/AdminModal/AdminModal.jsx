@@ -7,7 +7,7 @@ import ObjectAdminModal from './ObjectAdminModal';
 function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
 
     const [activeDropList, setAсtiveDropList] = useState(false)
-    const [typesDropDown, setTypesDropDown] = useState([{ id: 1, name: 'type' }, { id: 2, name: 'brand' }])
+    const [typesDropDown, setTypesDropDown] = useState('')
     const [typesNames, setTypesNames] = useState('')
     const [brandNames, setBrandNames] = useState('')
     const [selectType, setSelectType] = useState('')
@@ -45,6 +45,7 @@ function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
     }
 
     useEffect(() => {
+        setTypesDropDown([{ id: 1, name: 'type' }, { id: 2, name: 'brand' }])
 
         httpService.getTypes().then(res => setTypesNames(res))
         httpService.getBrand().then(res => setBrandNames(res))
@@ -141,6 +142,7 @@ function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
             break;
         case 2:
             visibleBody = <ObjectAdminModal
+                setTypesDropDown={setTypesDropDown}
                 typesDropDown={typesDropDown}
                 activeDropList={activeDropList}
                 setAсtiveDropList={setAсtiveDropList}

@@ -3,8 +3,10 @@ import { ReactComponent as ArrDown } from '../../assets/images/svg/arrow_drop_do
 import ModalFileInput from './ModalFileInput';
 import ModalInput from './ModalInput';
 
-function ObjectAdminModal({ typesDropDown, activeDropList, setAсtiveDropList, selectType, selectedSideFiles,
-    selectBrand, typesNames, setTypeId, setSelectType, brandNames, setBrandId, setSelectBrand, obj, selectedFile }) {
+function ObjectAdminModal({ typesDropDown, activeDropList, setAсtiveDropList,
+    selectType, selectedSideFiles,
+    selectBrand, typesNames, setTypeId, setSelectType, brandNames,
+    setBrandId, setSelectBrand, obj, selectedFile }) {
 
     const { name, setName, price, setPrice, oldprice, setOldprice,
         description, setDescription, material, setMaterial, size, setSize, } = obj;
@@ -25,7 +27,7 @@ function ObjectAdminModal({ typesDropDown, activeDropList, setAсtiveDropList, s
 
     return (
         <div className="admin-modal__object">
-            {typesDropDown.map(({ id, name }) =>
+            {typesDropDown && typesDropDown.map(({ id, name }) =>
                 <div
                     key={id}
                     onClick={() => {
