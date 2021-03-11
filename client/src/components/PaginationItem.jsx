@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setActivePage } from '../redux/actions/cards';
 
-function PaginationItem({ item }) {
+function PaginationItem({ item, brandBar }) {
     const dispatch = useDispatch();
     const activePage = useSelector(({ cards }) => cards.activePage)
 
@@ -10,6 +10,7 @@ function PaginationItem({ item }) {
     itemClassName += activePage === item ? " active" : ""
 
     const handlerPagination = () => {
+        brandBar.current.scrollIntoView({ behavior: "smooth" })
         dispatch(setActivePage(item))
     }
 

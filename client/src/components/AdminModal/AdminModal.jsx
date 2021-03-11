@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { ReactComponent as CloseModal } from '../../assets/images/svg/clear-single.svg';
+import { setCardLimit } from '../../redux/actions/cards';
 import httpService from '../../services/httpService'
 import ModalInput from './ModalInput';
 import ObjectAdminModal from './ObjectAdminModal';
 
 function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
+
+    const dispatch = useDispatch()
 
     const [activeDropList, setAсtiveDropList] = useState(false)
     const [typesDropDown, setTypesDropDown] = useState('')
@@ -26,10 +30,12 @@ function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
     const [typeId, setTypeId] = useState("")
     const [addedType, setAddedType] = useState("")
     const [addedBrand, setAddedBrand] = useState("")
+    const [limit, setLimit] = useState("")
 
-    let visibleBody = null;
+    let visibleBody = null,
+        visibleButton = null;
 
-    const obj = {
+    const objProps = {
         name,
         setName,
         price,
@@ -61,6 +67,9 @@ function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
                 setModalTitle('Добавить Объект')
                 setBodyClassName("admin-modal__body admin-modal__body_big mainbg")
                 break;
+            case 3:
+                setModalTitle('Укажите лимит')
+                break;
             default:
                 break;
         }
@@ -76,6 +85,11 @@ function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
             { name: "firstSideImg", file: e.target.files[0] },
             { name: "secondSideImg", file: e.target.files[1] },
         ])
+    }
+
+    const handlerLimitSubmit = () => {
+        dispatch(setCardLimit(Number(limit)))
+        handlerAdminModal()
     }
 
 
@@ -154,10 +168,25 @@ function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
                 brandNames={brandNames}
                 setBrandId={setBrandId}
                 setSelectBrand={setSelectBrand}
-                obj={obj}
+                objProps={objProps}
                 selectedFile={selectedFile}
                 selectedSideFiles={selectedSideFiles}
             />
+            visibleButton = <button
+                onClick={handlerSubmit}
+                className="admin-modal__btn btn">Добавить</button>
+            break;
+        case 3:
+            visibleBody = <ModalInput
+                value={limit}
+                callback={setLimit}
+                type={"number"}
+                name={"limit"}
+                placeholder={"Укажите лимит"}
+            />
+            visibleButton = <button
+                onClick={handlerLimitSubmit}
+                className="admin-modal__btn btn">Добавить</button>
             break;
         default:
             break;
@@ -177,9 +206,7 @@ function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
                         className="admin-modal__close" />
                 </div>
                 {visibleBody}
-                <button
-                    onClick={handlerSubmit}
-                    className="admin-modal__btn btn">Добавить</button>
+                {visibleButton}
             </div>
 
         </div>

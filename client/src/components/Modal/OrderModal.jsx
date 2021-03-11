@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { ReactComponent as DeleteItem } from '../../assets/images/svg/clear-single.svg';
 import InputMask from 'react-input-mask';
 
@@ -7,15 +7,15 @@ function OrderModal({ handlerModalShow, totalPrice, formError, resultPhoneClassN
     handleEmailBlur, totalCount, handlerSuccess, handlerEmail, handlerPhone,
     handlerName, handlerClear, checked, setChecked }) {
 
-    const form = useRef(null);
+
 
 
     const handlerOrderSubmit = (e) => {
         if (email && phone && name && checked) {
-            handlerSuccess(e, form);
+            handlerSuccess(e);
             handlerClear();
         } else {
-            handlerSuccess(e, form);
+            handlerSuccess(e);
         }
     }
 
@@ -24,7 +24,7 @@ function OrderModal({ handlerModalShow, totalPrice, formError, resultPhoneClassN
     }
 
     return (
-        <form ref={form} onSubmit={handlerOrderSubmit} className="modal__form form">
+        <form onSubmit={handlerOrderSubmit} className="modal__form form">
 
             <input
                 onChange={handlerName}

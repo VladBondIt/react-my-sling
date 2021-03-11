@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from 'react';
+import React, { useEffect, memo, useRef } from 'react';
 import Card from './Card';
 import CategoryItem from './CategoryItem';
 import SearchForm from './SearchForm';
@@ -15,6 +15,7 @@ import Pagination from './Pagination';
 
 const Shop = memo(function Shop() {
     const dispatch = useDispatch();
+    const brandBar = useRef()
 
     const { activeTypeItem, cardItems, loaderItems, limit, totalCount, activePage, activeBrandItem,
         isLoading, typeItems, cardInfos, searchChar, brandItems } = useSelector((state) => ({
@@ -33,6 +34,8 @@ const Shop = memo(function Shop() {
         }))
 
     useEffect(() => {
+        dispatch(setLoading(true))
+        dispatch(setSearchChar(''))
         httpService.getInfo().then((res) => {
             dispatch(setInfoCards(res))
         })
@@ -78,10 +81,11 @@ const Shop = memo(function Shop() {
                     <span className="search__count">
                         Товара найдено:
                         <span className="search__number">
-                            {totalCount}
+                            {searchChar ? visibleCards.length : totalCount}
                         </span>
                     </span>
                     <SearchForm
+                        searchChar={searchChar}
                         onChange={onChange} />
                     <div className="search__sort">
                         Сортировать по: <span className="search__type">Цене</span>
@@ -102,7 +106,7 @@ const Shop = memo(function Shop() {
                         </div>
                     </div>
                     <div className="shop__column shop__column_right">
-                        <div className="shop__brand brand shd">
+                        <div ref={brandBar} className="shop__brand brand shd">
                             <div className="brand__title">Выберите Бренд:</div>
                             <ul className="brand__list">
                                 {brandItems && brandItems.map((item) =>
@@ -120,6 +124,7 @@ const Shop = memo(function Shop() {
                         </div>
                         <Pagination
                             limit={limit}
+                            brandBar={brandBar}
                             totalCount={totalCount}
                         />
                     </div>

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { ReactComponent as CloseModal } from '../../assets/images/svg/clear-single.svg';
 import InputMask from 'react-input-mask';
 
@@ -7,16 +7,14 @@ function OfferCallModal({ handlerModalShow, handlerCallSuccess,
     phone, name, formError, handlePhoneBlur, resultEmailClassName,
     handleEmailBlur, nameClassName }) {
 
-    const form = useRef(null);
-
 
     const handlerSubmit = (e) => {
-        handlerCallSuccess(e, form);
+        handlerCallSuccess(e);
     }
 
 
     return (
-        <form ref={form} onSubmit={handlerSubmit} className="modal__form form">
+        <form onSubmit={handlerSubmit} className="modal__form form">
 
             <input
                 onChange={handlerName}

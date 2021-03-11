@@ -44,10 +44,10 @@ function Modal() {
         return re.test(phone);
     }
 
-    const handlerCallSuccess = (e, formForReset) => {
+    const handlerCallSuccess = (e) => {
         e.preventDefault();
         if (email && phone && name) {
-            formForReset.current.reset();
+            e.target.reset();
             dispatch(setModalType(5))
         } else {
             setFormError(true)
@@ -58,10 +58,10 @@ function Modal() {
     }
 
     // Order form cart
-    const handlerSuccess = (e, formForReset) => {
+    const handlerSuccess = (e) => {
         e.preventDefault();
         if (email && phone && name && checked) {
-            formForReset.current.reset();
+            e.target.reset();
             dispatch(setModalType(5))
         } else {
             setFormError(true)
@@ -70,14 +70,14 @@ function Modal() {
             }, 3000);
         }
     }
-    const handlerLoginSuccess = (e, formForReset) => {
+    const handlerLoginSuccess = (e) => {
         e.preventDefault();
         if (email && password) {
             httpService.login(email, password).then(res => {
                 dispatch(setUser(res))
                 dispatch(setAuth(true))
             })
-            formForReset.current.reset();
+            e.target.reset();
             handlerModalShow()
         } else {
             setFormError(true)
@@ -86,11 +86,11 @@ function Modal() {
             }, 3000);
         }
     }
-    const handlerRegSuccess = (e, formForReset) => {
+    const handlerRegSuccess = (e) => {
         e.preventDefault();
         if (email && phone && name && password && checked) {
             httpService.registration(name, phone, email, password).then(res => console.log(res))
-            formForReset.current.reset();
+            e.target.reset();
             dispatch(setModalType(7))
         } else {
             setFormError(true)
@@ -293,6 +293,7 @@ function Modal() {
         case 6:
             bodyClassName += " modal__body_cart-order";
             visibleModalBody = <RegistrationModal
+                setPhone={setPhone}
                 passClassName={passClassName}
                 password={password}
                 handlerPassword={handlerPassword}

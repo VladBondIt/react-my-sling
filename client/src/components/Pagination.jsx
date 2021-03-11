@@ -1,7 +1,7 @@
 import React from 'react'
 import PaginationItem from './PaginationItem'
 
-function Pagination({ totalCount, limit }) {
+function Pagination({ totalCount, limit, brandBar }) {
 
     const pageCount = Math.ceil(totalCount / limit)
     const pages = []
@@ -16,7 +16,7 @@ function Pagination({ totalCount, limit }) {
     return (
         <ul className="shop__pagination pagination shd">
             {pages.map((item) =>
-                <PaginationItem key={item} item={item} />)}
+                <PaginationItem brandBar={brandBar} key={item} item={item} />)}
         </ul>
     )
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ReactComponent as SearchSvg } from '../assets/images/svg/search-24px.svg'
 
-function SearchForm({ onChange }) {
+function SearchForm({ onChange, searchChar }) {
 
 
     const handlerChange = (e) => {
@@ -15,6 +15,7 @@ function SearchForm({ onChange }) {
                 onChange={handlerChange}
                 type="text"
                 name="text"
+                value={searchChar}
                 placeholder="Поиск в категории, описание, размер, материал"
                 className="search__input" />
             <div className="search__btn">

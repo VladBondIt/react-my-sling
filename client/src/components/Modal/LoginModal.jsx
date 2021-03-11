@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { ReactComponent as CloseModal } from '../../assets/images/svg/clear-single.svg';
 
 function OfferCallModal({ handlerModalShow, handlerLoginSuccess, handlerRegModal,
@@ -6,11 +6,10 @@ function OfferCallModal({ handlerModalShow, handlerLoginSuccess, handlerRegModal
     , resultEmailClassName, passClassName,
     handleEmailBlur }) {
 
-    const form = useRef(null);
 
 
     const handlerSubmit = (e) => {
-        handlerLoginSuccess(e, form);
+        handlerLoginSuccess(e);
     }
 
     const handlerCreateLogin = () => {
@@ -19,7 +18,7 @@ function OfferCallModal({ handlerModalShow, handlerLoginSuccess, handlerRegModal
 
 
     return (
-        <form ref={form} onSubmit={handlerSubmit} className="modal__form form">
+        <form onSubmit={handlerSubmit} className="modal__form form">
 
             <input
                 onBlur={handleEmailBlur}

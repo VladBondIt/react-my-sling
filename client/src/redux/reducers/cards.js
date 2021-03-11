@@ -1,4 +1,4 @@
-import { SET_INFOS, SET_CARDS, SET_LOADING, SET_ACTIVE_PAGE, SET_TOTAL_COUNT } from "../types";
+import { SET_INFOS, SET_CARDS, SET_LOADING, SET_ACTIVE_PAGE, SET_TOTAL_COUNT, SET_CARD_LIMIT } from "../types";
 
 const initialState = {
     cardItems: [],
@@ -35,6 +35,11 @@ const cards = (state = initialState, action) => {
             return {
                 ...state,
                 totalCount: action.payload,
+            }
+        case SET_CARD_LIMIT:
+            return {
+                ...state,
+                limit: action.payload,
             }
         // case SET_FOUND_CARDS:
         //     return {

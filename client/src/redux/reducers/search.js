@@ -1,7 +1,7 @@
 import { SET_SEARCH_CHAR } from "../types";
 
 const initialState = {
-    searchChar: null
+    searchChar: ''
 
 }
 const search = (state = initialState, action) => {
@@ -9,7 +9,7 @@ const search = (state = initialState, action) => {
         case SET_SEARCH_CHAR:
             return {
                 ...state,
-                searchChar: action.payload === '' ? null : action.payload,
+                searchChar: action.payload === '' ? '' : action.payload,
             }
         default:
             return state;

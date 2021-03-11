@@ -1,4 +1,4 @@
-import { SET_ACTIVE_PAGE, SET_CARDS, SET_INFOS, SET_TOTAL_COUNT } from "../types";
+import { SET_ACTIVE_PAGE, SET_CARDS, SET_CARD_LIMIT, SET_INFOS, SET_TOTAL_COUNT } from "../types";
 
 export const setCards = (items) => ({
     type: SET_CARDS,
@@ -15,6 +15,10 @@ export const setActivePage = (num) => ({
 export const setTotalCount = (numCount) => ({
     type: SET_TOTAL_COUNT,
     payload: numCount
+});
+export const setCardLimit = (limitCount) => ({
+    type: SET_CARD_LIMIT,
+    payload: limitCount
 });
 
 

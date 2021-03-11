@@ -6,10 +6,10 @@ import ModalInput from './ModalInput';
 function ObjectAdminModal({ typesDropDown, activeDropList, setAсtiveDropList,
     selectType, selectedSideFiles,
     selectBrand, typesNames, setTypeId, setSelectType, brandNames,
-    setBrandId, setSelectBrand, obj, selectedFile }) {
+    setBrandId, setSelectBrand, objProps, selectedFile }) {
 
     const { name, setName, price, setPrice, oldprice, setOldprice,
-        description, setDescription, material, setMaterial, size, setSize, } = obj;
+        description, setDescription, material, setMaterial, size, setSize, } = objProps;
 
     const inputsArr = [
         { type: "text", name: "name", value: name, callback: setName, placeholder: "Введите имя объекта" },

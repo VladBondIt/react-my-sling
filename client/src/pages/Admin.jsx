@@ -28,6 +28,10 @@ function Admin() {
         dispatch(setAdminModalType(2))
         dispatch(setAdminModalShow(!adminModalShow))
     }
+    const handlerLimitModal = () => {
+        dispatch(setAdminModalType(3))
+        dispatch(setAdminModalShow(!adminModalShow))
+    }
 
     const delegateShowModal = (e) => {
         if (e.target.matches('.admin-modal')) {
@@ -41,14 +45,25 @@ function Admin() {
                 <div className="admin__title">Административная панель</div>
 
                 <div
+                    onClick={handlerLimitModal}
+                    className="admin__row shd eff">
+                    Указать лимит товаров на страницу
+                </div>
+                <div
                     onClick={handlerTypeModal}
-                    className="admin__row shd eff">Добавить Тип</div>
+                    className="admin__row shd eff">
+                    Добавить Тип
+                </div>
                 <div
                     onClick={handlerBrandModal}
-                    className="admin__row shd eff">Добавить Бренд</div>
+                    className="admin__row shd eff">
+                    Добавить Бренд
+                </div>
                 <div
                     onClick={handlerObjectModal}
-                    className="admin__row shd eff">Добавить Объект</div>
+                    className="admin__row shd eff">
+                    Добавить Объект
+                </div>
 
                 {adminModalShow && <AdminModal
                     adminTypeModal={adminTypeModal}

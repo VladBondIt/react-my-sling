@@ -92,6 +92,10 @@
     @include adaptiv-font(22, 18);
     padding: 15px;
     margin-bottom: 30px;
+    margin-left: 10px;
+    @media (max-width: 540px) {
+        margin-left: 0;
+    }
     &__title {
         font-weight: 700;
         margin-bottom: 15px;

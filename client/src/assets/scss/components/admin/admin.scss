@@ -3,7 +3,7 @@
     padding: 50px;
     height: 100vh;
     &__title {
-        font-size: 30px;
+        @include adaptiv-font(30, 24);
         font-weight: 700;
         margin-bottom: 30px;
     }

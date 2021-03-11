@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { ReactComponent as CloseModal } from '../../assets/images/svg/clear-single.svg';
 import InputMask from 'react-input-mask';
 
@@ -7,11 +7,9 @@ function OrderModal({ handlerModalShow, formError, resultPhoneClassName,
     name, handlePhoneBlur, handleEmailBlur, handlerRegSuccess, handlerEmail, handlerPhone,
     handlerName, checked, setChecked }) {
 
-    const form = useRef(null);
-
 
     const handlerRegSubmit = (e) => {
-        handlerRegSuccess(e, form);
+        handlerRegSuccess(e);
     }
 
     const handlerCheckbox = (e) => {
@@ -19,7 +17,7 @@ function OrderModal({ handlerModalShow, formError, resultPhoneClassName,
     }
 
     return (
-        <form ref={form} onSubmit={handlerRegSubmit} className="modal__form form">
+        <form onSubmit={handlerRegSubmit} className="modal__form form">
 
             <input
                 onChange={handlerName}
