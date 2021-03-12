@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { ReactComponent as CloseModal } from '../../assets/images/svg/clear-single.svg';
-import { setCardLimit } from '../../redux/actions/cards';
 import httpService from '../../services/httpService'
 import ModalInput from './ModalInput';
 import ObjectAdminModal from './ObjectAdminModal';
@@ -88,7 +87,8 @@ function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
     }
 
     const handlerLimitSubmit = () => {
-        dispatch(setCardLimit(Number(limit)))
+        httpService.updateLimit(Number(limit))
+        // dispatch(setCardLimit(Number(limit)))
         handlerAdminModal()
     }
 
@@ -144,6 +144,9 @@ function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
                 name={"type"}
                 placeholder={"Введите Тип"}
             />
+            visibleButton = <button
+                onClick={handlerSubmit}
+                className="admin-modal__btn btn">Добавить</button>
             break;
         case 1:
             visibleBody = <ModalInput
@@ -153,6 +156,9 @@ function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
                 name={"brand"}
                 placeholder={"Введите Бренд"}
             />
+            visibleButton = <button
+                onClick={handlerSubmit}
+                className="admin-modal__btn btn">Добавить</button>
             break;
         case 2:
             visibleBody = <ObjectAdminModal

@@ -136,30 +136,35 @@ function HeaderNav() {
                 className="header__login login">
                 <button className="login__btn shd btn">
                     <User className="login__svg" />
-                    <span className="login__text">{user ? "Выйти" : "Войти"}</span>
+                    <span className="login__text">{user
+                        ? <div className="login__box">
+                            <span>{user.name}</span>
+                            <span>Выйти</span>
+                        </div>
+                        : "Войти"}</span>
                 </button>
             </div>
             {isAuth && user
-                ? user.role === "USER"
-                    ?
-                    <Link
-                        onClick={handlerLink}
-                        to="/react-my-sling/cart">
-                        <div className={cartClassName}>
-                            <CartSvg className="cart-header__svg" />
-                            <span className="cart-header__delimetr"></span>
-                            <div className="cart-header__box">
-                                <span className="cart-header__count">{totalCount} шт</span>
-                                <span className="cart-header__price">{totalPrice} руб</span>
-                            </div>
-                            <div className="cart-header__adaptive-count">{totalCount}</div>
+                ? <Link
+                    onClick={handlerLink}
+                    to="/react-my-sling/cart">
+                    <div className={cartClassName}>
+                        <CartSvg className="cart-header__svg" />
+                        <span className="cart-header__delimetr"></span>
+                        <div className="cart-header__box">
+                            <span className="cart-header__count">{totalCount} шт</span>
+                            <span className="cart-header__price">{totalPrice} руб</span>
                         </div>
-                    </Link>
-                    :
-                    <div
-                        onClick={handlerAdmin}
-                        className="header__admin btn shd">
-                        Админ<br />панель
+                        <div className="cart-header__adaptive-count">{totalCount}</div>
+                    </div>
+                </Link>
+                : null}
+            {isAuth && user && user.role !== "USER"
+                ?
+                <div
+                    onClick={handlerAdmin}
+                    className="header__admin btn shd">
+                    Админ<br />панель
                     </div>
                 : null}
         </nav>

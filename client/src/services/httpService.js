@@ -82,7 +82,7 @@ class FetchService {
         const res = await fetch(`${this._apiBaseServer}api/user/auth`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
+                'Authorization': `${this._auth}`
             },
         })
 
@@ -162,7 +162,7 @@ class FetchService {
         const res = await fetch(`${this._apiBaseServer}api/item/add`, {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
+                'Authorization': `${this._auth}`
             },
             body: item
         })
@@ -204,6 +204,39 @@ class FetchService {
 
         if (!res.ok) {
             throw new Error(`Could not fetch ${this._apiBaseServer}api/info` +
+                `, received ${res.status}`);
+        }
+
+        return await res.json();
+    }
+
+    async getLimit() {
+        const res = await fetch(`${this._apiBaseServer}api/limit`);
+
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${this._apiBaseServer}api/limit` +
+                `, received ${res.status}`);
+        }
+
+        return await res.json();
+    }
+
+    async updateLimit(limit) {
+        const obj = {
+            limit: limit
+        }
+
+        const res = await fetch(`${this._apiBaseServer}api/limit`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'Authorization': `${this._auth}`
+            },
+            body: JSON.stringify(obj)
+        });
+
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${this._apiBaseServer}api/limit` +
                 `, received ${res.status}`);
         }
 

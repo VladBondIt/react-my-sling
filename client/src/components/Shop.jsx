@@ -4,7 +4,7 @@ import CategoryItem from './CategoryItem';
 import SearchForm from './SearchForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCategoryBrands, setCategoryTypes, } from '../redux/actions/categoryes';
-import { setCards, setInfoCards, setTotalCount } from '../redux/actions/cards';
+import { setCardLimit, setCards, setInfoCards, setTotalCount } from '../redux/actions/cards';
 import Loader from './Loader';
 import { setLoading } from '../redux/actions/loader';
 import { setSearchChar } from '../redux/actions/search';
@@ -34,6 +34,9 @@ const Shop = memo(function Shop() {
         }))
 
     useEffect(() => {
+
+        httpService.getLimit().then((res) => dispatch(setCardLimit(res.limit)))
+
         dispatch(setLoading(true))
         dispatch(setSearchChar(''))
         httpService.getInfo().then((res) => {
@@ -50,10 +53,10 @@ const Shop = memo(function Shop() {
         httpService.getBrand().then(res => {
             dispatch(setCategoryBrands(res))
         })
-    }, [activePage, activeTypeItem, activeBrandItem])
+    }, [activePage, activeTypeItem, activeBrandItem, limit])
 
     const onChange = (e) => {
-        dispatch(setSearchChar((e.target.value).toLowerCase()))
+        dispatch(setSearchChar((e.target.value)))
     }
 
     const visibleCards = searchChar
@@ -63,9 +66,9 @@ const Shop = memo(function Shop() {
                 const result = Object.values({
                     price: x.price,
                     oldprice: x.oldprice,
-                    name: x.name,
+                    name: x.name.toLowerCase(),
                     size: info.size,
-                    material: info.material
+                    material: info.material.toLowerCase()
                 }).some((value) => {
                     return (value + '').toLowerCase().includes(searchChar.toLowerCase())
                 })
@@ -122,11 +125,12 @@ const Shop = memo(function Shop() {
                                         key={card.id} />)
                                 : loaderItems.map((loader) => <Loader key={loader.id} />)}
                         </div>
-                        <Pagination
-                            limit={limit}
-                            brandBar={brandBar}
-                            totalCount={totalCount}
-                        />
+                        {!searchChar &&
+                            <Pagination
+                                limit={limit}
+                                brandBar={brandBar}
+                                totalCount={totalCount}
+                            />}
                     </div>
                 </div>
             </div >

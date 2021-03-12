@@ -16,7 +16,7 @@ function SearchForm({ onChange, searchChar }) {
                 type="text"
                 name="text"
                 value={searchChar}
-                placeholder="Поиск в категории, описание, размер, материал"
+                placeholder="Поиск"
                 className="search__input" />
             <div className="search__btn">
                 <SearchSvg />

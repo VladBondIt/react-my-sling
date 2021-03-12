@@ -55,6 +55,10 @@ const TypeBrand = sequelize.define('type_brand', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 })
 
+const Limit = sequelize.define('limit', {
+    limit: { type: DataTypes.INTEGER, allowNull: false },
+})
+
 User.hasOne(Basket)
 Basket.belongsTo(User)
 
@@ -92,4 +96,5 @@ module.exports = {
     Type,
     Brand,
     TypeBrand,
+    Limit
 }

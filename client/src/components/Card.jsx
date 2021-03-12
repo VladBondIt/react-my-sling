@@ -69,11 +69,11 @@ function Card({ name, price, oldprice, img, id }) {
                 </div>
                 <div className="card__row">
                     <span className="card__size">Размер:</span>
-                    <span className="card__size-count">{info.size} см</span>
+                    <span className="card__size-count">{info && info.size} см</span>
                 </div>
                 <div className="card__row">
                     <span className="card__material">Материал:</span>
-                    <span className="card__material-value">{info.material}</span>
+                    <span className="card__material-value">{info && info.material}</span>
                 </div>
                 <div className="card__row">
                     <div className="card__price price">
