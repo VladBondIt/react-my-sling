@@ -242,6 +242,53 @@ class FetchService {
 
         return await res.json();
     }
+
+    async addBasketItem(id, basketId) {
+        const itemObj = {
+            basketId: basketId,
+            itemId: id,
+        }
+
+        const res = await fetch(`${this._apiBaseServer}api/basket`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'Authorization': `${this._auth}`
+            },
+            body: JSON.stringify(itemObj)
+        });
+
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${this._apiBaseServer}api/basket` +
+                `, received ${res.status}`);
+        }
+
+        return await res.json();
+    }
+
+    async getBasket(id) {
+
+        const res = await fetch(`${this._apiBaseServer}api/basket/${id}`);
+
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${this._apiBaseServer}api/basket/${id}` +
+                `, received ${res.status}`);
+        }
+
+        return await res.json();
+    }
+
+    async getBasketItems(id) {
+
+        const res = await fetch(`${this._apiBaseServer}api/basket/items/${id}`);
+
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${this._apiBaseServer}api/basket/items/${id}` +
+                `, received ${res.status}`);
+        }
+
+        return await res.json();
+    }
 }
 
 export default new FetchService();

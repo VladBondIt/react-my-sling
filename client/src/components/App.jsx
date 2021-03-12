@@ -11,17 +11,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setAuth, setUser } from '../redux/actions/login';
 import httpService from '../services/httpService';
 import { ADMIN_ROUTE, CARD_PAGE_ROUTE, CART_ROUTE, HOME_ROUTE } from '../consts/consts';
+import { setBasketId } from '../redux/actions/cart';
 
 
 
 function App() {
     const dispatch = useDispatch();
 
-    const { previewObj, user, isAuth } = useSelector(({ modal, login }) => ({
+    const { previewObj, user, isAuth, basketId } = useSelector(({ modal, login, cart }) => ({
         user: login.user,
         isAuth: login.isAuth,
-        previewObj: modal.previewObj
+        previewObj: modal.previewObj,
+        basketId: cart.basketId
     }))
+
+    if (user && user.role === 'USER' && !basketId) {
+        httpService.getBasket(user.id).then(res => dispatch(setBasketId(res.id)))
+    }
 
     React.useEffect(() => {
 

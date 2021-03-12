@@ -1,4 +1,4 @@
-import { CLEAR_CART, SET_CART_ITEMS, MINUS_CART_ITEM, CANCEL_POSITION } from "../types";
+import { CLEAR_CART, SET_CART_ITEMS, MINUS_CART_ITEM, CANCEL_POSITION, SET_BASKET_ID } from "../types";
 
 
 export const setCartItems = (itemObj) => ({
@@ -15,4 +15,8 @@ export const minusCartItem = (itemId) => ({
 export const cancelPosition = (cancelItemId) => ({
     type: CANCEL_POSITION,
     payload: cancelItemId
+});
+export const setBasketId = (basketId) => ({
+    type: SET_BASKET_ID,
+    payload: basketId
 });

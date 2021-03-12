@@ -1,10 +1,11 @@
-import { SET_CART_ITEMS, CLEAR_CART, MINUS_CART_ITEM, CANCEL_POSITION } from "../types";
+import { SET_CART_ITEMS, CLEAR_CART, MINUS_CART_ITEM, CANCEL_POSITION, SET_BASKET_ID } from "../types";
 
 const initialState = {
     cartItems: [],
     countsIdItems: {},
     totalPrice: 0,
-    totalCount: 0
+    totalCount: 0,
+    basketId: false
 }
 
 const calcTotalCount = (obj) => {
@@ -76,6 +77,11 @@ const cards = (state = initialState, action) => {
                 countsIdItems: {},
                 totalPrice: 0,
                 totalCount: 0
+            }
+        case SET_BASKET_ID:
+            return {
+                ...state,
+                basketId: action.payload
             }
         case MINUS_CART_ITEM:
 

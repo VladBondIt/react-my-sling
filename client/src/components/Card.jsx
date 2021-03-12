@@ -6,31 +6,25 @@ import { useHistory } from 'react-router-dom';
 import { setHomePage } from '../redux/actions/page';
 import { CARD_PAGE_ROUTE, HOST } from '../consts/consts';
 import AddButton from './AddButton';
+import httpService from '../services/httpService';
 
 function Card({ name, price, oldprice, img, id }) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { user, cardInfos } = useSelector(({ login, cards }) => ({
+    const { user, cardInfos, basketId } = useSelector(({ login, cards, cart }) => ({
         ...login,
-        ...cards
+        ...cards,
+        ...cart
     }))
     const [info, setInfo] = useState('')
 
-    // const obj = {
-    //     id,
-    //     name,
-    //     img,
-    //     description,
-    //     size,
-    //     material,
-    //     price,
-    //     oldprice,
-    //     dataForKey: Date.now().toString(16)
-    // }
+    const handlerCardItem = async () => {
+        const item = await httpService.addBasketItem(id, basketId)
+        const items = await httpService.getBasketItems(basketId)
 
-    // const handlerCardItem = () => {
-    //     dispatch(setCartItems(obj))
-    // }
+        console.log({ item, items });
+        // dispatch(setCartItems(obj))
+    }
 
     // const handlerPreview = () => {
     //     dispatch(setPreviewObj(obj))
@@ -80,7 +74,7 @@ function Card({ name, price, oldprice, img, id }) {
                         <span className="price__old">{oldprice} руб</span>
                         <span className="price__current">{price} руб</span>
                     </div>
-                    <AddButton user={user} />
+                    <AddButton user={user} callback={handlerCardItem} />
                 </div>
             </div>
         </div >

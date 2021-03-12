@@ -35,6 +35,7 @@ const Shop = memo(function Shop() {
 
     useEffect(() => {
 
+
         httpService.getLimit().then((res) => dispatch(setCardLimit(res.limit)))
 
         dispatch(setLoading(true))

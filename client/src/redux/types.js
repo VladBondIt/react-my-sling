@@ -26,3 +26,4 @@ export const SET_INFOS = "SET_INFOS";
 export const SET_ACTIVE_PAGE = "SET_ACTIVE_PAGE";
 export const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
 export const SET_CARD_LIMIT = "SET_CARD_LIMIT";
+export const SET_BASKET_ID = "SET_BASKET_ID";
