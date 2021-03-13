@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCartItems } from '../redux/actions/cart';
+import { setCartCountsId, setCartItems } from '../redux/actions/cart';
 import { setPreviewObj } from '../redux/actions/modal';
 import { useHistory } from 'react-router-dom';
 import { setHomePage } from '../redux/actions/page';
@@ -23,7 +23,8 @@ function Card({ name, price, oldprice, img, id }) {
         const items = await httpService.getBasketItems(basketId)
 
         console.log({ item, items });
-        // dispatch(setCartItems(obj))
+
+        dispatch(setCartCountsId(items))
     }
 
     // const handlerPreview = () => {
@@ -74,7 +75,7 @@ function Card({ name, price, oldprice, img, id }) {
                         <span className="price__old">{oldprice} руб</span>
                         <span className="price__current">{price} руб</span>
                     </div>
-                    <AddButton user={user} callback={handlerCardItem} />
+                    <AddButton user={user} callback={handlerCardItem} className={"card__button add-button btn"} />
                 </div>
             </div>
         </div >

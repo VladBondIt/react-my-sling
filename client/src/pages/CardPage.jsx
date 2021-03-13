@@ -45,7 +45,6 @@ function CardPage() {
     }, [])
 
 
-
     return (
         <div ref={scrollPoint} className="preview mainbg">
             <div className="container">
@@ -62,6 +61,21 @@ function CardPage() {
                         </div>
                         <div className="imagebox__column">
                             <img className="imagebox__mainimg" src={activeImg} alt="" />
+                        </div>
+                        <div className="imagebox__column">
+                            <div className="imagebox__rating">
+                                Рейтинг товара: {previewObj && previewObj.rating}
+                            </div>
+                            <ul className="imagebox__reviews reviews">
+                                <li className="reviews__item">
+                                    <span className="reviews__name">Ольга:</span>
+                                    <span className="reviews__post">Классный слинг всем рекомендую.</span>
+                                </li>
+                                <li className="reviews__item">
+                                    <span className="reviews__name">Юлия:</span>
+                                    <span className="reviews__post">Очень удобная вещь!</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div className="preview__infobox">
@@ -92,7 +106,7 @@ function CardPage() {
                             </div>
                             <div className="preview__buttons">
                                 <BackButton className={"preview__button shd btn eff"} />
-                                <AddButton user={user} />
+                                <AddButton user={user} className={'preview__button add-button btn'} />
                             </div>
                         </div>
                     </div>

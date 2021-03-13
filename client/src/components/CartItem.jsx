@@ -6,8 +6,9 @@ import { ReactComponent as Minus } from '../assets/images/svg/minus.svg';
 import { useDispatch } from 'react-redux';
 import { minusCartItem, setCartItems } from '../redux/actions/cart';
 import { setCancelId } from '../redux/actions/modal';
+import { HOST } from '../consts/consts';
 
-function CartItem({ id, title, img, size, material, price, description, dataForKey, handlerCancelModalShow }) {
+function CartItem({ id, name, img, price, info, handlerCancelModalShow }) {
 
     const dispatch = useDispatch();
 
@@ -18,17 +19,8 @@ function CartItem({ id, title, img, size, material, price, description, dataForK
     }))
 
     const handlerCartItem = () => {
-        const obj = {
-            id,
-            title,
-            img,
-            description,
-            size,
-            material,
-            price,
-            dataForKey
-        }
-        dispatch(setCartItems(obj))
+        console.log('object');
+
     }
 
     const onSetDisableMinus = () => {
@@ -52,8 +44,8 @@ function CartItem({ id, title, img, size, material, price, description, dataForK
     }
 
     useEffect(() => {
-        onSetDisableMinus()
-    }, [countsIdItems[id]])
+        // onSetDisableMinus()
+    }, [])
 
     const MinusButton = disableMinus ? "item__button shd btn disabled reff" : "item__button shd btn reff";
 
@@ -61,21 +53,21 @@ function CartItem({ id, title, img, size, material, price, description, dataForK
         <div className="cart__item item shd">
             <div className="item__column">
                 <div className="item__imgbox">
-                    <img className="item__img" src={img} alt="" />
+                    <img className="item__img" src={HOST + img} alt="" />
                 </div>
-                <h2 className="item__name">{title}</h2>
+                <h2 className="item__name">{name}</h2>
             </div>
             <div className="item__column">
-                <span className="item__description">{description}</span>
+                <span className="item__description">{info[0].description}</span>
             </div>
             <div className="item__column">
                 <div className="item__row">
                     <span className="item__size">Размер:</span>
-                    <span className="item__size-count">{size} см</span>
+                    <span className="item__size-count">{info[0].size} см</span>
                 </div>
                 <div className="item__row">
                     <span className="item__material">Материал:</span>
-                    <span className="item__material-value">{material}</span>
+                    <span className="item__material-value">{info[0].material}</span>
                 </div>
             </div>
             <div className="item__column">
@@ -90,7 +82,7 @@ function CartItem({ id, title, img, size, material, price, description, dataForK
                             onClick={handlerMinusItem}
                             className="item__minus" />
                     </button>
-                    <span className="item__count-value">{countsIdItems[id]} шт</span>
+                    <span className="item__count-value">{countsIdItems.filter((value) => value["id" + id])[0]["id" + id]} шт</span>
                     <button className="item__button item__button_green shd btn geff">
                         <Plus
                             onClick={handlerCartItem}
@@ -101,7 +93,7 @@ function CartItem({ id, title, img, size, material, price, description, dataForK
             </div>
             <div className="item__column">
                 <span className="item__text">Стоимость:</span>
-                <span className="item__totalprice">{price * countsIdItems[id]} руб</span>
+                <span className="item__totalprice">{price * countsIdItems.filter((value) => value["id" + id])[0]["id" + id]} руб</span>
             </div>
             <div className="item__column">
                 <button onClick={handlerCancel} className="item__button shd btn reff">

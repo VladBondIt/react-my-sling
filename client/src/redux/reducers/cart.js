@@ -1,26 +1,26 @@
-import { SET_CART_ITEMS, CLEAR_CART, MINUS_CART_ITEM, CANCEL_POSITION, SET_BASKET_ID } from "../types";
+import { SET_CART_ITEMS, CLEAR_CART, MINUS_CART_ITEM, CANCEL_POSITION, SET_BASKET_ID, SET_CART_COUNTS_ID } from "../types";
 
 const initialState = {
     cartItems: [],
-    countsIdItems: {},
+    countsIdItems: [],
     totalPrice: 0,
     totalCount: 0,
     basketId: false
 }
 
-const calcTotalCount = (obj) => {
-    return Object.values(obj).reduce((previousValue, currentValue) => {
+const calcTotalCount = (arr) => {
+    return arr.reduce((previousValue, currentValue) => {
 
-        previousValue += currentValue;
+        previousValue += Number(Object.values(currentValue));
 
         return previousValue;
     }, 0)
 }
 
-const calcTotalPrice = (arr, obj) => {
+const calcTotalPrice = (arr, countsArr) => {
     return arr.reduce((previousValue, currentValue) => {
 
-        previousValue += (currentValue.price * obj[currentValue.id])
+        previousValue += (currentValue.price * countsArr.filter((value) => value['id' + currentValue.id])[0]['id' + currentValue.id])
 
         return previousValue;
     }, 0)
@@ -32,44 +32,12 @@ const cards = (state = initialState, action) => {
     switch (action.type) {
         case SET_CART_ITEMS:
 
-            const stateCount = !state.countsIdItems[action.payload.id]
-                ? 0
-                : state.countsIdItems[action.payload.id];
-
-            let newItems = null;
-
-            state.cartItems.length > 0
-                ? state.cartItems.some((obj) => obj.id === action.payload.id)
-                    ? newItems = [
-                        ...state.cartItems
-                    ]
-                    : newItems = [
-                        ...state.cartItems,
-                        action.payload
-                    ]
-                : newItems = [
-                    ...state.cartItems,
-                    action.payload
-                ]
-
-            const newCountsIdItems = {
-                ...state.countsIdItems,
-                [action.payload.id]: stateCount + 1
-            };
-
-            const totalCount = calcTotalCount(newCountsIdItems);
-
-
-            const totalPrice = calcTotalPrice(newItems, newCountsIdItems);
-
-
+            const totalPrice = calcTotalPrice(action.payload, state.countsIdItems);
 
             return {
                 ...state,
-                cartItems: newItems,
-                countsIdItems: newCountsIdItems,
+                cartItems: action.payload,
                 totalPrice: totalPrice,
-                totalCount: totalCount
             }
         case CLEAR_CART:
             return {
@@ -118,6 +86,34 @@ const cards = (state = initialState, action) => {
                 countsIdItems: canceledCountsItems,
                 totalPrice: totalePriceCanceled,
                 totalCount: totaleCountCanceled
+            }
+        case SET_CART_COUNTS_ID:
+
+            const newCountsIdItems = action.payload.reduce((acc, currentValue) => {
+
+                if (acc.length !== 0 && acc.some((value) => value['id' + currentValue.itemId])) {
+                    acc.forEach((value) => {
+                        if (Object.keys(value)[0] === `id${currentValue.itemId}`) {
+                            value['id' + currentValue.itemId] += 1
+                        }
+                    })
+                } else {
+                    acc.push({
+                        ['id' + currentValue.itemId]: 1
+                    })
+
+                }
+
+                return acc;
+            }, [])
+
+            const newTotalCount = calcTotalCount(newCountsIdItems)
+
+            return {
+
+                ...state,
+                countsIdItems: newCountsIdItems,
+                totalCount: newTotalCount
             }
 
         default:

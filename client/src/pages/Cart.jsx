@@ -64,7 +64,7 @@ function Cart() {
                                 {cartItems.map((cartItem) => <CartItem
                                     {...cartItem}
                                     handlerCancelModalShow={handlerCancelModalShow}
-                                    key={cartItem.dataForKey}
+                                    key={cartItem.id}
                                 />)}
                             </div>
 

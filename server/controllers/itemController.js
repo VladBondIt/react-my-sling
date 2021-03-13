@@ -79,6 +79,22 @@ class ItemController {
 
         return res.json(item)
     }
+
+    async getItemsForCart(req, res) {
+        const { arr } = req.body
+
+        const resultArr = [...arr].map((value) => Number(value)).filter((value) => !Number.isNaN(value))
+
+
+        const items = await Item.findAll({
+            where: {
+                id: resultArr
+            },
+            include: [{ model: ItemInfo, as: 'info' }]
+        })
+
+        return res.json(items)
+    }
 }
 
 module.exports = new ItemController()

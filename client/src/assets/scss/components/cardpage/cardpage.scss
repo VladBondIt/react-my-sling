@@ -96,13 +96,19 @@
     display: flex;
     &__column {
         &:first-child {
-            @include adaptiv-flex-width(0, 0, 250, 90);
+            @include adaptiv-flex-width(0, 0, 170, 70);
             background: #000;
+        }
+        &:nth-child(2) {
+            border-left: 2px solid #000;
+            @include adaptiv-flex-width(0, 0, 500, 200);
+            position: relative;
         }
         &:last-child {
             border-left: 2px solid #000;
-            flex: 0 1 100%;
+            flex: 1 1 100%;
             position: relative;
+            background: rgba(255, 255, 255, 0.6);
         }
     }
     &__mainimg {
@@ -114,7 +120,7 @@
     }
     &__row {
         position: relative;
-        @include adaptiv-padding-bottom(200, 70);
+        @include adaptiv-padding-bottom(150, 70);
         &:not(:last-child) {
             border-bottom: 2px solid #000;
         }
@@ -134,5 +140,33 @@
         &.active {
             background: transparent;
         }
+    }
+
+    &__rating {
+        @include adaptiv-font(30, 20);
+        font-weight: 700;
+        padding: 10px 20px;
+        margin: 0 auto;
+        margin: 20px 0;
+    }
+
+    &__reviews {
+    }
+}
+
+.reviews {
+    &__item {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        padding: 0 10px;
+    }
+    &__name {
+        @include adaptiv-font(30, 20);
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    &__post {
+        @include adaptiv-font(26, 18);
     }
 }

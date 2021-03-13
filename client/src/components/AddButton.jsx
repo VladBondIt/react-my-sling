@@ -1,11 +1,11 @@
 import React from 'react'
 
-function AddButton({ user, callback }) {
+function AddButton({ user, callback, className }) {
     return (
         <button
             disabled={user ? false : true}
             title={user ? "Добавить предмет в корзину" : "Войдите что бы добавить предмет в корзину"}
-            className="card__button add-button btn"
+            className={className}
             onClick={callback}
         >
             Добавить

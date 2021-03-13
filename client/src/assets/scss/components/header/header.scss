@@ -258,7 +258,7 @@
         fill: #b2e5fb;
     }
     &__text {
-        margin-left: 5px;
+        margin: 0 5px;
         @include adaptiv-font(19, 14);
         @media (max-width: 450px) {
             margin: 0;
