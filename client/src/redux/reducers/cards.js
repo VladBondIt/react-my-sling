@@ -1,10 +1,11 @@
+import { LIMIT } from "../../services/limit";
 import { SET_INFOS, SET_CARDS, SET_LOADING, SET_ACTIVE_PAGE, SET_TOTAL_COUNT, SET_CARD_LIMIT } from "../types";
 
 const initialState = {
     cardItems: [],
     cardInfos: [],
     isLoaded: false,
-    limit: 3,
+    limit: LIMIT,
     activePage: 1,
     totalCount: 0
 

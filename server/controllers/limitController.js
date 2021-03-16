@@ -1,4 +1,5 @@
 const { Limit } = require('../models/models')
+const fs = require('fs');
 
 class LimitController {
 
@@ -25,6 +26,18 @@ class LimitController {
         })
 
         return res.json(items)
+    }
+
+    async writeLimit(req, res) {
+
+        const { limit } = req.body
+
+        fs.writeFile('../../react-my-sling/client/src/services/limit.js', `export const LIMIT = ${limit}`, 'utf8', function (err) {
+            if (err) console.log(err);
+        });
+
+        return res
+
     }
 
 }

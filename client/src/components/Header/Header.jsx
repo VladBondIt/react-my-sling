@@ -34,7 +34,7 @@ function Header() {
             {isHomePage
                 ?
                 <div className="header__background">
-                    <div className="container">
+                    <div className={modalShow ? "container open" : "container"}>
                         <HeaderNav />
                         <div className="header__content">
                             <div className="header__row">

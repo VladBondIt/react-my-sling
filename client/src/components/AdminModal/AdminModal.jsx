@@ -87,7 +87,7 @@ function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
     }
 
     const handlerLimitSubmit = () => {
-        httpService.updateLimit(Number(limit))
+        httpService.rewriteLimit(Number(limit))
         // dispatch(setCardLimit(Number(limit)))
         handlerAdminModal()
     }

@@ -18,7 +18,7 @@ import { setBasketId, setCartCountsId, setCartItems } from '../redux/actions/car
 function App() {
     const dispatch = useDispatch();
 
-    const { previewObj, user, isAuth, basketId, countsIdItems, cartItems } = useSelector(({ modal, login, cart }) => ({
+    const { previewObj, user, isAuth, basketId, countsIdItems, cartItems, } = useSelector(({ modal, login, cart }) => ({
         user: login.user,
         isAuth: login.isAuth,
         previewObj: modal.previewObj,
@@ -33,6 +33,7 @@ function App() {
     if (countsIdItems.length > 0 && basketId && cartItems.length === 0) {
         httpService.getCartItems(countsIdItems).then(res => dispatch(setCartItems(res)))
     }
+
 
     React.useEffect(() => {
         if (basketId) {
@@ -53,6 +54,7 @@ function App() {
                 })
         }
     }, [basketId])
+
 
     return (
         <div className="wrapper">

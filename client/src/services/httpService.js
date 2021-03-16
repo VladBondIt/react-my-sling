@@ -6,26 +6,26 @@ class FetchService {
     _apiBaseServer = HOST;
     _auth = `Bearer ${localStorage.getItem('token')}`
 
-    async getResource(url) {
-        const res = await fetch(`${this._apiBase}${url}`);
+    // async getResource(url) {
+    //     const res = await fetch(`${this._apiBase}${url}`);
 
-        if (!res.ok) {
-            throw new Error(`Could not fetch ${url}` +
-                `, received ${res.status}`);
-        }
-        return await res.json();
-    }
+    //     if (!res.ok) {
+    //         throw new Error(`Could not fetch ${url}` +
+    //             `, received ${res.status}`);
+    //     }
+    //     return await res.json();
+    // }
 
 
-    async getCategoryes(url) {
-        const res = await fetch(`${this._apiBase}${url}`);
-        if (!res.ok) {
-            throw new Error(`Could not fetch ${url}` +
-                `, received ${res.status}`);
-        }
-        const data = await res.json();
-        return [...new Map(data.map(obj => [obj["category"], obj])).values()]
-    }
+    // async getCategoryes(url) {
+    //     const res = await fetch(`${this._apiBase}${url}`);
+    //     if (!res.ok) {
+    //         throw new Error(`Could not fetch ${url}` +
+    //             `, received ${res.status}`);
+    //     }
+    //     const data = await res.json();
+    //     return [...new Map(data.map(obj => [obj["category"], obj])).values()]
+    // }
 
 
     async registration(name, phone, email, password) {
@@ -240,13 +240,13 @@ class FetchService {
         return await res.json();
     }
 
-    async updateLimit(limit) {
+    async rewriteLimit(limit) {
         const obj = {
             limit: limit
         }
 
         const res = await fetch(`${this._apiBaseServer}api/limit`, {
-            method: 'PUT',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
                 'Authorization': `${this._auth}`

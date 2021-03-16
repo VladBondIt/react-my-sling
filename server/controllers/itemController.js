@@ -9,7 +9,7 @@ class ItemController {
             let { name, oldprice, price, brandId, typeId, info } = req.body
             const { img, firstSideImg, secondSideImg, } = req.files
 
-            //Экспортируем объект path из експресса, передаем в функцию МВ метод резолв
+            //Экспортируем объект path из ноды, передаем в функцию МВ метод резолв
             // с параметрами пути к папке статик, для адаптации пути под разные ОС.
 
 
@@ -83,8 +83,7 @@ class ItemController {
     async getItemsForCart(req, res) {
         const { arr } = req.body
 
-        const resultArr = [...arr].map((value) => Number(value)).filter((value) => !Number.isNaN(value))
-
+        const resultArr = JSON.parse(arr)
 
         const items = await Item.findAll({
             where: {
