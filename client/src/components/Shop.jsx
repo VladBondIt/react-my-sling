@@ -4,13 +4,15 @@ import CategoryItem from './CategoryItem';
 import SearchForm from './SearchForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCategoryBrands, setCategoryTypes, } from '../redux/actions/categoryes';
-import { setCardLimit, setCards, setInfoCards, setTotalCount } from '../redux/actions/cards';
+import { setCards, setInfoCards, setTotalCount } from '../redux/actions/cards';
 import Loader from './Loader';
 import { setLoading } from '../redux/actions/loader';
 import { setSearchChar } from '../redux/actions/search';
-import httpService from '../services/httpService';
 import BrandItem from './BrandItem';
 import Pagination from './Pagination';
+import itemService from '../services/itemService';
+import typeService from '../services/typeService';
+import brandService from '../services/brandService';
 
 
 const Shop = memo(function Shop() {
@@ -35,23 +37,20 @@ const Shop = memo(function Shop() {
 
     useEffect(() => {
 
-
-        // httpService.getLimit().then((res) => dispatch(setCardLimit(res.limit)))
-
         dispatch(setLoading(true))
         dispatch(setSearchChar(''))
-        httpService.getInfo().then((res) => {
+        itemService.getInfo().then((res) => {
             dispatch(setInfoCards(res))
         })
-        httpService.getItems(activeTypeItem, activeBrandItem, activePage, limit).then((res) => {
+        itemService.getItems(activeTypeItem, activeBrandItem, activePage, limit).then((res) => {
             dispatch(setTotalCount(res.count))
             dispatch(setCards(res.rows))
             dispatch(setLoading(false))
         })
-        httpService.getTypes().then(res => {
+        typeService.getTypes().then(res => {
             dispatch(setCategoryTypes(res))
         })
-        httpService.getBrand().then(res => {
+        brandService.getBrand().then(res => {
             dispatch(setCategoryBrands(res))
         })
     }, [activePage, activeTypeItem, activeBrandItem, limit])

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { ReactComponent as CloseModal } from '../../assets/images/svg/clear-single.svg';
+import brandService from '../../services/brandService';
 import httpService from '../../services/httpService'
+import itemService from '../../services/itemService';
+import limitService from '../../services/limitService';
+import typeService from '../../services/typeService';
 import ModalInput from './ModalInput';
 import ObjectAdminModal from './ObjectAdminModal';
 
@@ -52,8 +56,8 @@ function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
     useEffect(() => {
         setTypesDropDown([{ id: 1, name: 'type' }, { id: 2, name: 'brand' }])
 
-        httpService.getTypes().then(res => setTypesNames(res))
-        httpService.getBrand().then(res => setBrandNames(res))
+        typeService.getTypes().then(res => setTypesNames(res))
+        brandService.getBrand().then(res => setBrandNames(res))
 
         switch (adminTypeModal) {
             case 0:
@@ -87,8 +91,7 @@ function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
     }
 
     const handlerLimitSubmit = () => {
-        httpService.rewriteLimit(Number(limit))
-        // dispatch(setCardLimit(Number(limit)))
+        limitService.rewriteLimit(Number(limit))
         handlerAdminModal()
     }
 
@@ -103,10 +106,10 @@ function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
         const formData = new FormData();
         switch (adminTypeModal) {
             case 0:
-                httpService.createType(addedType).then(res => console.log(res))
+                typeService.createType(addedType).then(res => console.log(res))
                 break;
             case 1:
-                httpService.createBrand(addedBrand).then(res => console.log(res))
+                brandService.createBrand(addedBrand).then(res => console.log(res))
                 break;
             case 2:
                 formData.append('name', name)
@@ -124,7 +127,7 @@ function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
                     console.log(pair);
                 }
 
-                httpService.createItem(formData).then(res => console.log(res))
+                itemService.createItem(formData).then(res => console.log(res))
                 break;
 
             default:

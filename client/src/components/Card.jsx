@@ -1,30 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCartCountsId, setCartItems } from '../redux/actions/cart';
-import { setPreviewObj } from '../redux/actions/modal';
 import { useHistory } from 'react-router-dom';
 import { setHomePage } from '../redux/actions/page';
 import { CARD_PAGE_ROUTE, HOST } from '../consts/consts';
 import AddButton from './AddButton';
-import httpService from '../services/httpService';
+import basketService from '../services/basketService';
+import { setCartCountsId, setCartItems } from '../redux/actions/cart';
+import clientCartService from '../services/clientCartService';
 
 function Card({ name, price, oldprice, img, id }) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { user, cardInfos, basketId } = useSelector(({ login, cards, cart }) => ({
+    const { user, cardInfos, basketId, countsIdItems } = useSelector(({ login, cards, cart }) => ({
         ...login,
         ...cards,
         ...cart
     }))
     const [info, setInfo] = useState('')
 
-    const handlerCardItem = async () => {
-        const item = await httpService.addBasketItem(id, basketId)
-        const items = await httpService.getBasketItems(basketId)
-
-        console.log({ item, items });
-
-        dispatch(setCartCountsId(items))
+    const handlerCardItem = () => {
+        basketService.addBasketItem(id, basketId).then(res => console.log(res))
+        basketService.getUserBasketItems(basketId).then(res => dispatch(setCartCountsId(res)))
+        clientCartService.getCartItems(countsIdItems).then(res => dispatch(setCartItems(res)))
     }
 
     // const handlerPreview = () => {

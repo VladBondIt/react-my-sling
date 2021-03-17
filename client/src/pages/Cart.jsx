@@ -3,7 +3,6 @@ import CartItem from '../components/CartItem';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as CartEmpty } from '../assets/images/svg/cart-empty-black.svg';
 import { ReactComponent as CartClear } from '../assets/images/svg/clear-all.svg';
-import Modal from '../components/Modal/Modal';
 import { setModalShow, setModalType } from '../redux/actions/modal';
 import BackButton from '../components/BackButton';
 
@@ -89,7 +88,6 @@ function Cart() {
                         </div>
                         <BackButton className={"cart__button shd btn eff"} />
                     </div>}
-                {modalShow && <Modal />}
             </div>
         </div>
     )

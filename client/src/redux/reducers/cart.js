@@ -32,6 +32,8 @@ const cards = (state = initialState, action) => {
     switch (action.type) {
         case SET_CART_ITEMS:
 
+            console.log(action.payload)
+
             const totalPrice = calcTotalPrice(action.payload, state.countsIdItems);
 
             return {

@@ -4,7 +4,7 @@ import { ReactComponent as DeleteItem } from '../assets/images/svg/clear-single.
 import { ReactComponent as Plus } from '../assets/images/svg/plus.svg';
 import { ReactComponent as Minus } from '../assets/images/svg/minus.svg';
 import { useDispatch } from 'react-redux';
-import { minusCartItem, setCartItems } from '../redux/actions/cart';
+import { minusCartItem } from '../redux/actions/cart';
 import { setCancelId } from '../redux/actions/modal';
 import { HOST } from '../consts/consts';
 
@@ -84,7 +84,7 @@ function CartItem({ id, name, img, price, info, handlerCancelModalShow }) {
                             onClick={handlerMinusItem}
                             className="item__minus" />
                     </button>
-                    <span className="item__count-value">{countsIdItems.find((value) => Object.keys(value)[0] === "id" + id)["id" + id]} шт</span>
+                    <span className="item__count-value">{countsIdItems.filter((value) => value["id" + id] && value["id" + id])[0]["id" + id]} шт</span>
                     <button className="item__button item__button_green shd btn geff">
                         <Plus
                             onClick={handlerCartItem}

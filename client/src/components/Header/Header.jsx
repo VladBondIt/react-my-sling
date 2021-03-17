@@ -5,7 +5,6 @@ import { ReactComponent as FbSvg } from '../../assets/images/svg/header-facebook
 import HeaderNav from './HeaderNav';
 import { useSelector, useDispatch } from 'react-redux';
 import { setModalShow, setModalType } from '../../redux/actions/modal';
-import Modal from '../Modal/Modal';
 
 
 function Header() {
@@ -13,18 +12,13 @@ function Header() {
 
     const dispatch = useDispatch();
 
-    const { modalShow, typeModal, isHomePage } = useSelector((state) => ({
+    const { modalShow, isHomePage } = useSelector((state) => ({
         modalShow: state.modal.modalShow,
-        typeModal: state.modal.typeModal,
         isHomePage: state.page.isHomePage,
     }))
 
-    const handlerOfferCallModalShow = () => {
-        dispatch(setModalShow(!modalShow))
-    }
-
     const handlerOfferCallModal = () => {
-        handlerOfferCallModalShow()
+        dispatch(setModalShow(!modalShow))
         dispatch(setModalType(2))
     }
 
@@ -71,9 +65,6 @@ function Header() {
                         <HeaderNav />
                     </div>
                 </div>}
-            {modalShow && <Modal
-                handlerOfferCallModalShow={handlerOfferCallModalShow}
-                typeModal={typeModal} />}
         </header >
 
     )

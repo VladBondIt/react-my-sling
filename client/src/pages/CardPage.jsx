@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCartItems } from '../redux/actions/cart';
 import PreviewItem from '../components/PreviewItem';
 import BackButton from '../components/BackButton';
-import httpService from '../services/httpService';
 import { HOST } from '../consts/consts';
 import { useParams } from 'react-router-dom';
 import { setPreviewObj } from '../redux/actions/modal';
 import { setHomePage } from '../redux/actions/page';
 import AddButton from '../components/AddButton';
+import itemService from '../services/itemService';
 
 function CardPage() {
 
@@ -39,7 +39,7 @@ function CardPage() {
     useEffect(() => {
         scrollPoint.current.scrollIntoView({ behavior: "smooth" })
         dispatch(setHomePage(false))
-        httpService.getItem(id).then(res => {
+        itemService.getItem(id).then(res => {
             dispatch(setPreviewObj(res))
         })
     }, [])

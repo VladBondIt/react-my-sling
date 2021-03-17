@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import CartModal from './CartModal';
 import OfferCallModal from './OfferCallModal';
 import { useSelector, useDispatch } from 'react-redux';
-import { cancelPosition, clearCart } from '../../redux/actions/cart';
+import { cancelPosition, clearCart, setCartCountsId } from '../../redux/actions/cart';
 import { setModalShow, setModalType } from '../../redux/actions/modal';
 import OrderModal from './OrderModal';
 import ThanksModal from './ThanksModal';
 import LoginModal from './LoginModal';
 import RegistrationModal from './RegistrationModal';
 import ThanksRegModal from './ThanksRegModal';
-import httpService from '../../services/httpService';
 import { setAuth, setUser } from '../../redux/actions/login';
+import loginService from '../../services/loginService';
+import basketService from '../../services/basketService';
 
 function Modal() {
 
@@ -26,12 +27,13 @@ function Modal() {
     const [password, setPassword] = useState("");
 
 
-    const { modalShow, typeModal, cancelId, totalPrice, totalCount } = useSelector((state) => ({
+    const { modalShow, typeModal, cancelId, totalPrice, totalCount, basketId } = useSelector((state) => ({
         modalShow: state.modal.modalShow,
         typeModal: state.modal.typeModal,
         cancelId: state.modal.cancelId,
         totalPrice: state.cart.totalPrice,
         totalCount: state.cart.totalCount,
+        basketId: state.cart.basketId,
     }))
 
 
@@ -70,10 +72,11 @@ function Modal() {
             }, 3000);
         }
     }
+
     const handlerLoginSuccess = (e) => {
         e.preventDefault();
         if (email && password) {
-            httpService.login(email, password).then(res => {
+            loginService.login(email, password).then(res => {
                 dispatch(setUser(res))
                 dispatch(setAuth(true))
             })
@@ -89,7 +92,7 @@ function Modal() {
     const handlerRegSuccess = (e) => {
         e.preventDefault();
         if (email && phone && name && password && checked) {
-            httpService.registration(name, phone, email, password).then(res => console.log(res))
+            loginService.registration(name, phone, email, password).then(res => console.log(res))
             e.target.reset();
             dispatch(setModalType(7))
         } else {
@@ -151,7 +154,8 @@ function Modal() {
         dispatch(clearCart())
     }
     const handlerCancel = () => {
-        dispatch(cancelPosition(cancelId))
+        basketService.cancelBasketItem(cancelId, basketId).then(res => console.log(res))
+        basketService.getUserBasketItems(basketId).then(res => dispatch(setCartCountsId(res)))
     }
 
     const handlerModalShow = () => {
