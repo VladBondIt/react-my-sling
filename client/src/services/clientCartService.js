@@ -3,7 +3,7 @@ import BaseService from "./baseService";
 class ClientCartService extends BaseService {
 
     async getCartItems(arr) {
-        arr = arr.map((value) => Number(Object.keys(value)[0].slice(2)))
+        arr = arr.map((value) => value.id)
 
         const formData = new FormData();
 

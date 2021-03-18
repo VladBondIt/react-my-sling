@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CartModal from './CartModal';
 import OfferCallModal from './OfferCallModal';
 import { useSelector, useDispatch } from 'react-redux';
-import { cancelPosition, clearCart, setCartCountsId } from '../../redux/actions/cart';
+import { cancelPosition, clearCart } from '../../redux/actions/cart';
 import { setModalShow, setModalType } from '../../redux/actions/modal';
 import OrderModal from './OrderModal';
 import ThanksModal from './ThanksModal';
@@ -155,7 +155,7 @@ function Modal() {
     }
     const handlerCancel = () => {
         basketService.cancelBasketItem(cancelId, basketId).then(res => console.log(res))
-        basketService.getUserBasketItems(basketId).then(res => dispatch(setCartCountsId(res)))
+
     }
 
     const handlerModalShow = () => {

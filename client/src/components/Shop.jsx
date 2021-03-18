@@ -121,7 +121,7 @@ const Shop = memo(function Shop() {
                             {!isLoading
                                 ? visibleCards.map((card) =>
                                     <Card
-                                        {...card}
+                                        card={card}
                                         key={card.id} />)
                                 : loaderItems.map((loader) => <Loader key={loader.id} />)}
                         </div>

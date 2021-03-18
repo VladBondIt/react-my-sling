@@ -5,24 +5,22 @@ import { setHomePage } from '../redux/actions/page';
 import { CARD_PAGE_ROUTE, HOST } from '../consts/consts';
 import AddButton from './AddButton';
 import basketService from '../services/basketService';
-import { setCartCountsId, setCartItems } from '../redux/actions/cart';
-import clientCartService from '../services/clientCartService';
+import { addCartItem } from '../redux/actions/cart';
+// import { setCartCountsId, setCartItems } from '../redux/actions/cart';
+// import clientCartService from '../services/clientCartService';
 
-function Card({ name, price, oldprice, img, id }) {
+function Card({ card }) {
+    const { name, price, oldprice, img, id } = card
+
+
     const dispatch = useDispatch();
     const history = useHistory();
-    const { user, cardInfos, basketId, countsIdItems } = useSelector(({ login, cards, cart }) => ({
+    const { user, cardInfos, basketId } = useSelector(({ login, cards, cart }) => ({
         ...login,
         ...cards,
         ...cart
     }))
     const [info, setInfo] = useState('')
-
-    const handlerCardItem = () => {
-        basketService.addBasketItem(id, basketId).then(res => console.log(res))
-        basketService.getUserBasketItems(basketId).then(res => dispatch(setCartCountsId(res)))
-        clientCartService.getCartItems(countsIdItems).then(res => dispatch(setCartItems(res)))
-    }
 
     // const handlerPreview = () => {
     //     dispatch(setPreviewObj(obj))
@@ -36,10 +34,20 @@ function Card({ name, price, oldprice, img, id }) {
 
     const handlerInfo = () => {
         if (cardInfos) {
-            setInfo(cardInfos.filter((value) => value.itemId === id)[0])
+            setInfo(cardInfos.filter((value) => value.itemId === id))
         }
 
     }
+
+    const handlerCardItem = () => {
+        const obj = {
+            ...card,
+            info
+        }
+        basketService.addBasketItem(id, basketId).then(res => console.log(res))
+        dispatch(addCartItem(obj))
+    }
+
     useEffect(() => {
         handlerInfo()
     }, [])
@@ -61,11 +69,11 @@ function Card({ name, price, oldprice, img, id }) {
                 </div>
                 <div className="card__row">
                     <span className="card__size">Размер:</span>
-                    <span className="card__size-count">{info && info.size} см</span>
+                    <span className="card__size-count">{info && info[0].size} см</span>
                 </div>
                 <div className="card__row">
                     <span className="card__material">Материал:</span>
-                    <span className="card__material-value">{info && info.material}</span>
+                    <span className="card__material-value">{info && info[0].material}</span>
                 </div>
                 <div className="card__row">
                     <div className="card__price price">

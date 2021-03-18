@@ -8,15 +8,11 @@ import { minusCartItem } from '../redux/actions/cart';
 import { setCancelId } from '../redux/actions/modal';
 import { HOST } from '../consts/consts';
 
-function CartItem({ id, name, img, price, info, handlerCancelModalShow }) {
+function CartItem({ id, count, name, img, price, info, handlerCancelModalShow }) {
 
     const dispatch = useDispatch();
 
     const [disableMinus, setDisableMinus] = useState(false);
-
-    const { countsIdItems } = useSelector((state) => ({
-        countsIdItems: state.cart.countsIdItems,
-    }))
 
     const handlerCartItem = () => {
         console.log('object');
@@ -24,7 +20,7 @@ function CartItem({ id, name, img, price, info, handlerCancelModalShow }) {
     }
 
     const onSetDisableMinus = () => {
-        if (countsIdItems[id] === 1) {
+        if (count === 1) {
             setDisableMinus(true)
         } else {
             setDisableMinus(false)
@@ -32,7 +28,7 @@ function CartItem({ id, name, img, price, info, handlerCancelModalShow }) {
     }
 
     const handlerMinusItem = () => {
-        if (countsIdItems[id] !== 1) {
+        if (count !== 1) {
             dispatch(minusCartItem(id))
         }
         onSetDisableMinus()
@@ -84,7 +80,7 @@ function CartItem({ id, name, img, price, info, handlerCancelModalShow }) {
                             onClick={handlerMinusItem}
                             className="item__minus" />
                     </button>
-                    <span className="item__count-value">{countsIdItems.filter((value) => value["id" + id] && value["id" + id])[0]["id" + id]} шт</span>
+                    <span className="item__count-value">{count} шт</span>
                     <button className="item__button item__button_green shd btn geff">
                         <Plus
                             onClick={handlerCartItem}
@@ -95,7 +91,7 @@ function CartItem({ id, name, img, price, info, handlerCancelModalShow }) {
             </div>
             <div className="item__column">
                 <span className="item__text">Стоимость:</span>
-                <span className="item__totalprice">{price * countsIdItems.filter((value) => value["id" + id])[0]["id" + id]} руб</span>
+                <span className="item__totalprice">{price * count} руб</span>
             </div>
             <div className="item__column">
                 <button onClick={handlerCancel} className="item__button shd btn reff">

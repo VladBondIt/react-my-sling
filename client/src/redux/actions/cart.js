@@ -1,9 +1,9 @@
-import { CLEAR_CART, SET_CART_ITEMS, MINUS_CART_ITEM, CANCEL_POSITION, SET_BASKET_ID, SET_CART_COUNTS_ID } from "../types";
+import { CLEAR_CART, SET_CART_ITEMS, MINUS_CART_ITEM, CANCEL_POSITION, SET_BASKET_ID, ADD_CART_ITEM } from "../types";
 
 
-export const setCartItems = (itemObj) => ({
+export const setCartItems = (itemArr) => ({
     type: SET_CART_ITEMS,
-    payload: itemObj
+    payload: itemArr
 });
 export const clearCart = () => ({
     type: CLEAR_CART,
@@ -20,7 +20,7 @@ export const setBasketId = (basketId) => ({
     type: SET_BASKET_ID,
     payload: basketId
 });
-export const setCartCountsId = (idsObj) => ({
-    type: SET_CART_COUNTS_ID,
-    payload: idsObj
+export const addCartItem = (itemObj) => ({
+    type: ADD_CART_ITEM,
+    payload: itemObj
 });

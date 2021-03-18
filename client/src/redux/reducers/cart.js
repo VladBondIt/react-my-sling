@@ -1,8 +1,7 @@
-import { SET_CART_ITEMS, CLEAR_CART, MINUS_CART_ITEM, CANCEL_POSITION, SET_BASKET_ID, SET_CART_COUNTS_ID } from "../types";
+import { SET_CART_ITEMS, CLEAR_CART, MINUS_CART_ITEM, CANCEL_POSITION, SET_BASKET_ID, ADD_CART_ITEM } from "../types";
 
 const initialState = {
     cartItems: [],
-    countsIdItems: [],
     totalPrice: 0,
     totalCount: 0,
     basketId: false
@@ -11,16 +10,16 @@ const initialState = {
 const calcTotalCount = (arr) => {
     return arr.reduce((previousValue, currentValue) => {
 
-        previousValue += Number(Object.values(currentValue));
+        previousValue += currentValue.count;
 
         return previousValue;
     }, 0)
 }
 
-const calcTotalPrice = (arr, countsArr) => {
+const calcTotalPrice = (arr) => {
     return arr.reduce((previousValue, currentValue) => {
 
-        previousValue += (currentValue.price * countsArr.filter((value) => value['id' + currentValue.id])[0]['id' + currentValue.id])
+        previousValue += (currentValue.price * currentValue.count)
 
         return previousValue;
     }, 0)
@@ -32,14 +31,14 @@ const cards = (state = initialState, action) => {
     switch (action.type) {
         case SET_CART_ITEMS:
 
-            console.log(action.payload)
-
-            const totalPrice = calcTotalPrice(action.payload, state.countsIdItems);
+            const totalPrice = calcTotalPrice(action.payload)
+            const totalCount = calcTotalCount(action.payload)
 
             return {
                 ...state,
                 cartItems: action.payload,
                 totalPrice: totalPrice,
+                totalCount: totalCount
             }
         case CLEAR_CART:
             return {
@@ -53,25 +52,26 @@ const cards = (state = initialState, action) => {
                 ...state,
                 basketId: action.payload
             }
-        case MINUS_CART_ITEM:
+        // case MINUS_CART_ITEM:
 
-            const countsIdItemsMinused = {
-                ...state.countsIdItems,
-                [action.payload]: state.countsIdItems[action.payload] - 1
-            };
+        //     const countsIdItemsMinused = {
+        //         ...state.countsIdItems,
+        //         [action.payload]: state.countsIdItems[action.payload] - 1
+        //     };
 
-            const totalCountMinused = calcTotalCount(countsIdItemsMinused);
+        //     const totalCountMinused = calcTotalCount(countsIdItemsMinused);
 
-            const totalPriceMinused = calcTotalPrice(state.cartItems, countsIdItemsMinused);
+        //     const totalPriceMinused = calcTotalPrice(state.cartItems, countsIdItemsMinused);
 
 
 
-            return {
-                ...state,
-                countsIdItems: countsIdItemsMinused,
-                totalPrice: totalPriceMinused,
-                totalCount: totalCountMinused
-            }
+        //     return {
+        //         ...state,
+        //         countsIdItems: countsIdItemsMinused,
+        //         totalPrice: totalPriceMinused,
+        //         totalCount: totalCountMinused
+        //     }
+
         case CANCEL_POSITION:
 
             const canceledItems = state.cartItems.filter((obj) => obj.id !== action.payload)
@@ -89,32 +89,29 @@ const cards = (state = initialState, action) => {
                 totalPrice: totalePriceCanceled,
                 totalCount: totaleCountCanceled
             }
-        case SET_CART_COUNTS_ID:
+        case ADD_CART_ITEM:
 
-            const newCountsIdItems = action.payload.reduce((acc, currentValue) => {
+            let countedItems = false;
+            let newCartItems = false;
 
-                if (acc.length !== 0 && acc.some((value) => value['id' + currentValue.itemId])) {
-                    acc.forEach((value) => {
-                        if (Object.keys(value)[0] === `id${currentValue.itemId}`) {
-                            value['id' + currentValue.itemId] += 1
-                        }
-                    })
-                } else {
-                    acc.push({
-                        ['id' + currentValue.itemId]: 1
-                    })
+            if (state.cartItems.length > 0 && state.cartItems.some((value) => value.id === action.payload.id)) {
+                countedItems = state.cartItems.map((value) => value.id === action.payload.id
+                    ? { ...value, count: value.count + 1 }
+                    : value)
+            } else {
+                newCartItems = [{ ...action.payload, count: 1 }]
+            }
 
-                }
+            const newArr = newCartItems ? [...state.cartItems, ...newCartItems] : countedItems
 
-                return acc;
-            }, [])
-
-            const newTotalCount = calcTotalCount(newCountsIdItems)
+            const newTotalPrice = calcTotalPrice(newArr)
+            const newTotalCount = calcTotalCount(newArr)
 
             return {
 
                 ...state,
-                countsIdItems: newCountsIdItems,
+                cartItems: newArr,
+                totalPrice: newTotalPrice,
                 totalCount: newTotalCount
             }
 

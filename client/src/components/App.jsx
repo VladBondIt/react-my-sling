@@ -34,14 +34,37 @@ function App() {
     if (user && user.role === 'USER' && !basketId) {
         basketService.getBasket(user.id).then(res => dispatch(setBasketId(res.id)))
     }
-    if (cartItems.length === 0) {
-        clientCartService.getCartItems(countsIdItems).then(res => dispatch(setCartItems(res)))
-    }
 
     React.useEffect(() => {
 
         if (basketId) {
-            basketService.getUserBasketItems(basketId).then(res => dispatch(setCartCountsId(res)))
+            basketService.getUserBasketItems(basketId)
+                .then(res => {
+                    if (res.length > 0) {
+                        const countsIdItems = res.reduce((acc, currentValue) => {
+                            if (acc.length !== 0 && acc.some((value) => value.id === currentValue.itemId)) {
+                                acc.forEach((value) => {
+                                    if (value.id === currentValue.itemId) {
+                                        value.count += 1
+                                    }
+                                })
+                            } else {
+                                acc.push({
+                                    id: currentValue.itemId,
+                                    count: 1
+                                })
+                            }
+                            return acc;
+                        }, [])
+                        clientCartService.getCartItems(countsIdItems).then(res => {
+                            res = res.map((value) => {
+                                const count = countsIdItems.filter((item) => value.id === item.id)[0].count
+                                return count && ({ ...value, count })
+                            })
+                            dispatch(setCartItems(res))
+                        })
+                    }
+                })
         }
 
         if (!user) {
