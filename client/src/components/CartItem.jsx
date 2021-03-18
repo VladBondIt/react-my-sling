@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import { ReactComponent as DeleteItem } from '../assets/images/svg/clear-single.svg';
 import { ReactComponent as Plus } from '../assets/images/svg/plus.svg';
 import { ReactComponent as Minus } from '../assets/images/svg/minus.svg';
@@ -7,31 +6,23 @@ import { useDispatch } from 'react-redux';
 import { minusCartItem } from '../redux/actions/cart';
 import { setCancelId } from '../redux/actions/modal';
 import { HOST } from '../consts/consts';
+import basketService from '../services/basketService';
 
-function CartItem({ id, count, name, img, price, info, handlerCancelModalShow }) {
+function CartItem({ id, count, name, img, price, info, handlerCancelModalShow, basketId }) {
 
     const dispatch = useDispatch();
 
-    const [disableMinus, setDisableMinus] = useState(false);
 
     const handlerCartItem = () => {
         console.log('object');
 
     }
 
-    const onSetDisableMinus = () => {
-        if (count === 1) {
-            setDisableMinus(true)
-        } else {
-            setDisableMinus(false)
-        }
-    }
-
     const handlerMinusItem = () => {
         if (count !== 1) {
+            basketService.minusBasketItem(id, basketId).then(res => console.log(res))
             dispatch(minusCartItem(id))
         }
-        onSetDisableMinus()
     }
 
     const handlerCancel = () => {
@@ -39,13 +30,7 @@ function CartItem({ id, count, name, img, price, info, handlerCancelModalShow })
         dispatch(setCancelId(id))
     }
 
-    useEffect(() => {
-        // onSetDisableMinus()
-    }, [])
-
-
-
-    const MinusButton = disableMinus ? "item__button shd btn disabled reff" : "item__button shd btn reff";
+    const minusButton = count === 1 ? "item__button shd btn disabled reff" : "item__button shd btn reff";
 
     return (
         <div className="cart__item item shd">
@@ -75,7 +60,7 @@ function CartItem({ id, count, name, img, price, info, handlerCancelModalShow })
             <div className="item__column">
                 <div className="item__count">
                     <button
-                        className={MinusButton}>
+                        className={minusButton}>
                         <Minus
                             onClick={handlerMinusItem}
                             className="item__minus" />

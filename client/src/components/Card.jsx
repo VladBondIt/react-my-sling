@@ -6,8 +6,6 @@ import { CARD_PAGE_ROUTE, HOST } from '../consts/consts';
 import AddButton from './AddButton';
 import basketService from '../services/basketService';
 import { addCartItem } from '../redux/actions/cart';
-// import { setCartCountsId, setCartItems } from '../redux/actions/cart';
-// import clientCartService from '../services/clientCartService';
 
 function Card({ card }) {
     const { name, price, oldprice, img, id } = card

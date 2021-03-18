@@ -151,6 +151,7 @@ function Modal() {
     }
 
     const handlerClear = () => {
+        basketService.clearBasketItem(basketId).then(res => console.log(res))
         dispatch(clearCart())
     }
     const handlerCancel = () => {

@@ -83,6 +83,51 @@ class BasketService extends BaseService {
         return await res.json();
     }
 
+    async minusBasketItem(id, basketId) {
+        const itemObj = {
+            basketId: basketId,
+            itemId: id,
+        }
+
+        const res = await fetch(`${this._apiBaseServer}api/basket/minus`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'Authorization': `${this._auth}`
+            },
+            body: JSON.stringify(itemObj)
+        });
+
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${this._apiBaseServer}api/basket/minus` +
+                `, received ${res.status}`);
+        }
+
+        return await res.json();
+    }
+
+    async clearBasketItem(basketId) {
+        const itemObj = {
+            basketId: basketId,
+        }
+
+        const res = await fetch(`${this._apiBaseServer}api/basket/clear`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'Authorization': `${this._auth}`
+            },
+            body: JSON.stringify(itemObj)
+        });
+
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${this._apiBaseServer}api/basket/clear` +
+                `, received ${res.status}`);
+        }
+
+        return await res.json();
+    }
+
 
 }
 

@@ -8,7 +8,7 @@ class BasketController {
         return res.json(basketItem)
     }
 
-    async deleteItem(req, res) {
+    async cancelItem(req, res) {
         const { basketId, itemId } = req.body
         const basketItem = await BasketItem.destroy({
             where: {
@@ -17,6 +17,36 @@ class BasketController {
             }
         })
         return res.json(basketItem)
+    }
+
+    async minusItem(req, res) {
+        const { basketId, itemId } = req.body
+        const basketItem = await BasketItem.findOne({
+            where: {
+                itemId,
+                basketId
+            }
+        })
+
+        const minusRes = await BasketItem.destroy({
+            where: {
+                id: basketItem.id
+            }
+        })
+
+
+        return res.json(minusRes)
+    }
+
+
+    async clearBasket(req, res) {
+        const { basketId } = req.body
+        const clearedItem = await BasketItem.destroy({
+            where: {
+                basketId
+            }
+        })
+        return res.json(clearedItem)
     }
 
     async getBasketItems(req, res) {

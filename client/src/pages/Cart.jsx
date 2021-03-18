@@ -10,8 +10,9 @@ function Cart() {
     const dispatch = useDispatch();
     const scrollPoint = useRef()
 
-    const { cartItems, totalPrice, modalShow } = useSelector((state) => ({
+    const { cartItems, totalPrice, modalShow, basketId } = useSelector((state) => ({
         cartItems: state.cart.cartItems,
+        basketId: state.cart.basketId,
         totalPrice: state.cart.totalPrice,
         modalShow: state.modal.modalShow,
     }))
@@ -62,6 +63,7 @@ function Cart() {
                             <div className="cart__itembox">
                                 {cartItems.map((cartItem) => <CartItem
                                     {...cartItem}
+                                    basketId={basketId}
                                     handlerCancelModalShow={handlerCancelModalShow}
                                     key={cartItem.id}
                                 />)}

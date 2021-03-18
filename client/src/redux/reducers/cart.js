@@ -43,34 +43,32 @@ const cards = (state = initialState, action) => {
         case CLEAR_CART:
             return {
                 cartItems: [],
-                countsIdItems: {},
                 totalPrice: 0,
-                totalCount: 0
+                totalCount: 0,
+                ...state.basketId
             }
         case SET_BASKET_ID:
             return {
                 ...state,
                 basketId: action.payload
             }
-        // case MINUS_CART_ITEM:
+        case MINUS_CART_ITEM:
 
-        //     const countsIdItemsMinused = {
-        //         ...state.countsIdItems,
-        //         [action.payload]: state.countsIdItems[action.payload] - 1
-        //     };
+            const minusedItems = state.cartItems
+                .map((value) => value.id === action.payload
+                    ? { ...value, count: value.count - 1 }
+                    : value
+                )
 
-        //     const totalCountMinused = calcTotalCount(countsIdItemsMinused);
+            const totalCountMinused = calcTotalCount(minusedItems);
+            const totalPriceMinused = calcTotalPrice(minusedItems);
 
-        //     const totalPriceMinused = calcTotalPrice(state.cartItems, countsIdItemsMinused);
-
-
-
-        //     return {
-        //         ...state,
-        //         countsIdItems: countsIdItemsMinused,
-        //         totalPrice: totalPriceMinused,
-        //         totalCount: totalCountMinused
-        //     }
+            return {
+                ...state,
+                cartItems: minusedItems,
+                totalPrice: totalPriceMinused,
+                totalCount: totalCountMinused
+            }
 
         case CANCEL_POSITION:
 

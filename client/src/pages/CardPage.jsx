@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCartItems } from '../redux/actions/cart';
+import { addCartItem } from '../redux/actions/cart';
 import PreviewItem from '../components/PreviewItem';
 import BackButton from '../components/BackButton';
 import { HOST } from '../consts/consts';
@@ -9,6 +9,7 @@ import { setPreviewObj } from '../redux/actions/modal';
 import { setHomePage } from '../redux/actions/page';
 import AddButton from '../components/AddButton';
 import itemService from '../services/itemService';
+import basketService from '../services/basketService';
 
 function CardPage() {
 
@@ -16,9 +17,10 @@ function CardPage() {
 
     const { id } = useParams();
 
-    const { previewObj, user } = useSelector(({ modal, login }) => ({
+    const { previewObj, user, basketId } = useSelector(({ modal, login, cart }) => ({
         ...modal,
-        ...login
+        ...login,
+        ...cart
     }))
 
     const [activeImg, setActiveImg] = useState('')
@@ -28,7 +30,8 @@ function CardPage() {
     const dispatch = useDispatch();
 
     const handlerAddItemToCart = () => {
-        dispatch(setCartItems(previewObj))
+        basketService.addBasketItem(id, basketId).then(res => console.log(res))
+        dispatch(addCartItem(previewObj))
     }
     if (previewObj && sideImgs.length === 0) {
         setActiveImg(HOST + previewObj.img)
@@ -106,7 +109,7 @@ function CardPage() {
                             </div>
                             <div className="preview__buttons">
                                 <BackButton className={"preview__button shd btn eff"} />
-                                <AddButton user={user} className={'preview__button add-button btn'} />
+                                <AddButton callback={handlerAddItemToCart} user={user} className={'preview__button add-button btn'} />
                             </div>
                         </div>
                     </div>
