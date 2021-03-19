@@ -156,7 +156,7 @@ function Modal() {
     }
     const handlerCancel = () => {
         basketService.cancelBasketItem(cancelId, basketId).then(res => console.log(res))
-
+        dispatch(cancelPosition(cancelId))
     }
 
     const handlerModalShow = () => {

@@ -74,16 +74,13 @@ const cards = (state = initialState, action) => {
 
             const canceledItems = state.cartItems.filter((obj) => obj.id !== action.payload)
 
-            const canceledCountsItems = Object.fromEntries(Object.entries(state.countsIdItems).filter((x) => x[0] !== (action.payload + '')))
-
-            const totaleCountCanceled = calcTotalCount(canceledCountsItems);
-            const totalePriceCanceled = calcTotalPrice(canceledItems, canceledCountsItems);
+            const totaleCountCanceled = calcTotalCount(canceledItems);
+            const totalePriceCanceled = calcTotalPrice(canceledItems);
 
 
             return {
                 ...state,
                 cartItems: canceledItems,
-                countsIdItems: canceledCountsItems,
                 totalPrice: totalePriceCanceled,
                 totalCount: totaleCountCanceled
             }

@@ -3,7 +3,7 @@ import { ReactComponent as DeleteItem } from '../assets/images/svg/clear-single.
 import { ReactComponent as Plus } from '../assets/images/svg/plus.svg';
 import { ReactComponent as Minus } from '../assets/images/svg/minus.svg';
 import { useDispatch } from 'react-redux';
-import { minusCartItem } from '../redux/actions/cart';
+import { addCartItem, minusCartItem } from '../redux/actions/cart';
 import { setCancelId } from '../redux/actions/modal';
 import { HOST } from '../consts/consts';
 import basketService from '../services/basketService';
@@ -14,8 +14,11 @@ function CartItem({ id, count, name, img, price, info, handlerCancelModalShow, b
 
 
     const handlerCartItem = () => {
-        console.log('object');
-
+        basketService.addBasketItem(id, basketId).then(res => console.log(res))
+        const obj = {
+            id
+        }
+        dispatch(addCartItem(obj))
     }
 
     const handlerMinusItem = () => {
