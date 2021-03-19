@@ -10,6 +10,7 @@ import { setHomePage } from '../redux/actions/page';
 import AddButton from '../components/AddButton';
 import itemService from '../services/itemService';
 import basketService from '../services/basketService';
+import RatingItem from '../components/RatingItem';
 
 function CardPage() {
 
@@ -26,6 +27,9 @@ function CardPage() {
     const [activeImg, setActiveImg] = useState('')
     const [activeId, setActiveId] = useState(1)
     const [sideImgs, setSideImgs] = useState([])
+    const [ratingNums, setRatingNums] = useState([1, 2, 3, 4, 5])
+    const [ratingValue, setRatingValue] = useState(0)
+    const [width, setWidth] = useState('')
 
     const dispatch = useDispatch();
 
@@ -47,6 +51,15 @@ function CardPage() {
         })
     }, [])
 
+
+    const handlerRatingItem = (e) => {
+        setRatingValue(e.target.value)
+        const obj = {
+            width: (e.target.value / 0.05) + "%"
+        }
+
+        setWidth(obj)
+    }
 
     return (
         <div ref={scrollPoint} className="preview mainbg">
@@ -114,6 +127,27 @@ function CardPage() {
                         </div>
                     </div>
                 </div>
+                <form className="preview__form rating">
+                    <div className="rating__label">Оценить продукт</div>
+                    <div className="rating__body">
+                        <div className="rating__stars">
+                            {width
+                                ? <div style={width} className="rating__active"></div>
+                                : <div className="rating__active"></div>}
+
+                            <div className="rating__items">
+                                {ratingNums.map((value) => <RatingItem
+                                    key={value}
+                                    value={value}
+                                    handlerRatingItem={handlerRatingItem} />)}
+                            </div>
+                        </div>
+                        <div className="rating__value">{ratingValue}</div>
+                    </div>
+                    <div className="rating__label">Написать отзыв</div>
+                    <textarea className="rating__message" cols="60" rows="5" type="text" />
+                    <button className="rating__btn shd btn eff">Отправить</button>
+                </form>
             </div>
         </div>
     )
