@@ -12,6 +12,7 @@ import itemService from '../services/itemService';
 import basketService from '../services/basketService';
 import RatingItem from '../components/RatingItem';
 import ratingService from '../services/ratingService';
+import ReviewsItem from '../components/ReviewsItem';
 
 function CardPage() {
 
@@ -28,12 +29,14 @@ function CardPage() {
     const [activeImg, setActiveImg] = useState('')
     const [activeId, setActiveId] = useState(1)
     const [sideImgs, setSideImgs] = useState([])
-    const [ratingNums, setRatingNums] = useState([1, 2, 3, 4, 5])
     const [ratingValue, setRatingValue] = useState(0)
     const [width, setWidth] = useState('')
     const [overallWidth, setOverallWidth] = useState('')
-    const [ratingShow, setRatingShow] = useState(false)
+    const [ratingShow, setRatingShow] = useState(true)
     const [overallRating, setOverallRating] = useState(0)
+
+    const ratingNums = [1, 2, 3, 4, 5]
+    const reviewsArr = [{ name: "Ольга", post: "Классный слинг всем рекомендую." }, { name: "Марта", post: "Отличное качество,подойдет всем." }]
 
     const dispatch = useDispatch();
 
@@ -109,7 +112,7 @@ function CardPage() {
                             <div className="imagebox__rating rating">
                                 <div className="rating__label">Рейтинг:</div>
                                 <div className="rating__body">
-                                    <div className="rating__stars">
+                                    <div className="rating__stars rating__stars_overall">
                                         {overallWidth
                                             ? <div style={overallWidth} className="rating__active"></div>
                                             : <div className="rating__active"></div>}
@@ -123,16 +126,26 @@ function CardPage() {
                                     <div className="rating__value">{overallRating}</div>
                                 </div>
                             </div>
-                            <ul className="imagebox__reviews reviews">
-                                <li className="reviews__item">
-                                    <span className="reviews__name">Ольга:</span>
-                                    <span className="reviews__post">Классный слинг всем рекомендую.</span>
-                                </li>
-                                <li className="reviews__item">
-                                    <span className="reviews__name">Юлия:</span>
-                                    <span className="reviews__post">Очень удобная вещь!</span>
-                                </li>
-                            </ul>
+                            <div className="preview-info">
+                                <div className="preview-info__row">
+                                    <div className="preview-info__column">
+                                        <span className="preview-info__size">Размер:</span>
+                                        <span className="preview-info__size-count">{previewObj && previewObj.info[0].size} см</span>
+                                    </div>
+                                    <div className="preview-info__column">
+                                        <span className="preview-info__material">Материал:</span>
+                                        <span className="preview-info__material-value">{previewObj && previewObj.info[0].material}</span>
+                                    </div>
+                                </div>
+                                <div className="preview-info__price price">
+                                    <span className="price__old-big">Старая цена:
+                                        <span className="price__rub">{previewObj && previewObj.oldprice} руб</span>
+                                    </span>
+                                    <span className="price__current">Цена:
+                                        <span className="price__rub">{previewObj && previewObj.price} руб</span>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="preview__infobox">
@@ -142,25 +155,9 @@ function CardPage() {
                                 {previewObj && previewObj.info[0].description}: Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit impedit vitae recusandae sequi labore itaque maxime debitis maiores asperiores iusto!
                                 </div>
                         </div>
+
                         <div className="preview__row">
-                            <div className="preview__column">
-                                <span className="preview__size">Размер:</span>
-                                <span className="preview__size-count">{previewObj && previewObj.info[0].size} см</span>
-                            </div>
-                            <div className="preview__column">
-                                <span className="preview__material">Материал:</span>
-                                <span className="preview__material-value">{previewObj && previewObj.info[0].material}</span>
-                            </div>
-                        </div>
-                        <div className="preview__row">
-                            <div className="preview__price price">
-                                <span className="price__old-big">Старая цена:
-                                        <span className="price__rub">{previewObj && previewObj.oldprice} руб</span>
-                                </span>
-                                <span className="price__current">Цена:
-                                        <span className="price__rub">{previewObj && previewObj.price} руб</span>
-                                </span>
-                            </div>
+
                             <div className="preview__buttons">
                                 <BackButton className={"preview__button shd btn eff"} />
                                 <AddButton callback={handlerAddItemToCart} user={user} className={'preview__button add-button btn'} />
@@ -168,6 +165,11 @@ function CardPage() {
                         </div>
                     </div>
                 </div>
+                <ul className="reviews">
+                    <div className="reviews__label">Отзывы:</div>
+                    {reviewsArr.map((obj) =>
+                        <ReviewsItem key={obj.name}{...obj} />)}
+                </ul>
                 {user.role === "USER" && ratingShow
                     ?
                     <form onSubmit={handlerVote} className="preview__form rating">
@@ -187,8 +189,13 @@ function CardPage() {
                             <div className="rating__value">{ratingValue}</div>
                         </div>
                         <div className="rating__label">Написать отзыв</div>
-                        <textarea className="rating__message" cols="60" rows="5" type="text" />
-                        <button className="rating__btn shd btn eff">Отправить</button>
+                        <textarea className="rating__message shd" type="text" />
+                        {ratingValue
+                            ? <button className="rating__btn shd btn eff">Отправить</button>
+                            : <button
+                                disabled
+                                title="Выберите оценку"
+                                className="rating__btn shd btn eff disabled">Отправить</button>}
                     </form>
                     : null}
             </div>

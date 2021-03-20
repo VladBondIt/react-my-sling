@@ -3,12 +3,12 @@
     line-height: 0.75;
     padding: 10px;
     &__label {
-        margin-bottom: 30px;
+        margin-bottom: 20px;
     }
     &__body {
         display: flex;
         align-items: flex-end;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
         width: max-content;
     }
     &__stars {
@@ -17,6 +17,9 @@
             content: "★★★★★";
             display: block;
             color: white;
+        }
+        &_overall {
+            font-size: 30px;
         }
     }
     &__active {
@@ -58,6 +61,11 @@
     &__message {
         font-size: 22px;
         margin-bottom: 30px;
+        width: 100%;
+        min-height: 50px;
+        padding-left: 5px;
+        border-radius: 20px;
+        resize: vertical;
     }
     &__btn {
         display: flex;

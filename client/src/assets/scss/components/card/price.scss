@@ -18,6 +18,8 @@
     &__old-big {
         color: #999999;
         margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
         @media (max-width: 768px) {
             display: flex;
             justify-content: space-between;
@@ -25,6 +27,8 @@
     }
 
     &__current {
+        display: flex;
+        justify-content: space-between;
         @media (max-width: 768px) {
             display: flex;
             justify-content: space-between;
