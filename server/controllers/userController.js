@@ -31,7 +31,7 @@ class UserController {
         const basket = await Basket.create({ userId: user.id })
         const token = generateJwt(user.id, user.email, user.role, user.name)
 
-        return res.json({ token })
+        return res.json({ token, basket })
 
     }
 
