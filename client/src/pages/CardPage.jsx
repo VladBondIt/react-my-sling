@@ -11,6 +11,7 @@ import AddButton from '../components/AddButton';
 import itemService from '../services/itemService';
 import basketService from '../services/basketService';
 import RatingItem from '../components/RatingItem';
+import ratingService from '../services/ratingService';
 
 function CardPage() {
 
@@ -30,6 +31,9 @@ function CardPage() {
     const [ratingNums, setRatingNums] = useState([1, 2, 3, 4, 5])
     const [ratingValue, setRatingValue] = useState(0)
     const [width, setWidth] = useState('')
+    const [overallWidth, setOverallWidth] = useState('')
+    const [ratingShow, setRatingShow] = useState(false)
+    const [overallRating, setOverallRating] = useState(0)
 
     const dispatch = useDispatch();
 
@@ -43,22 +47,45 @@ function CardPage() {
         setSideImgs([HOST + previewObj.img, HOST + firstSideImg, HOST + secondSideImg])
     }
 
+    const calcWidth = (num) => {
+        const obj = {
+            width: (num / 0.05) + "%"
+        }
+        return obj;
+    }
+
+    const fetchRating = () => {
+        ratingService.getRating(id, user.id).then((res) => {
+            if (res) {
+                const { booleanResult, overallRating } = res
+                setOverallRating(overallRating);
+                setRatingShow(booleanResult)
+                setOverallWidth(calcWidth(overallRating))
+            }
+        })
+    }
+
     useEffect(() => {
         scrollPoint.current.scrollIntoView({ behavior: "smooth" })
         dispatch(setHomePage(false))
         itemService.getItem(id).then(res => {
             dispatch(setPreviewObj(res))
         })
+
+        fetchRating()
+
     }, [])
 
 
     const handlerRatingItem = (e) => {
         setRatingValue(e.target.value)
-        const obj = {
-            width: (e.target.value / 0.05) + "%"
-        }
+        setWidth(calcWidth(e.target.value))
+    }
 
-        setWidth(obj)
+    const handlerVote = (e) => {
+        e.preventDefault()
+        ratingService.postRating(ratingValue, user.id, id).then(res => console.log(res))
+        fetchRating()
     }
 
     return (
@@ -79,8 +106,22 @@ function CardPage() {
                             <img className="imagebox__mainimg" src={activeImg} alt="" />
                         </div>
                         <div className="imagebox__column">
-                            <div className="imagebox__rating">
-                                Рейтинг товара: {previewObj && previewObj.rating}
+                            <div className="imagebox__rating rating">
+                                <div className="rating__label">Рейтинг:</div>
+                                <div className="rating__body">
+                                    <div className="rating__stars">
+                                        {overallWidth
+                                            ? <div style={overallWidth} className="rating__active"></div>
+                                            : <div className="rating__active"></div>}
+                                        <div className="rating__items">
+                                            {ratingNums.map((value) => <RatingItem
+                                                key={value}
+                                                value={value}
+                                            />)}
+                                        </div>
+                                    </div>
+                                    <div className="rating__value">{overallRating}</div>
+                                </div>
                             </div>
                             <ul className="imagebox__reviews reviews">
                                 <li className="reviews__item">
@@ -127,27 +168,29 @@ function CardPage() {
                         </div>
                     </div>
                 </div>
-                <form className="preview__form rating">
-                    <div className="rating__label">Оценить продукт</div>
-                    <div className="rating__body">
-                        <div className="rating__stars">
-                            {width
-                                ? <div style={width} className="rating__active"></div>
-                                : <div className="rating__active"></div>}
-
-                            <div className="rating__items">
-                                {ratingNums.map((value) => <RatingItem
-                                    key={value}
-                                    value={value}
-                                    handlerRatingItem={handlerRatingItem} />)}
+                {user.role === "USER" && ratingShow
+                    ?
+                    <form onSubmit={handlerVote} className="preview__form rating">
+                        <div className="rating__label">Оценить продукт</div>
+                        <div className="rating__body">
+                            <div className="rating__stars">
+                                {width
+                                    ? <div style={width} className="rating__active"></div>
+                                    : <div className="rating__active"></div>}
+                                <div className="rating__items">
+                                    {ratingNums.map((value) => <RatingItem
+                                        key={value}
+                                        value={value}
+                                        handlerRatingItem={handlerRatingItem} />)}
+                                </div>
                             </div>
+                            <div className="rating__value">{ratingValue}</div>
                         </div>
-                        <div className="rating__value">{ratingValue}</div>
-                    </div>
-                    <div className="rating__label">Написать отзыв</div>
-                    <textarea className="rating__message" cols="60" rows="5" type="text" />
-                    <button className="rating__btn shd btn eff">Отправить</button>
-                </form>
+                        <div className="rating__label">Написать отзыв</div>
+                        <textarea className="rating__message" cols="60" rows="5" type="text" />
+                        <button className="rating__btn shd btn eff">Отправить</button>
+                    </form>
+                    : null}
             </div>
         </div>
     )
