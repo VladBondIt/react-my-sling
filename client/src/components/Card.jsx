@@ -20,10 +20,6 @@ function Card({ card }) {
     }))
     const [info, setInfo] = useState('')
 
-    // const handlerPreview = () => {
-    //     dispatch(setPreviewObj(obj))
-    // }
-
     const handlerLink = (e) => {
         e.preventDefault()
         dispatch(setHomePage(false))

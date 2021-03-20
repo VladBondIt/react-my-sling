@@ -5,7 +5,7 @@ import PreviewItem from '../components/PreviewItem';
 import BackButton from '../components/BackButton';
 import { HOST } from '../consts/consts';
 import { useParams } from 'react-router-dom';
-import { setPreviewObj } from '../redux/actions/modal';
+// import { setPreviewObj } from '../redux/actions/modal';
 import { setHomePage } from '../redux/actions/page';
 import AddButton from '../components/AddButton';
 import itemService from '../services/itemService';
@@ -20,8 +20,7 @@ function CardPage() {
 
     const { id } = useParams();
 
-    const { previewObj, user, basketId } = useSelector(({ modal, login, cart }) => ({
-        ...modal,
+    const { user, basketId } = useSelector(({ modal, login, cart }) => ({
         ...login,
         ...cart
     }))
@@ -34,11 +33,14 @@ function CardPage() {
     const [overallWidth, setOverallWidth] = useState('')
     const [ratingShow, setRatingShow] = useState(true)
     const [overallRating, setOverallRating] = useState(0)
+    const [previewObj, setPreviewObj] = useState(0)
 
     const ratingNums = [1, 2, 3, 4, 5]
     const reviewsArr = [{ name: "Ольга", post: "Классный слинг всем рекомендую." }, { name: "Марта", post: "Отличное качество,подойдет всем." }]
 
     const dispatch = useDispatch();
+
+    console.log(previewObj && previewObj.img);
 
     const handlerAddItemToCart = () => {
         basketService.addBasketItem(id, basketId).then(res => console.log(res))
@@ -72,7 +74,7 @@ function CardPage() {
         scrollPoint.current.scrollIntoView({ behavior: "smooth" })
         dispatch(setHomePage(false))
         itemService.getItem(id).then(res => {
-            dispatch(setPreviewObj(res))
+            setPreviewObj(res)
         })
 
         fetchRating()

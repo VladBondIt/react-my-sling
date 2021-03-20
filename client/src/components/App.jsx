@@ -24,7 +24,6 @@ function App() {
     const { user, isAuth, basketId, modalShow } = useSelector(({ modal, login, cart }) => ({
         user: login.user,
         isAuth: login.isAuth,
-        previewObj: modal.previewObj,
         modalShow: modal.modalShow,
         basketId: cart.basketId,
         countsIdItems: cart.countsIdItems,
