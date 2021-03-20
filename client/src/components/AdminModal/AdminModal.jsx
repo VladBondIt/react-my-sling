@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { ReactComponent as CloseModal } from '../../assets/images/svg/clear-single.svg';
 import brandService from '../../services/brandService';
-import httpService from '../../services/httpService'
 import itemService from '../../services/itemService';
 import limitService from '../../services/limitService';
 import typeService from '../../services/typeService';
@@ -10,8 +8,6 @@ import ModalInput from './ModalInput';
 import ObjectAdminModal from './ObjectAdminModal';
 
 function AdminModal({ delegateShowModal, handlerAdminModal, adminTypeModal }) {
-
-    const dispatch = useDispatch()
 
     const [activeDropList, setAсtiveDropList] = useState(false)
     const [typesDropDown, setTypesDropDown] = useState('')

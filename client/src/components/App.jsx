@@ -10,7 +10,7 @@ import CardPage from '../pages/CardPage';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuth, setUser } from '../redux/actions/login';
 import { ADMIN_ROUTE, CARD_PAGE_ROUTE, CART_ROUTE, HOME_ROUTE } from '../consts/consts';
-import { setBasketId, setCartCountsId, setCartItems } from '../redux/actions/cart';
+import { setBasketId, setCartItems } from '../redux/actions/cart';
 import loginService from '../services/loginService';
 import Modal from './Modal/Modal';
 import clientCartService from '../services/clientCartService';
@@ -21,7 +21,7 @@ import basketService from '../services/basketService';
 function App() {
     const dispatch = useDispatch();
 
-    const { previewObj, user, isAuth, basketId, countsIdItems, cartItems, modalShow } = useSelector(({ modal, login, cart }) => ({
+    const { user, isAuth, basketId, modalShow } = useSelector(({ modal, login, cart }) => ({
         user: login.user,
         isAuth: login.isAuth,
         previewObj: modal.previewObj,
