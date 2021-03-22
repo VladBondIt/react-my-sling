@@ -12,6 +12,7 @@ import ThanksRegModal from './ThanksRegModal';
 import { setAuth, setUser } from '../../redux/actions/login';
 import loginService from '../../services/loginService';
 import basketService from '../../services/basketService';
+import emailService from '../../services/emailService';
 
 function Modal() {
 
@@ -49,6 +50,7 @@ function Modal() {
     const handlerCallSuccess = (e) => {
         e.preventDefault();
         if (email && phone && name) {
+            emailService.sendMail({ name, email, phone }).then(res => console.log(res))
             e.target.reset();
             dispatch(setModalType(5))
         } else {
