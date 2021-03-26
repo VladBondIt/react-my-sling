@@ -2,9 +2,9 @@ import BaseService from "./baseService";
 
 class RatingService extends BaseService {
 
-    async postRating(rating, userId, itemId) {
+    async postRating(name, text, rating, userId, itemId) {
 
-        const obj = { rating, userId, itemId }
+        const obj = { name, text, rating, userId, itemId }
 
         const res = await fetch(`${this._apiBaseServer}api/rating/`, {
             method: 'POST',
@@ -41,7 +41,7 @@ class RatingService extends BaseService {
                 return previousValue;
             }, 0)) / ratingsArr.length;
 
-            return { booleanResult, overallRating };
+            return { booleanResult, overallRating, ratingsArr };
         }
 
         return false

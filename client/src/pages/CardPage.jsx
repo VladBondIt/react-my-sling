@@ -13,7 +13,6 @@ import RatingItem from '../components/RatingItem';
 import ratingService from '../services/ratingService';
 import ReviewsItem from '../components/ReviewsItem';
 import useInput from '../hooks/useInput';
-import reviewService from '../services/reviewService';
 
 function CardPage() {
 
@@ -35,7 +34,7 @@ function CardPage() {
     const [ratingShow, setRatingShow] = useState(true)
     const [overallRating, setOverallRating] = useState(0)
     const [previewObj, setPreviewObj] = useState(0)
-    const [sending, setSending] = useState(false)
+    const [reviewArr, setReviewArr] = useState('')
 
     const reviewText = useInput('')
 
@@ -60,18 +59,18 @@ function CardPage() {
         }
         return obj;
     }
-    console.log(previewObj);
 
-    // const fetchRating = () => {
-    //     ratingService.getRating(id, user.id).then((res) => {
-    //         if (res) {
-    //             const { booleanResult, overallRating } = res
-    //             setOverallRating(overallRating);
-    //             setRatingShow(booleanResult)
-    //             setOverallWidth(calcWidth(overallRating))
-    //         }
-    //     })
-    // }
+    const fetchRating = () => {
+        ratingService.getRating(id, user.id).then((res) => {
+            if (res) {
+                const { booleanResult, overallRating, ratingsArr } = res
+                setOverallRating(overallRating);
+                setRatingShow(booleanResult)
+                setOverallWidth(calcWidth(overallRating))
+                setReviewArr(ratingsArr)
+            }
+        })
+    }
 
     const handlerRatingItem = (e) => {
         setRatingValue(e.target.value)
@@ -80,33 +79,23 @@ function CardPage() {
 
     const handlerVote = async (e) => {
         e.preventDefault()
-        const postRating = ratingService.postRating(ratingValue, user.id, id)
-        const postReview = reviewService.postReview(user.name, reviewText.value, user.id, id)
+        const postRating = await ratingService.postRating(user.name, reviewText.value, ratingValue, user.id, id)
 
-        if (postRating && postReview) {
-            setSending(true)
+        if (postRating) {
+            fetchRating()
         }
     }
-
-    console.log(ratingShow);
 
     useEffect(() => {
         scrollPoint.current.scrollIntoView({ behavior: "smooth" })
         dispatch(setHomePage(false))
         itemService.getItem(id, user.id).then(res => {
-            console.log(res)
             setPreviewObj(res)
-            if (res.userVoted) {
-                setRatingShow(false)
-            } else {
-                setRatingShow(true)
-            }
-            setOverallRating(res.rating)
-
-            setOverallWidth(calcWidth(res.rating))
         })
 
-    }, [sending])
+        fetchRating()
+
+    }, [])
 
 
     return (
@@ -185,9 +174,8 @@ function CardPage() {
                 </div>
                 <ul className="reviews">
                     <div className="reviews__label">Отзывы:</div>
-                    {previewObj
-                        && previewObj.reviews.length > 0
-                        ? previewObj.reviews.map((obj) =>
+                    {reviewArr
+                        ? reviewArr.map((obj) =>
                             <ReviewsItem key={obj.name}{...obj} />)
                         : <div className="reviews__nothing">Нет отзывов о товаре</div>}
 

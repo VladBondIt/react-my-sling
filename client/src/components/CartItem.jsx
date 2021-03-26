@@ -33,7 +33,7 @@ function CartItem({ id, count, name, img, price, info, handlerCancelModalShow, b
         dispatch(setCancelId(id))
     }
 
-    const minusButton = count === 1 ? "item__button shd btn disabled reff" : "item__button shd btn reff";
+    const minusButton = count === 1 ? "item__button item__button_disabled" : "item__button shd btn reff";
 
     return (
         <div className="cart__item item shd">
@@ -63,6 +63,7 @@ function CartItem({ id, count, name, img, price, info, handlerCancelModalShow, b
             <div className="item__column">
                 <div className="item__count">
                     <button
+                        disabled={count === 1 ? true : false}
                         className={minusButton}>
                         <Minus
                             onClick={handlerMinusItem}

@@ -71,31 +71,14 @@ class ItemController {
 
     async getOne(req, res) {
         const { id } = req.params
-        const { userId } = req.query
 
         const item = await Item.findOne({
             where: { id },
-            include: [{ model: ItemInfo, as: 'info' }, Rating, Review],
+            include: [{ model: ItemInfo, as: 'info' }],
         })
 
 
-        const data = JSON.parse(JSON.stringify(item))
-
-        const len = data.ratings.length
-        let userVoted = false
-
-        if (userId && len > 0) {
-            userVoted = data.ratings.some((obj) => obj.userId === +userId)
-        }
-
-        const resultItem = {
-            ...data,
-            rating: len > 0 ? Number(((data.ratings.reduce((acc, curr) => acc += curr.rating, 0)) / len).toFixed(1)) : 0,
-            userVoted
-        }
-
-
-        return res.json(resultItem)
+        return res.json(item)
     }
 
     async getItemsForCart(req, res) {

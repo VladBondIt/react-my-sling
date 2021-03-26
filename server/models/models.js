@@ -40,10 +40,6 @@ const Brand = sequelize.define('brand', {
 const Rating = sequelize.define("rating", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     rating: { type: DataTypes.INTEGER, allowNull: false },
-})
-
-const Review = sequelize.define("review", {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: { type: DataTypes.STRING, allowNull: false },
     text: { type: DataTypes.STRING, allowNull: false },
 })
@@ -67,9 +63,6 @@ Basket.belongsTo(User)
 User.hasMany(Rating)
 Rating.belongsTo(User)
 
-User.hasMany(Review)
-Review.belongsTo(User)
-
 Basket.hasMany(BasketItem)
 BasketItem.belongsTo(Basket)
 
@@ -81,9 +74,6 @@ Item.belongsTo(Brand)
 
 Item.hasMany(Rating)
 Rating.belongsTo(Item)
-
-Item.hasMany(Review)
-Review.belongsTo(Item)
 
 Item.hasMany(BasketItem)
 BasketItem.belongsTo(Item)
@@ -104,5 +94,4 @@ module.exports = {
     Type,
     Brand,
     TypeBrand,
-    Review
 }

@@ -9,7 +9,6 @@ const limitRouter = require('./limitRouter')
 const basketRouter = require('./basketRouter')
 const ratingRouter = require('./ratingRouter')
 const mailerRouter = require('./mailerRouter')
-const reviewRouter = require('./reviewRouter')
 
 
 router.use('/user', userRouter)
@@ -21,7 +20,6 @@ router.use('/limit', limitRouter)
 router.use('/basket', basketRouter)
 router.use('/rating', ratingRouter)
 router.use('/mail', mailerRouter)
-router.use('/review', reviewRouter)
 
 
 

@@ -3,9 +3,9 @@ const ApiError = require('../error/ApiError');
 
 class RatingController {
     async addRating(req, res) {
-        const { rating, userId, itemId } = req.body
+        const { name, text, rating, userId, itemId } = req.body
 
-        const resRating = await Rating.create({ rating, userId, itemId })
+        const resRating = await Rating.create({ name, text, rating, userId, itemId })
         return res.json(resRating)
     }
 
