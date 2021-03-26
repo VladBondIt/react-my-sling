@@ -35,8 +35,8 @@ class ItemService extends BaseService {
         return await res.json();
     }
 
-    async getItem(id) {
-        const res = await fetch(`${this._apiBaseServer}api/item/${id}`);
+    async getItem(id, userId) {
+        const res = await fetch(`${this._apiBaseServer}api/item/${id}?userId=${userId}`);
 
         if (!res.ok) {
             throw new Error(`Could not fetch ${this._apiBaseServer}api/item/${id}` +

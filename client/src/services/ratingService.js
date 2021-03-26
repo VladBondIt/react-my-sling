@@ -1,6 +1,7 @@
 import BaseService from "./baseService";
 
 class RatingService extends BaseService {
+
     async postRating(rating, userId, itemId) {
 
         const obj = { rating, userId, itemId }
@@ -36,8 +37,6 @@ class RatingService extends BaseService {
             const booleanResult = !ratingsArr.some((value) => value.userId === loginUserId)
 
             const overallRating = (ratingsArr.reduce((previousValue, currentValue) => {
-                console.log(previousValue)
-                console.log(currentValue.rating)
                 previousValue += Number(currentValue.rating)
                 return previousValue;
             }, 0)) / ratingsArr.length;

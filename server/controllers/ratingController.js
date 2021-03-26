@@ -5,8 +5,8 @@ class RatingController {
     async addRating(req, res) {
         const { rating, userId, itemId } = req.body
 
-        const type = await Rating.create({ rating, userId, itemId })
-        return res.json(type)
+        const resRating = await Rating.create({ rating, userId, itemId })
+        return res.json(resRating)
     }
 
     async getRating(req, res) {

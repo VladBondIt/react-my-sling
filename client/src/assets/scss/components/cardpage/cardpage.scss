@@ -141,6 +141,9 @@
     &__post {
         @include adaptiv-font(26, 18);
     }
+    &__nothing {
+        @include adaptiv-font(30, 20);
+    }
 }
 
 .preview-info {

@@ -5,7 +5,6 @@ import PreviewItem from '../components/PreviewItem';
 import BackButton from '../components/BackButton';
 import { HOST } from '../consts/consts';
 import { useParams } from 'react-router-dom';
-// import { setPreviewObj } from '../redux/actions/modal';
 import { setHomePage } from '../redux/actions/page';
 import AddButton from '../components/AddButton';
 import itemService from '../services/itemService';
@@ -13,6 +12,8 @@ import basketService from '../services/basketService';
 import RatingItem from '../components/RatingItem';
 import ratingService from '../services/ratingService';
 import ReviewsItem from '../components/ReviewsItem';
+import useInput from '../hooks/useInput';
+import reviewService from '../services/reviewService';
 
 function CardPage() {
 
@@ -20,7 +21,7 @@ function CardPage() {
 
     const { id } = useParams();
 
-    const { user, basketId } = useSelector(({ modal, login, cart }) => ({
+    const { user, basketId } = useSelector(({ login, cart }) => ({
         ...login,
         ...cart
     }))
@@ -34,13 +35,14 @@ function CardPage() {
     const [ratingShow, setRatingShow] = useState(true)
     const [overallRating, setOverallRating] = useState(0)
     const [previewObj, setPreviewObj] = useState(0)
+    const [sending, setSending] = useState(false)
+
+    const reviewText = useInput('')
 
     const ratingNums = [1, 2, 3, 4, 5]
-    const reviewsArr = [{ name: "Ольга", post: "Классный слинг всем рекомендую." }, { name: "Марта", post: "Отличное качество,подойдет всем." }]
+    // const reviewsArr = [{ name: "Ольга", post: "Классный слинг всем рекомендую." }, { name: "Марта", post: "Отличное качество,подойдет всем." }]
 
     const dispatch = useDispatch();
-
-    console.log(previewObj && previewObj.img);
 
     const handlerAddItemToCart = () => {
         basketService.addBasketItem(id, basketId).then(res => console.log(res))
@@ -58,40 +60,54 @@ function CardPage() {
         }
         return obj;
     }
+    console.log(previewObj);
 
-    const fetchRating = () => {
-        ratingService.getRating(id, user.id).then((res) => {
-            if (res) {
-                const { booleanResult, overallRating } = res
-                setOverallRating(overallRating);
-                setRatingShow(booleanResult)
-                setOverallWidth(calcWidth(overallRating))
-            }
-        })
-    }
-
-    useEffect(() => {
-        scrollPoint.current.scrollIntoView({ behavior: "smooth" })
-        dispatch(setHomePage(false))
-        itemService.getItem(id).then(res => {
-            setPreviewObj(res)
-        })
-
-        fetchRating()
-
-    }, [])
-
+    // const fetchRating = () => {
+    //     ratingService.getRating(id, user.id).then((res) => {
+    //         if (res) {
+    //             const { booleanResult, overallRating } = res
+    //             setOverallRating(overallRating);
+    //             setRatingShow(booleanResult)
+    //             setOverallWidth(calcWidth(overallRating))
+    //         }
+    //     })
+    // }
 
     const handlerRatingItem = (e) => {
         setRatingValue(e.target.value)
         setWidth(calcWidth(e.target.value))
     }
 
-    const handlerVote = (e) => {
+    const handlerVote = async (e) => {
         e.preventDefault()
-        ratingService.postRating(ratingValue, user.id, id).then(res => console.log(res))
-        fetchRating()
+        const postRating = ratingService.postRating(ratingValue, user.id, id)
+        const postReview = reviewService.postReview(user.name, reviewText.value, user.id, id)
+
+        if (postRating && postReview) {
+            setSending(true)
+        }
     }
+
+    console.log(ratingShow);
+
+    useEffect(() => {
+        scrollPoint.current.scrollIntoView({ behavior: "smooth" })
+        dispatch(setHomePage(false))
+        itemService.getItem(id, user.id).then(res => {
+            console.log(res)
+            setPreviewObj(res)
+            if (res.userVoted) {
+                setRatingShow(false)
+            } else {
+                setRatingShow(true)
+            }
+            setOverallRating(res.rating)
+
+            setOverallWidth(calcWidth(res.rating))
+        })
+
+    }, [sending])
+
 
     return (
         <div ref={scrollPoint} className="preview mainbg">
@@ -155,7 +171,7 @@ function CardPage() {
                             <h2 className="preview__name">{previewObj && previewObj.name}</h2>
                             <div className="preview__text">
                                 {previewObj && previewObj.info[0].description}: Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit impedit vitae recusandae sequi labore itaque maxime debitis maiores asperiores iusto!
-                                </div>
+                            </div>
                         </div>
 
                         <div className="preview__row">
@@ -169,8 +185,12 @@ function CardPage() {
                 </div>
                 <ul className="reviews">
                     <div className="reviews__label">Отзывы:</div>
-                    {reviewsArr.map((obj) =>
-                        <ReviewsItem key={obj.name}{...obj} />)}
+                    {previewObj
+                        && previewObj.reviews.length > 0
+                        ? previewObj.reviews.map((obj) =>
+                            <ReviewsItem key={obj.name}{...obj} />)
+                        : <div className="reviews__nothing">Нет отзывов о товаре</div>}
+
                 </ul>
                 {user.role === "USER" && ratingShow
                     ?
@@ -191,8 +211,12 @@ function CardPage() {
                             <div className="rating__value">{ratingValue}</div>
                         </div>
                         <div className="rating__label">Написать отзыв</div>
-                        <textarea className="rating__message shd" type="text" />
-                        {ratingValue
+                        <textarea
+                            {...reviewText}
+                            className="rating__message shd"
+                            type="text"
+                            placeholder="Оставьте свой отзыв о товаре" />
+                        {ratingValue && reviewText.value
                             ? <button className="rating__btn shd btn eff">Отправить</button>
                             : <button
                                 disabled

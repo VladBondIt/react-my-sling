@@ -1,6 +1,6 @@
 import BaseService from "./baseService";
 
-class BrandService extends BaseService {
+class EmailService extends BaseService {
 
     async sendMail({ name, email, phone }) {
 
@@ -30,4 +30,4 @@ class BrandService extends BaseService {
 
 }
 
-export default new BrandService();
+export default new EmailService();

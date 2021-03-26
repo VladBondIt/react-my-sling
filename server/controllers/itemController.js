@@ -1,6 +1,6 @@
 const uuid = require('uuid')
 const path = require('path')
-const { Item, ItemInfo } = require('../models/models')
+const { Item, ItemInfo, Rating, Review } = require('../models/models')
 const ApiError = require('../error/ApiError')
 
 class ItemController {
@@ -71,13 +71,31 @@ class ItemController {
 
     async getOne(req, res) {
         const { id } = req.params
+        const { userId } = req.query
 
         const item = await Item.findOne({
             where: { id },
-            include: [{ model: ItemInfo, as: 'info' }]
+            include: [{ model: ItemInfo, as: 'info' }, Rating, Review],
         })
 
-        return res.json(item)
+
+        const data = JSON.parse(JSON.stringify(item))
+
+        const len = data.ratings.length
+        let userVoted = false
+
+        if (userId && len > 0) {
+            userVoted = data.ratings.some((obj) => obj.userId === +userId)
+        }
+
+        const resultItem = {
+            ...data,
+            rating: len > 0 ? Number(((data.ratings.reduce((acc, curr) => acc += curr.rating, 0)) / len).toFixed(1)) : 0,
+            userVoted
+        }
+
+
+        return res.json(resultItem)
     }
 
     async getItemsForCart(req, res) {
@@ -89,7 +107,7 @@ class ItemController {
             where: {
                 id: resultArr
             },
-            include: [{ model: ItemInfo, as: 'info' }]
+            include: [{ model: ItemInfo, as: 'info' }],
         })
 
         return res.json(items)
