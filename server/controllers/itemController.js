@@ -43,25 +43,76 @@ class ItemController {
     }
 
     async getAll(req, res) {
-        let { brandId, typeId, limit = 9, page = 1 } = req.query
+        let { brandId, typeId, limit = 9, page = 1, type, sort } = req.query
 
         let offset = page * limit - limit
 
         let items;
 
-        if (!brandId && !typeId) {
-            items = await Item.findAndCountAll({ limit, offset })
-        }
-        if (brandId && !typeId) {
-            items = await Item.findAndCountAll({ where: { brandId }, limit, offset })
+        console.log(req.query)
 
-        }
-        if (!brandId && typeId) {
-            items = await Item.findAndCountAll({ where: { typeId }, limit, offset })
+        if (!type && !sort) {
+            if (!brandId && !typeId) {
+                items = await Item.findAndCountAll({
+                    limit,
+                    offset,
+                })
+            }
+            if (brandId && !typeId) {
+                items = await Item.findAndCountAll({ where: { brandId }, limit, offset })
 
-        }
-        if (brandId && typeId) {
-            items = await Item.findAndCountAll({ where: { typeId, brandId }, limit, offset })
+            }
+            if (!brandId && typeId) {
+                items = await Item.findAndCountAll({ where: { typeId }, limit, offset })
+
+            }
+            if (brandId && typeId) {
+                items = await Item.findAndCountAll({ where: { typeId, brandId }, limit, offset })
+
+            }
+        } else {
+            if (!brandId && !typeId) {
+                items = await Item.findAndCountAll({
+                    limit,
+                    offset,
+                    order: [
+                        [type, sort]
+                    ]
+                })
+            }
+            if (brandId && !typeId) {
+                items = await Item.findAndCountAll({
+                    where: { brandId },
+                    limit,
+                    offset,
+                    order: [
+                        [type, sort]
+                    ]
+                })
+
+            }
+            if (!brandId && typeId) {
+                items = await Item.findAndCountAll({
+                    where: { typeId },
+                    limit,
+                    offset,
+                    order: [
+                        [type, sort]
+                    ]
+                })
+
+            }
+            if (brandId && typeId) {
+                items = await Item.findAndCountAll({
+                    where: { typeId, brandId },
+                    limit,
+                    offset,
+                    order: [
+                        [type, sort]
+                    ]
+                })
+
+            }
 
         }
 

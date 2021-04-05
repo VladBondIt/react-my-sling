@@ -36,10 +36,7 @@ class RatingService extends BaseService {
 
             const booleanResult = !ratingsArr.some((value) => value.userId === loginUserId)
 
-            const overallRating = (ratingsArr.reduce((previousValue, currentValue) => {
-                previousValue += Number(currentValue.rating)
-                return previousValue;
-            }, 0)) / ratingsArr.length;
+            const overallRating = (ratingsArr.reduce((previousValue, currentValue) => previousValue + currentValue.rating, 0)) / ratingsArr.length;
 
             return { booleanResult, overallRating, ratingsArr };
         }

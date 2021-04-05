@@ -21,12 +21,39 @@ class ItemService extends BaseService {
         return await res.json();
     }
 
-    async getItems(typeId, brandId, page, limit = 3) {
+    async getItems(typeId, brandId, page, limit = 3, sortType, direction) {
         const typeQuery = typeId ? `&typeId=${typeId}` : ""
         const brandQuery = brandId ? `&brandId=${brandId}` : ""
         const pageQuery = `&page=${page}`
         const limitQuery = `&limit=${limit}`
-        const res = await fetch(`${this._apiBaseServer}api/item?${typeQuery}${brandQuery}${pageQuery}${limitQuery}`);
+        let sortTypeQuery = ''
+
+        switch (sortType) {
+            case "Цене":
+                sortTypeQuery = '&type=price'
+                break;
+            case "Алфавиту":
+                sortTypeQuery = '&type=name'
+                break;
+
+            default:
+                break;
+        }
+
+        switch (direction) {
+            case 'ASC':
+                sortTypeQuery += '&sort=ASC'
+                break;
+            case 'DESC':
+                sortTypeQuery += '&sort=DESC'
+
+                break;
+
+            default:
+                break;
+        }
+
+        const res = await fetch(`${this._apiBaseServer}api/item?${typeQuery}${brandQuery}${pageQuery}${limitQuery}${sortTypeQuery}`);
 
         if (!res.ok) {
             throw new Error(`Could not fetch ${this._apiBaseServer}api/item` +

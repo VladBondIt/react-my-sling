@@ -1,4 +1,4 @@
-import React, { useEffect, memo, useRef } from 'react';
+import React, { useEffect, memo, useRef, useState } from 'react';
 import Card from './Card';
 import CategoryItem from './CategoryItem';
 import SearchForm from './SearchForm';
@@ -13,27 +13,26 @@ import Pagination from './Pagination';
 import itemService from '../services/itemService';
 import typeService from '../services/typeService';
 import brandService from '../services/brandService';
+import SortPopup from './SortPopup';
 
 
 const Shop = memo(function Shop() {
     const dispatch = useDispatch();
     const brandBar = useRef()
+    const sortBox = useRef()
 
     const { activeTypeItem, cardItems, loaderItems, limit, totalCount, activePage, activeBrandItem,
         isLoading, typeItems, cardInfos, searchChar, brandItems } = useSelector((state) => ({
-            activeTypeItem: state.categoryes.activeTypeItem,
-            cardItems: state.cards.cardItems,
-            cardInfos: state.cards.cardInfos,
-            totalCount: state.cards.totalCount,
-            activePage: state.cards.activePage,
-            limit: state.cards.limit,
-            typeItems: state.categoryes.typeItems,
-            brandItems: state.categoryes.brandItems,
-            activeBrandItem: state.categoryes.activeBrandItem,
-            loaderItems: state.loader.loaderItems,
-            isLoading: state.loader.isLoading,
-            searchChar: state.search.searchChar,
+            ...state.categoryes,
+            ...state.cards,
+            ...state.limit,
+            ...state.loader,
+            ...state.search,
         }))
+
+    const [sortPopupShow, setSortPopupShow] = useState(false)
+    const [sortName, setSortName] = useState('')
+    const fieldsArr = ['Цене', 'Алфавиту']
 
     useEffect(() => {
 
@@ -57,6 +56,13 @@ const Shop = memo(function Shop() {
 
     const onChange = (e) => {
         dispatch(setSearchChar((e.target.value)))
+    }
+
+    const handlerSort = (e) => {
+
+        if (e.target.classList[0] !== 'sort__item') {
+            setSortPopupShow(!sortPopupShow)
+        }
     }
 
     const visibleCards = searchChar
@@ -90,8 +96,14 @@ const Shop = memo(function Shop() {
                     <SearchForm
                         searchChar={searchChar}
                         onChange={onChange} />
-                    <div className="search__sort">
-                        Сортировать по: <span className="search__type">Цене</span>
+                    <div onClick={handlerSort} className="search__sort">
+                        <div ref={sortBox} className="search__box">
+                            Сортировать по: <span className="search__type">{sortName}</span>
+                        </div>
+                        {sortPopupShow && <SortPopup
+                            sortName={sortName}
+                            fieldsArr={fieldsArr}
+                            setSortName={setSortName} />}
                     </div>
                 </div>
                 <div className="shop__content">
