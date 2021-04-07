@@ -15,6 +15,7 @@ import loginService from '../services/loginService';
 import Modal from './Modal/Modal';
 import clientCartService from '../services/clientCartService';
 import basketService from '../services/basketService';
+import { setSortPopupShow } from '../redux/actions/modal';
 
 
 
@@ -37,9 +38,11 @@ function App() {
     React.useEffect(() => {
 
         if (basketId) {
+            // Проверяем есть у залогиненного пользователя итемы в корзине, при его входе
             basketService.getUserBasketItems(basketId)
                 .then(res => {
                     if (res.length > 0) {
+                        // если итемы есть, собираем их айдишники и каунтим их количество
                         const countsIdItems = res.reduce((acc, currentValue) => {
                             if (acc.length !== 0 && acc.some((value) => value.id === currentValue.itemId)) {
                                 acc.forEach((value) => {
@@ -55,10 +58,13 @@ function App() {
                             }
                             return acc;
                         }, [])
+                        // получем итемы с базы по айдишникам 
                         clientCartService.getCartItems(countsIdItems).then(res => {
                             res = res.map((value) => {
+                                // вытаскиваем ранее посчитаные каунты из объекта в отфильтрованом массиве
                                 const count = countsIdItems.filter((item) => value.id === item.id)[0].count
-                                return count && ({ ...value, count })
+                                // возвращаем модифицированый объект с полем каунт
+                                return ({ ...value, count })
                             })
                             dispatch(setCartItems(res))
                         })
@@ -79,11 +85,19 @@ function App() {
                     dispatch(setAuth(false))
                 })
         }
-    }, [basketId])
+    }, [dispatch, user, basketId])
+
+    const wrapperHandler = (e) => {
+        const targetClass = e.target.classList[0]
+        if (targetClass !== 'search__sort' && targetClass !== 'search__box'
+            && targetClass !== 'search__type' && targetClass !== 'sort__item') {
+            dispatch(setSortPopupShow(false))
+        }
+    }
 
 
     return (
-        <div className="wrapper">
+        <div onClick={wrapperHandler} className="wrapper">
             <Header />
             <Switch>
                 <Route exact path={HOME_ROUTE} component={Home} />

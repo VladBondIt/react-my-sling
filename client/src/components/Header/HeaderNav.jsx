@@ -144,7 +144,7 @@ function HeaderNav() {
                         : "Войти"}</span>
                 </button>
             </div>
-            {isAuth && user
+            {isAuth && user.role === "USER"
                 ? <Link
                     onClick={handlerLink}
                     to="/react-my-sling/cart">

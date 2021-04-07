@@ -1,6 +1,6 @@
 const uuid = require('uuid')
-const path = require('path')
 const { Item, ItemInfo, Rating, Review } = require('../models/models')
+const path = require('path')
 const ApiError = require('../error/ApiError')
 
 class ItemController {
@@ -48,8 +48,6 @@ class ItemController {
         let offset = page * limit - limit
 
         let items;
-
-        console.log(req.query)
 
         if (!type && !sort) {
             if (!brandId && !typeId) {

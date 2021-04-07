@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { setHomePage } from '../redux/actions/page';
@@ -26,12 +26,12 @@ function Card({ card }) {
         history.push(CARD_PAGE_ROUTE + '/' + id)
     }
 
-    const handlerInfo = () => {
+    const handlerInfo = useCallback(() => {
         if (cardInfos) {
             setInfo(cardInfos.filter((value) => value.itemId === id))
         }
 
-    }
+    }, [cardInfos, id])
 
     const handlerCardItem = () => {
         const obj = {
@@ -44,7 +44,7 @@ function Card({ card }) {
 
     useEffect(() => {
         handlerInfo()
-    }, [])
+    }, [handlerInfo])
 
     return (
         < div className="shop__card card shd" >

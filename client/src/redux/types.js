@@ -27,3 +27,4 @@ export const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
 export const SET_CARD_LIMIT = "SET_CARD_LIMIT";
 export const SET_BASKET_ID = "SET_BASKET_ID";
 export const ADD_CART_ITEM = "ADD_CART_ITEM";
+export const SET_SHOW_SORT_POPUP = "SET_SHOW_SORT_POPUP";

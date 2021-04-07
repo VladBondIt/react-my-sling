@@ -20,7 +20,7 @@ function Footer() {
         window.onresize = () => {
             dispatch(setInnerWidth(window.innerWidth))
         }
-    }, []);
+    }, [dispatch]);
 
     const handlerLinkToHome = () => {
         dispatch(setHomePage(true))

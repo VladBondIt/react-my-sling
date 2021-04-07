@@ -1,11 +1,12 @@
-import { SET_MODAL, SET_MODAL_TYPE, SET_CANCEL_ID, SET_ADMIN_MODAL_TYPE, SET_ADMIN_MODAL } from "../types";
+import { SET_MODAL, SET_MODAL_TYPE, SET_CANCEL_ID, SET_ADMIN_MODAL_TYPE, SET_ADMIN_MODAL, SET_SHOW_SORT_POPUP } from "../types";
 
 const initialState = {
     modalShow: false,
     typeModal: null,
     cancelId: null,
     adminTypeModal: null,
-    adminModalShow: false
+    adminModalShow: false,
+    sortPopupShow: false
 
 }
 const modal = (state = initialState, action) => {
@@ -34,6 +35,11 @@ const modal = (state = initialState, action) => {
             return {
                 ...state,
                 cancelId: action.payload,
+            }
+        case SET_SHOW_SORT_POPUP:
+            return {
+                ...state,
+                sortPopupShow: action.payload,
             }
         default:
             return state;

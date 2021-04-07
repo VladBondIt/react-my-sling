@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCartItem } from '../redux/actions/cart';
 import PreviewItem from '../components/PreviewItem';
@@ -39,7 +39,6 @@ function CardPage() {
     const reviewText = useInput('')
 
     const ratingNums = [1, 2, 3, 4, 5]
-    // const reviewsArr = [{ name: "Ольга", post: "Классный слинг всем рекомендую." }, { name: "Марта", post: "Отличное качество,подойдет всем." }]
 
     const dispatch = useDispatch();
 
@@ -53,14 +52,14 @@ function CardPage() {
         setSideImgs([HOST + previewObj.img, HOST + firstSideImg, HOST + secondSideImg])
     }
 
-    const calcWidth = (num) => {
+    const calcWidth = useCallback((num) => {
         const obj = {
             width: (num / 0.05) + "%"
         }
         return obj;
-    }
+    }, [])
 
-    const fetchRating = () => {
+    const fetchRating = useCallback(() => {
         ratingService.getRating(id, user.id).then((res) => {
             if (res) {
                 const { booleanResult, overallRating, ratingsArr } = res
@@ -70,7 +69,7 @@ function CardPage() {
                 setReviewArr(ratingsArr)
             }
         })
-    }
+    }, [calcWidth, id, user.id])
 
     const handlerRatingItem = (e) => {
         setRatingValue(e.target.value)
@@ -95,7 +94,7 @@ function CardPage() {
 
         fetchRating()
 
-    }, [])
+    }, [fetchRating, dispatch, id, user.id])
 
 
     return (
@@ -118,7 +117,7 @@ function CardPage() {
                         <div className="imagebox__column">
                             <div className="imagebox__rating rating">
                                 <div className="rating__label">Рейтинг:</div>
-                                <div className="rating__body">
+                                <div className="rating__body rating__body_small">
                                     <div className="rating__stars rating__stars_overall">
                                         {overallWidth
                                             ? <div style={overallWidth} className="rating__active"></div>
@@ -176,7 +175,7 @@ function CardPage() {
                     <div className="reviews__label">Отзывы:</div>
                     {reviewArr
                         ? reviewArr.map((obj) =>
-                            <ReviewsItem key={obj.name}{...obj} />)
+                            <ReviewsItem ratingNums={ratingNums} key={obj.name} {...obj} calcWidth={calcWidth} />)
                         : <div className="reviews__nothing">Нет отзывов о товаре</div>}
 
                 </ul>

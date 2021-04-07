@@ -6,7 +6,7 @@ function ThanksModal({ handlerModalShow }) {
         setTimeout(() => {
             handlerModalShow()
         }, 3000);
-    }, [])
+    }, [handlerModalShow])
 
     return (
         <div className="modal__thanks thanks">

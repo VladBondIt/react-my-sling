@@ -14,6 +14,7 @@ import itemService from '../services/itemService';
 import typeService from '../services/typeService';
 import brandService from '../services/brandService';
 import SortPopup from './SortPopup';
+import { setSortPopupShow } from '../redux/actions/modal';
 
 
 const Shop = memo(function Shop() {
@@ -22,15 +23,15 @@ const Shop = memo(function Shop() {
     const sortBox = useRef()
 
     const { activeTypeItem, cardItems, loaderItems, limit, totalCount, activePage, activeBrandItem,
-        isLoading, typeItems, cardInfos, searchChar, brandItems } = useSelector((state) => ({
+        isLoading, typeItems, cardInfos, searchChar, brandItems, sortPopupShow } = useSelector((state) => ({
             ...state.categoryes,
+            ...state.modal,
             ...state.cards,
             ...state.limit,
             ...state.loader,
             ...state.search,
         }))
 
-    const [sortPopupShow, setSortPopupShow] = useState(false)
     const [sortName, setSortName] = useState('')
     const fieldsArr = ['Цене', 'Алфавиту']
 
@@ -52,7 +53,7 @@ const Shop = memo(function Shop() {
         brandService.getBrand().then(res => {
             dispatch(setCategoryBrands(res))
         })
-    }, [activePage, activeTypeItem, activeBrandItem, limit])
+    }, [dispatch, activePage, activeTypeItem, activeBrandItem, limit])
 
     const onChange = (e) => {
         dispatch(setSearchChar((e.target.value)))
@@ -61,7 +62,7 @@ const Shop = memo(function Shop() {
     const handlerSort = (e) => {
 
         if (e.target.classList[0] !== 'sort__item') {
-            setSortPopupShow(!sortPopupShow)
+            dispatch(setSortPopupShow(!sortPopupShow))
         }
     }
 

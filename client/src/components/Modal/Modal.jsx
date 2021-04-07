@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import CartModal from './CartModal';
 import OfferCallModal from './OfferCallModal';
 import { useSelector, useDispatch } from 'react-redux';
@@ -29,12 +29,8 @@ function Modal() {
 
 
     const { modalShow, typeModal, cancelId, totalPrice, totalCount, basketId } = useSelector((state) => ({
-        modalShow: state.modal.modalShow,
-        typeModal: state.modal.typeModal,
-        cancelId: state.modal.cancelId,
-        totalPrice: state.cart.totalPrice,
-        totalCount: state.cart.totalCount,
-        basketId: state.cart.basketId,
+        ...state.modal,
+        ...state.cart,
     }))
 
 
@@ -161,9 +157,9 @@ function Modal() {
         dispatch(cancelPosition(cancelId))
     }
 
-    const handlerModalShow = () => {
+    const handlerModalShow = useCallback(() => {
         dispatch(setModalShow(!modalShow))
-    }
+    }, [dispatch, modalShow])
 
     const delegateShowModal = (e) => {
         if (e.target.matches('.modal')) {
