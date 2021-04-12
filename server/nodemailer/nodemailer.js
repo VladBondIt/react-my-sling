@@ -4,9 +4,10 @@ const transporter = nodemailer.createTransport({
     host: "smtp.mail.ru",
     port: 465,
     secure: true, //true only for 465
+    // Email login , pass
     auth: {
-        user: "for_mailer18@mail.ru",
-        pass: "4u)igsAr4PSS"
+        user: "",
+        pass: ""
     },
 }, {
     from: "Mailer test <for_mailer18@mail.ru>"
